@@ -9,6 +9,7 @@ namespace SeriesManagementSystem.Domain
 {
     public class Software
     {
+        private Series _selectedSeries;
         private FileManager _fileManager = new FileManager();
         private List<Series> _seriesList = new List<Series>();
 
