@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SeriesManagementSystem
+namespace SeriesManagementSystem.UI
 {
-    public partial class Form1 : Form
+    public partial class SoftwareForm : Form
     {
-        public Form1()
+        public SoftwareForm()
         {
             InitializeComponent();
         }
