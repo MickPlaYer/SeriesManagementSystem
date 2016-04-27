@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeriesManagementSystem.Domain;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -10,6 +12,7 @@ namespace SeriesManagementSystemUnitTest
     {
         Software _software;
         PrivateObject _privateObject;
+        const String _filePath = "./test.txt";
 
         [TestInitialize()]
         public void TestInitialize()
@@ -24,10 +27,40 @@ namespace SeriesManagementSystemUnitTest
             String name = "First Movie";
             String description = "The first movie in the world.";
             _software.AddSeries(name, description);
-            List<Series> sl = _privateObject.GetField("_seriesList") as List<Series>;
-            Series s = sl[sl.Count - 1];
+            Series s = GetLastSeries();
             Assert.AreEqual(name, s.Name);
             Assert.AreEqual(description, s.Description);
+        }
+
+        [TestMethod]
+        public void TestImportFile()
+        {
+            String name = "First Movie";
+            String description = "The first movie in the world.";
+            String fileContext = "[{ \"Name\":\"" + name + "\", \"Description\":\"" + description + "\" }]";
+            PrepareImportFile(fileContext);
+            _software.ImportFile(_filePath);
+            Series s = GetLastSeries();
+            Assert.AreEqual(name, s.Name);
+            Assert.AreEqual(description, s.Description);
+        }
+
+        private void PrepareImportFile(string fileContext)
+        {
+            if (File.Exists(_filePath))
+                File.Delete(_filePath);
+            using (FileStream fs = File.OpenWrite(_filePath))
+            {
+                Byte[] info = new UTF8Encoding(true).GetBytes(fileContext);
+                fs.Write(info, 0, info.Length);
+            }
+        }
+
+        private Series GetLastSeries()
+        {
+            List<Series> sl = _privateObject.GetField("_seriesList") as List<Series>;
+            Assert.IsTrue(sl.Count > 0, "Not any series in the list!");
+            return sl[sl.Count - 1];
         }
     }
 }
