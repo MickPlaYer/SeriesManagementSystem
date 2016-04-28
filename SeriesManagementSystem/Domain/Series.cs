@@ -18,12 +18,18 @@ namespace SeriesManagementSystem.Domain
 
         public string Name
         {
-            get { return _name; } 
+            get
+            {
+                return _name;
+            }
         }
 
         public string Description
         {
-            get { return _description; }
+            get
+            {
+                return _description;
+            }
         }
     }
 }

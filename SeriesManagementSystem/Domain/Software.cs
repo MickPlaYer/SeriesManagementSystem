@@ -12,7 +12,6 @@ namespace SeriesManagementSystem.Domain
         private Series _selectedSeries;
         private SeriesManager _seriesManager;
         private FileManager _fileManager = new FileManager();
-        //private List<Series> _seriesList = new List<Series>();
 
         public Software()
         {
@@ -22,8 +21,7 @@ namespace SeriesManagementSystem.Domain
         // Add a new series with name and description.
         public void AddSeries(string name, string description)
         {
-            Series s = new Series(name, description);
-            _seriesManager.Add(s);
+            _seriesManager.AddSeries(name, description);
         }
 
         //Import series data from a file.
@@ -31,7 +29,7 @@ namespace SeriesManagementSystem.Domain
         {
             _fileManager.ImportFile(filePath);
             List<Series> list = _fileManager.GetList();
-            _seriesManager.AddRange(list);
+            _seriesManager.AddList(list);
         }
     }
 }

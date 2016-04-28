@@ -12,7 +12,7 @@ namespace SeriesManagementSystemUnitTest
     {
         Software _software;
         PrivateObject _privateObject;
-        const String _filePath = "./test.txt";
+        const String _filePath = "../test.txt";
 
         [TestInitialize()]
         public void TestInitialize()
@@ -37,7 +37,7 @@ namespace SeriesManagementSystemUnitTest
         {
             String name = "First Movie";
             String description = "The first movie in the world.";
-            String fileContext = "[{ \"Name\":\"" + name + "\", \"Description\":\"" + description + "\" }]";
+            String fileContext = "[{ \"Name\":\"" + name + "\", \"Description\":\"" + description + "\"}]";
             PrepareImportFile(fileContext);
             _software.ImportFile(_filePath);
             Series s = GetLastSeries();
@@ -59,9 +59,10 @@ namespace SeriesManagementSystemUnitTest
         #region Get Private Object
         private Series GetLastSeries()
         {
-            SeriesManager sl = _privateObject.GetField("_seriesManager") as SeriesManager;
-            Assert.IsTrue(sl.SeriesList.Count > 0, "Not any series in the list!");
-            return sl.SeriesList[sl.SeriesList.Count - 1];
+            SeriesManager seriesManager = _privateObject.GetField("_seriesManager") as SeriesManager;
+            Assert.IsNotNull(seriesManager.SeriesList);
+            Assert.IsTrue(seriesManager.SeriesList.Count > 0, "No any series in the list!");
+            return seriesManager.SeriesList[seriesManager.SeriesList.Count - 1];
         }
         #endregion
     }

@@ -32,14 +32,24 @@ namespace SeriesManagementSystem.Domain
         }
         #endregion
 
-        public void Add(Series series)
+        public void AddSeries(Series series)
         {
             _series.Add(series);
         }
 
-        public void AddRange(List<Series> list)
+        public void AddSeries(String name, String description)
         {
+            Series series = new Series(name, description);
+            AddSeries(series);
+        }
+
+        public void AddList(List<Series> list)
+        {
+            Console.WriteLine("in Test");
+            Console.WriteLine(list.Count);
             _series.AddRange(list);
+            Console.WriteLine(_series.Count);
+            Console.WriteLine(_series[0].Name + "  " + _series[0].Description);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace SeriesManagementSystem.Foundation
             {
                 fileContext = streamReader.ReadToEnd();
             }
-            _list = JsonConvert.DeserializeObject<List<Series>>(fileContext);
+            _list = JsonConvert.DeserializeObject<List<Series>>(fileContext) as List<Series>;
         }
 
         public List<Series> GetList()
