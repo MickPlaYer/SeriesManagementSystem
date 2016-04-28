@@ -56,11 +56,13 @@ namespace SeriesManagementSystemUnitTest
             }
         }
 
+        #region Get Private Object
         private Series GetLastSeries()
         {
-            List<Series> sl = _privateObject.GetField("_seriesList") as List<Series>;
-            Assert.IsTrue(sl.Count > 0, "Not any series in the list!");
-            return sl[sl.Count - 1];
+            SeriesManager sl = _privateObject.GetField("_seriesManager") as SeriesManager;
+            Assert.IsTrue(sl.SeriesList.Count > 0, "Not any series in the list!");
+            return sl.SeriesList[sl.SeriesList.Count - 1];
         }
+        #endregion
     }
 }
