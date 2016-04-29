@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeriesManagementSystem.Domain
 {
     public class SeriesManager
     {
-        private List<Series> _series;
+        private List<Series> _series = null;
+        private Series _selectedSeries;
 
         #region Constructor
         public SeriesManager()
@@ -30,6 +28,18 @@ namespace SeriesManagementSystem.Domain
                 return _series;
             }
         }
+
+        public Series SelectedSeries
+        {
+            get
+            {
+                return _selectedSeries;
+            }
+            private set
+            {
+                _selectedSeries = value;
+            }
+        }
         #endregion
 
         public void AddSeries(Series series)
@@ -45,11 +55,12 @@ namespace SeriesManagementSystem.Domain
 
         public void AddList(List<Series> list)
         {
-            Console.WriteLine("in Test");
-            Console.WriteLine(list.Count);
             _series.AddRange(list);
-            Console.WriteLine(_series.Count);
-            Console.WriteLine(_series[0].Name + "  " + _series[0].Description);
+        }
+
+        public void SelectSeries(int sid)
+        {
+            _selectedSeries = _series.Find((x) => x.SeriesID == sid);
         }
     }
 }

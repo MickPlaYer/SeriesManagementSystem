@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace SeriesManagementSystem.Domain
 {
     public class Series
     {
+        private int _seriesID;
         private string _name;
         private string _description;
 
@@ -16,11 +14,23 @@ namespace SeriesManagementSystem.Domain
             _description = description;
         }
 
+        [JsonConstructor]
+        public Series(string name, string description, int seriesID) :
+            this(name, description)
+        {
+            _seriesID = seriesID;
+        }
+
+        #region Public Properties
         public string Name
         {
             get
             {
                 return _name;
+            }
+            set
+            {
+                _name = value;
             }
         }
 
@@ -30,6 +40,23 @@ namespace SeriesManagementSystem.Domain
             {
                 return _description;
             }
+            set
+            {
+                _description = value;
+            }
         }
+
+        public int SeriesID
+        {
+            get
+            {
+                return _seriesID;
+            }
+            set
+            {
+                _seriesID = value;
+            }
+        }
+        #endregion
     }
 }

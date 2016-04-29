@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeriesManagementSystem.Domain;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -37,7 +36,8 @@ namespace SeriesManagementSystemUnitTest
         {
             String name = "First Movie";
             String description = "The first movie in the world.";
-            String fileContext = "[{ \"Name\":\"" + name + "\", \"Description\":\"" + description + "\"}]";
+            int seriesID = 1;
+            String fileContext = "[{ \"Name\":\"" + name + "\", \"Description\":\"" + description + "\", \"SeriesID\":"+seriesID+"}]";
             PrepareImportFile(fileContext);
             _software.ImportFile(_filePath);
             Series s = GetLastSeries();

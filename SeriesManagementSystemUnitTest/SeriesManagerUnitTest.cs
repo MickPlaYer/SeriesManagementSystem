@@ -3,8 +3,6 @@ using SeriesManagementSystem.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -15,18 +13,22 @@ namespace SeriesManagementSystemUnitTest
         Series[] _series;
         const String SeriesName = "manager's series";
         const String SeriesDescription = "it is a series' description of manager";
+        const int SeriesID = 1;
 
         [TestInitialize]
         public void Initialize()
         {
             _seriesManager = new SeriesManager();
             _series = new Series[3];
-            for(int i = 0;i < 3;i++){
-                _series[i] = new Series(SeriesName+i.ToString(), SeriesDescription+i.ToString());
+            for (int i = 0; i < 3; i++)
+            {
+                _series[i] = new Series(SeriesName + i.ToString(), SeriesDescription + i.ToString(), SeriesID + i);
             }
         }
 
-        // Test function of AddSeries
+        /// <summary>
+        /// Test function of AddSeries
+        /// </summary>
         [TestMethod]
         public void TestAdd()
         {
@@ -46,7 +48,9 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(series.Description, SeriesDescription);
         }
 
-        // test the function of AddRange with a parameter, List<Series>
+        /// <summary>
+        /// test the function of AddRange with a parameter, List<Series>
+        /// </summary>
         [TestMethod]
         public void TestAddRange()
         {
@@ -58,6 +62,28 @@ namespace SeriesManagementSystemUnitTest
             Assert.IsTrue(content.Count != 0, "the series list is still empty after adding a list of series");
         }
 
+        /// <summary>
+        /// Test function of SelectSeries
+        /// </summary>
+        [TestMethod]
+        public void TestSelectSeries()
+        {
+            // add series into series manager
+            _seriesManager.AddList(new List<Series>(_series));
+
+            // test initialization of selected series is empty
+            Assert.IsNull(_seriesManager.SelectedSeries);
+
+            // test selected series after selecting the series
+            _seriesManager.SelectSeries(2);
+            Assert.AreEqual(_seriesManager.SelectedSeries, _series[1]);
+            _seriesManager.SelectSeries(1);
+            Assert.AreEqual(_seriesManager.SelectedSeries, _series[0]);
+        }
+        /// <summary>
+        /// get the series list of series manager
+        /// </summary>
+        /// <returns></returns>
         private List<Series> GetSeriesList()
         {
             return _seriesManager.SeriesList;
