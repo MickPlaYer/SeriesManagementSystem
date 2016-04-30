@@ -40,7 +40,7 @@ namespace SeriesManagementSystem.Domain
 
         public void AddSeries(String name, String description)
         {
-            Series series = new Series(name, description);
+            Series series = new Series(name, description, 1);
             AddSeries(series);
         }
 
@@ -52,6 +52,12 @@ namespace SeriesManagementSystem.Domain
         public void SelectSeries(int sid)
         {
             _selectedSeries = _series.Find((x) => x.SeriesID == sid);
+        }
+
+        public void ModifySelectedSeries(string newName, string newDescription)
+        {
+            _selectedSeries.SetName(newName);
+            _selectedSeries.SetDescription(newDescription);
         }
     }
 }

@@ -46,5 +46,15 @@ namespace SeriesManagementSystem.Domain
             }
         }
         #endregion
+
+        public void SetName(string newName)
+        {
+            _name = newName;
+        }
+
+        public void SetDescription(string newDescription)
+        {
+            _description = newDescription;
+        }
     }
 }

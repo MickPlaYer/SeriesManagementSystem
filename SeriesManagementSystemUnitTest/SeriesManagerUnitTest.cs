@@ -11,9 +11,11 @@ namespace SeriesManagementSystemUnitTest
     {
         SeriesManager _seriesManager;
         Series[] _series;
-        const String SeriesName = "manager's series";
-        const String SeriesDescription = "it is a series' description of manager";
-        const int SeriesID = 1;
+        const int SeriesID = 0;
+        const string SeriesName = "manager's series";
+        const string SeriesDescription = "it is a series' description of manager";
+        const string ModifiedSeriesName = "modifiedSeries";
+        const string ModifiedSeriesDescription = "this is a modified description";
 
         [TestInitialize]
         public void Initialize()
@@ -76,10 +78,31 @@ namespace SeriesManagementSystemUnitTest
 
             // test selected series after selecting the series
             _seriesManager.SelectSeries(2);
-            Assert.AreEqual(_seriesManager.SelectedSeries, _series[1]);
+            Assert.AreEqual(_seriesManager.SelectedSeries, _series[2]);
             _seriesManager.SelectSeries(1);
-            Assert.AreEqual(_seriesManager.SelectedSeries, _series[0]);
+            Assert.AreEqual(_seriesManager.SelectedSeries, _series[1]);
+
+            // test if manager does not find the series in the list, it returns null
+            _seriesManager.SelectSeries(10);
+            Assert.IsNull(_seriesManager.SelectedSeries);
         }
+
+        [TestMethod]
+        public void TestModifiedSelectedSeries()
+        {
+            _seriesManager.AddList(new List<Series>(_series));
+            _seriesManager.SelectSeries(2);
+            Assert.AreEqual(_seriesManager.SelectedSeries, _series[2]);
+
+
+            _seriesManager.ModifySelectedSeries(ModifiedSeriesName, ModifiedSeriesDescription);
+            Assert.AreEqual(_seriesManager.SelectedSeries.Name, ModifiedSeriesName);
+            Assert.AreEqual(_seriesManager.SelectedSeries.Description, ModifiedSeriesDescription);
+
+            Assert.AreEqual(GetSeriesList().Find((x)=>x.SeriesID==2).Name, ModifiedSeriesName);
+            Assert.AreEqual(GetSeriesList().Find((x)=>x.SeriesID==2).Description, ModifiedSeriesDescription);
+        }
+        
         /// <summary>
         /// get the series list of series manager
         /// </summary>

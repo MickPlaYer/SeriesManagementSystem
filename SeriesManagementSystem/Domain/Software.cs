@@ -27,5 +27,15 @@ namespace SeriesManagementSystem.Domain
             List<Series> list = _fileManager.GetList();
             _seriesManager.AddList(list);
         }
+
+        public void SelectSeries(int sid)
+        {
+            _seriesManager.SelectSeries(sid);
+        }
+
+        public void ModifySeries(string newName, string newDescription)
+        {
+            _seriesManager.ModifySelectedSeries(newName, newDescription);
+        }
     }
 }

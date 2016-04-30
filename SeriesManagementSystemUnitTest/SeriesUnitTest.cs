@@ -8,9 +8,11 @@ namespace SeriesManagementSystemUnitTest
     public class SeriesUnitTest
     {
         Series _series;
-        const String SeriesName = "testSeries";
-        const String SeriesDescription = "this is a test Series Description";
         const int SeriesID = 10;
+        const string SeriesName = "testSeries";
+        const string SeriesDescription = "this is a test Series Description";
+        const string ModifiedSeriesName = "modifiedSeries";
+        const string ModifiedSeriesDescription = "this is a modified description";
 
         [TestInitialize]
         public void Initialize()
@@ -28,6 +30,22 @@ namespace SeriesManagementSystemUnitTest
         public void TestDescription()
         {
             Assert.AreEqual(_series.Description, SeriesDescription);
+        }
+
+        [TestMethod]
+        public void TestSetName()
+        {
+            Assert.AreEqual(_series.Name, SeriesName);
+            _series.SetName(ModifiedSeriesName);
+            Assert.AreEqual(_series.Name, ModifiedSeriesName);
+        }
+
+        [TestMethod]
+        public void TestSetDescription()
+        {
+            Assert.AreEqual(_series.Description, SeriesDescription);
+            _series.SetDescription(ModifiedSeriesDescription);
+            Assert.AreEqual(_series.Description, ModifiedSeriesDescription);
         }
     }
 }
