@@ -28,10 +28,6 @@ namespace SeriesManagementSystem.Domain
             {
                 return _name;
             }
-            set
-            {
-                _name = value;
-            }
         }
 
         public string Description
@@ -40,10 +36,6 @@ namespace SeriesManagementSystem.Domain
             {
                 return _description;
             }
-            set
-            {
-                _description = value;
-            }
         }
 
         public int SeriesID
@@ -51,10 +43,6 @@ namespace SeriesManagementSystem.Domain
             get
             {
                 return _seriesID;
-            }
-            set
-            {
-                _seriesID = value;
             }
         }
         #endregion

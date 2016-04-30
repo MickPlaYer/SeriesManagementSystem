@@ -13,11 +13,6 @@ namespace SeriesManagementSystem.Domain
         {
             _series = new List<Series>();
         }
-
-        public SeriesManager(List<Series> list)
-        {
-            _series = new List<Series>(list);
-        }
         #endregion
 
         #region Public Object
@@ -34,10 +29,6 @@ namespace SeriesManagementSystem.Domain
             get
             {
                 return _selectedSeries;
-            }
-            private set
-            {
-                _selectedSeries = value;
             }
         }
         #endregion
