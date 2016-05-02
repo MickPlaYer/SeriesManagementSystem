@@ -59,5 +59,11 @@ namespace SeriesManagementSystem.Domain
             _selectedSeries.SetName(newName);
             _selectedSeries.SetDescription(newDescription);
         }
+
+        public void RemoveSeries(int sid)
+        {
+            Series series = _series.Find((s) => s.SeriesID == sid);
+            _series.Remove(series);
+        }
     }
 }

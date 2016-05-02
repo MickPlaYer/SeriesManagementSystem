@@ -37,5 +37,10 @@ namespace SeriesManagementSystem.Domain
         {
             _seriesManager.ModifySelectedSeries(newName, newDescription);
         }
+
+        public void RemoveSeries(int sid)
+        {
+            _seriesManager.RemoveSeries(sid);
+        }
     }
 }

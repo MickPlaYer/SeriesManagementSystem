@@ -101,7 +101,18 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(ModifiedSeriesName, GetSeriesList().Find((x)=>x.SeriesID==2).Name);
             Assert.AreEqual(ModifiedSeriesDescription, GetSeriesList().Find((x)=>x.SeriesID==2).Description);
         }
-        
+
+        [TestMethod]
+        public void TestRemoveSeries()
+        {
+            List<Series> seriesList = GetSeriesList();
+            seriesList.AddRange(new List<Series>(_series));
+            Assert.AreEqual(3, seriesList.Count);
+            _seriesManager.RemoveSeries(1);
+            Assert.AreEqual(2, seriesList.Count);
+            Assert.AreEqual(-1, seriesList.IndexOf(_series[1]));
+        }
+
         /// <summary>
         /// get the series list of series manager
         /// </summary>

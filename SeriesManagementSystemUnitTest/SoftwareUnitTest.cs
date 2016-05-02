@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeriesManagementSystem.Domain;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -72,6 +73,17 @@ namespace SeriesManagementSystemUnitTest
             _software.ModifySeries(ModifiedSeriesName, ModifiedSeriesDescription);
             Assert.AreEqual(ModifiedSeriesName, GetSeriesManager().SelectedSeries.Name);
             Assert.AreEqual(ModifiedSeriesDescription, GetSeriesManager().SelectedSeries.Description);
+        }
+
+        [TestMethod]
+        public void TestRemoveSeries()
+        {
+            SeriesManager seriesManager = GetSeriesManager();
+            List<Series> seriesList = seriesManager.SeriesList;
+            Assert.AreEqual(3, seriesList.Count);
+            _software.RemoveSeries(1);
+            Assert.AreEqual(2, seriesList.Count);
+            Assert.IsNull(seriesList.Find((s) => s.Name == SeriesName + 0));
         }
 
         private void PrepareImportFile(string fileContext)
