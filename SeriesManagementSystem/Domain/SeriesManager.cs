@@ -56,8 +56,8 @@ namespace SeriesManagementSystem.Domain
 
         public void ModifySelectedSeries(string newName, string newDescription)
         {
-            _selectedSeries.SetName(newName);
-            _selectedSeries.SetDescription(newDescription);
+            _selectedSeries.Name = newName;
+            _selectedSeries.Description = newDescription;
         }
 
         public void RemoveSeries(int sid)

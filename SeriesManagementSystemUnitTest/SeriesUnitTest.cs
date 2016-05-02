@@ -36,7 +36,7 @@ namespace SeriesManagementSystemUnitTest
         public void TestSetName()
         {
             Assert.AreEqual(SeriesName, _series.Name);
-            _series.SetName(ModifiedSeriesName);
+            _series.Name = ModifiedSeriesName;
             Assert.AreEqual(ModifiedSeriesName, _series.Name);
         }
 
@@ -44,7 +44,7 @@ namespace SeriesManagementSystemUnitTest
         public void TestSetDescription()
         {
             Assert.AreEqual(SeriesDescription, _series.Description);
-            _series.SetDescription(ModifiedSeriesDescription);
+            _series.Description = ModifiedSeriesDescription;
             Assert.AreEqual(ModifiedSeriesDescription, _series.Description);
         }
     }

@@ -90,7 +90,8 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestModifiedSelectedSeries()
         {
-            _seriesManager.AddList(new List<Series>(_series));
+            GetSeriesList().AddRange(new List<Series>(_series));
+
             _seriesManager.SelectSeries(2);
             Assert.AreEqual(_series[2], _seriesManager.SelectedSeries);
 
