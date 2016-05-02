@@ -59,19 +59,19 @@ namespace SeriesManagementSystemUnitTest
         public void TestSelectSeries()
         {
             _software.SelectSeries(1);
-            Assert.AreEqual(GetSeriesManager().SelectedSeries.Name, SeriesName + 0);
-            Assert.AreEqual(GetSeriesManager().SelectedSeries.Description, SeriesDescription + 0);
+            Assert.AreEqual(SeriesName + 0, GetSeriesManager().SelectedSeries.Name);
+            Assert.AreEqual(SeriesDescription + 0, GetSeriesManager().SelectedSeries.Description);
         }
 
         [TestMethod]
         public void TestModifySeries()
         {
             _software.SelectSeries(1);
-            Assert.AreEqual(GetSeriesManager().SelectedSeries.Name, SeriesName + 0);
-            Assert.AreEqual(GetSeriesManager().SelectedSeries.Description, SeriesDescription + 0);
+            Assert.AreEqual(SeriesName + 0, GetSeriesManager().SelectedSeries.Name);
+            Assert.AreEqual(SeriesDescription + 0, GetSeriesManager().SelectedSeries.Description);
             _software.ModifySeries(ModifiedSeriesName, ModifiedSeriesDescription);
-            Assert.AreEqual(GetSeriesManager().SelectedSeries.Name, ModifiedSeriesName);
-            Assert.AreEqual(GetSeriesManager().SelectedSeries.Description, ModifiedSeriesDescription);
+            Assert.AreEqual(ModifiedSeriesName, GetSeriesManager().SelectedSeries.Name);
+            Assert.AreEqual(ModifiedSeriesDescription, GetSeriesManager().SelectedSeries.Description);
         }
 
         private void PrepareImportFile(string fileContext)

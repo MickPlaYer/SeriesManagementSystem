@@ -78,9 +78,9 @@ namespace SeriesManagementSystemUnitTest
 
             // test selected series after selecting the series
             _seriesManager.SelectSeries(2);
-            Assert.AreEqual(_seriesManager.SelectedSeries, _series[2]);
+            Assert.AreEqual(_series[2], _seriesManager.SelectedSeries);
             _seriesManager.SelectSeries(1);
-            Assert.AreEqual(_seriesManager.SelectedSeries, _series[1]);
+            Assert.AreEqual(_series[1], _seriesManager.SelectedSeries);
 
             // test if manager does not find the series in the list, it returns null
             _seriesManager.SelectSeries(10);
@@ -92,15 +92,14 @@ namespace SeriesManagementSystemUnitTest
         {
             _seriesManager.AddList(new List<Series>(_series));
             _seriesManager.SelectSeries(2);
-            Assert.AreEqual(_seriesManager.SelectedSeries, _series[2]);
-
+            Assert.AreEqual(_series[2], _seriesManager.SelectedSeries);
 
             _seriesManager.ModifySelectedSeries(ModifiedSeriesName, ModifiedSeriesDescription);
-            Assert.AreEqual(_seriesManager.SelectedSeries.Name, ModifiedSeriesName);
-            Assert.AreEqual(_seriesManager.SelectedSeries.Description, ModifiedSeriesDescription);
+            Assert.AreEqual(ModifiedSeriesName, _seriesManager.SelectedSeries.Name);
+            Assert.AreEqual(ModifiedSeriesDescription, _seriesManager.SelectedSeries.Description);
 
-            Assert.AreEqual(GetSeriesList().Find((x)=>x.SeriesID==2).Name, ModifiedSeriesName);
-            Assert.AreEqual(GetSeriesList().Find((x)=>x.SeriesID==2).Description, ModifiedSeriesDescription);
+            Assert.AreEqual(ModifiedSeriesName, GetSeriesList().Find((x)=>x.SeriesID==2).Name);
+            Assert.AreEqual(ModifiedSeriesDescription, GetSeriesList().Find((x)=>x.SeriesID==2).Description);
         }
         
         /// <summary>

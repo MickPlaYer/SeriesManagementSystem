@@ -23,29 +23,29 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestName()
         {
-            Assert.AreEqual(_series.Name, SeriesName);
+            Assert.AreEqual(SeriesName, _series.Name);
         }
 
         [TestMethod]
         public void TestDescription()
         {
-            Assert.AreEqual(_series.Description, SeriesDescription);
+            Assert.AreEqual(SeriesDescription, _series.Description);
         }
 
         [TestMethod]
         public void TestSetName()
         {
-            Assert.AreEqual(_series.Name, SeriesName);
+            Assert.AreEqual(SeriesName, _series.Name);
             _series.SetName(ModifiedSeriesName);
-            Assert.AreEqual(_series.Name, ModifiedSeriesName);
+            Assert.AreEqual(ModifiedSeriesName, _series.Name);
         }
 
         [TestMethod]
         public void TestSetDescription()
         {
-            Assert.AreEqual(_series.Description, SeriesDescription);
+            Assert.AreEqual(SeriesDescription, _series.Description);
             _series.SetDescription(ModifiedSeriesDescription);
-            Assert.AreEqual(_series.Description, ModifiedSeriesDescription);
+            Assert.AreEqual(ModifiedSeriesDescription, _series.Description);
         }
     }
 }
