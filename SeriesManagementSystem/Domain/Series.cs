@@ -52,6 +52,10 @@ namespace SeriesManagementSystem.Domain
             {
                 return _seriesID;
             }
+            set
+            {
+                _seriesID = value;
+            }
         }
         #endregion
     }

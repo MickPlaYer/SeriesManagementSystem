@@ -20,12 +20,22 @@ namespace SeriesManagementSystemUnitTest
         [TestInitialize]
         public void Initialize()
         {
-            _seriesManager = new SeriesManager();
+            _seriesManager = new SeriesManager(new List<Series>());
             _series = new Series[3];
             for (int i = 0; i < 3; i++)
             {
                 _series[i] = new Series(SeriesName + i.ToString(), SeriesDescription + i.ToString(), SeriesID + i);
             }
+        }
+
+        [TestMethod]
+        public void TestInitializeCount()
+        {
+            PrivateObject privateObject = new PrivateObject(_seriesManager);
+            Assert.AreEqual(0, privateObject.GetFieldOrProperty("_count"));
+            privateObject.SetField("_series", new List<Series>(_series));
+            privateObject.Invoke("InitializeCount");
+            Assert.AreEqual(3, privateObject.GetFieldOrProperty("_count"));
         }
 
         /// <summary>
@@ -35,7 +45,7 @@ namespace SeriesManagementSystemUnitTest
         public void TestAdd()
         {
             // test AddSeries function with one parameter, series
-            _seriesManager.AddSeries(_series[0]);
+            _seriesManager.AddSeries(_series[0].Name, _series[0].Description);
             List<Series> seriesList = GetSeriesList();
             Series series = seriesList.Last();
             Assert.AreEqual(series.Name, _series[0].Name);
@@ -71,7 +81,8 @@ namespace SeriesManagementSystemUnitTest
         public void TestSelectSeries()
         {
             // add series into series manager
-            _seriesManager.AddList(new List<Series>(_series));
+            List<Series> seriesList = GetSeriesList();
+            seriesList.AddRange(new List<Series>(_series));
 
             // test initialization of selected series is empty
             Assert.IsNull(_seriesManager.SelectedSeries);

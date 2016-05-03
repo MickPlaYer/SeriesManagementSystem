@@ -5,13 +5,14 @@ namespace SeriesManagementSystem.Domain
 {
     public class Software
     {
-        private Series _selectedSeries;
         private SeriesManager _seriesManager;
-        private FileManager _fileManager = new FileManager();
+        private FileManager _fileManager;
 
         public Software()
         {
-            _seriesManager = new SeriesManager();
+            _fileManager = new FileManager();
+            List<Series> list = _fileManager.GetList();
+            _seriesManager = new SeriesManager(list);
         }
 
         // Add a new series with name and description.

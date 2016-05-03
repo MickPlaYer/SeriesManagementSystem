@@ -9,7 +9,25 @@ namespace SeriesManagementSystem.Foundation
 {
     public class FileManager
     {
-        private List<Series> _list = new List<Series>();
+        private List<Series> _list;
+        private const string LOCAL_STOREAGE = "./dat/data.dat";
+
+        public FileManager()
+        {
+            try
+            {
+                ImportFile(LOCAL_STOREAGE);
+            }
+            catch (Exception e)
+            {
+                if (e is FileNotFoundException || e is DirectoryNotFoundException)
+                {
+                    _list = new List<Series>();
+                }
+                else
+                    throw e;
+            }
+        }
 
         public void ImportFile(string filePath)
         {

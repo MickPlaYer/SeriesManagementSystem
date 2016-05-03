@@ -60,16 +60,16 @@ namespace SeriesManagementSystemUnitTest
         public void TestSelectSeries()
         {
             _software.SelectSeries(1);
-            Assert.AreEqual(SeriesName + 0, GetSeriesManager().SelectedSeries.Name);
-            Assert.AreEqual(SeriesDescription + 0, GetSeriesManager().SelectedSeries.Description);
+            Assert.AreEqual(SeriesName + 1, GetSeriesManager().SelectedSeries.Name);
+            Assert.AreEqual(SeriesDescription + 1, GetSeriesManager().SelectedSeries.Description);
         }
 
         [TestMethod]
         public void TestModifySeries()
         {
             _software.SelectSeries(1);
-            Assert.AreEqual(SeriesName + 0, GetSeriesManager().SelectedSeries.Name);
-            Assert.AreEqual(SeriesDescription + 0, GetSeriesManager().SelectedSeries.Description);
+            Assert.AreEqual(SeriesName + 1, GetSeriesManager().SelectedSeries.Name);
+            Assert.AreEqual(SeriesDescription + 1, GetSeriesManager().SelectedSeries.Description);
             _software.ModifySeries(ModifiedSeriesName, ModifiedSeriesDescription);
             Assert.AreEqual(ModifiedSeriesName, GetSeriesManager().SelectedSeries.Name);
             Assert.AreEqual(ModifiedSeriesDescription, GetSeriesManager().SelectedSeries.Description);
@@ -83,7 +83,7 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(3, seriesList.Count);
             _software.RemoveSeries(1);
             Assert.AreEqual(2, seriesList.Count);
-            Assert.IsNull(seriesList.Find((s) => s.Name == SeriesName + 0));
+            Assert.IsNull(seriesList.Find((s) => s.Name == SeriesName + 1));
         }
 
         private void PrepareImportFile(string fileContext)

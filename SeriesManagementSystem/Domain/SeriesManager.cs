@@ -7,11 +7,13 @@ namespace SeriesManagementSystem.Domain
     {
         private List<Series> _series = null;
         private Series _selectedSeries;
+        private int _count = 0;
 
         #region Constructor
-        public SeriesManager()
+        public SeriesManager(List<Series> list)
         {
-            _series = new List<Series>();
+            _series = list;
+            InitializeCount();
         }
         #endregion
 
@@ -33,19 +35,18 @@ namespace SeriesManagementSystem.Domain
         }
         #endregion
 
-        public void AddSeries(Series series)
-        {
-            _series.Add(series);
-        }
-
         public void AddSeries(String name, String description)
         {
-            Series series = new Series(name, description, 1);
-            AddSeries(series);
+            Series series = new Series(name, description, _count++);
+            _series.Add(series);
         }
 
         public void AddList(List<Series> list)
         {
+            foreach (Series series in list)
+            {
+                series.SeriesID = _count++;
+            }
             _series.AddRange(list);
         }
 
@@ -64,6 +65,14 @@ namespace SeriesManagementSystem.Domain
         {
             Series series = _series.Find((s) => s.SeriesID == sid);
             _series.Remove(series);
+        }
+
+        private void InitializeCount()
+        {
+            if (_series.Count != 0)
+            {
+                _count = _series[_series.Count - 1].SeriesID + 1;
+            }
         }
     }
 }
