@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SeriesManagementSystem.Domain;
 using System.Windows.Forms;
 
 namespace SeriesManagementSystem.UI
 {
     public partial class SoftwareForm : Form
     {
-        public SoftwareForm()
+        private Software _software;
+        public SoftwareForm(Software software)
         {
             InitializeComponent();
+            _software = software;
         }
     }
 }

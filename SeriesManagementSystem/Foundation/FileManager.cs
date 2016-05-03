@@ -43,5 +43,17 @@ namespace SeriesManagementSystem.Foundation
         {
             return _list;
         }
+
+        public void SaveFile(List<Series> series)
+        {
+            new FileInfo(LOCAL_STOREAGE).Directory.Create();
+            using (FileStream fs = File.OpenWrite(LOCAL_STOREAGE))
+            {
+                string data = JsonConvert.SerializeObject(series);
+                Byte[] info = new UTF8Encoding(true).GetBytes(data);
+                fs.Write(info, 0, info.Length);
+                fs.Close();
+            }
+        }
     }
 }

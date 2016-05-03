@@ -43,5 +43,11 @@ namespace SeriesManagementSystem.Domain
         {
             _seriesManager.RemoveSeries(sid);
         }
+
+         ~Software()
+        {
+            List<Series> list = _seriesManager.SeriesList;
+            _fileManager.SaveFile(list);
+        }
     }
 }

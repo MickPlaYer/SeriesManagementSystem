@@ -18,6 +18,7 @@ namespace SeriesManagementSystemUnitTest
         const string SeriesDescription = "This is a test description";
         const string ModifiedSeriesName = "modifiedSeries";
         const string ModifiedSeriesDescription = "this is a modified description";
+        const string FILE_PATH = "./dat/data.dat";
 
         [TestInitialize()]
         public void TestInitialize()
@@ -29,6 +30,13 @@ namespace SeriesManagementSystemUnitTest
             {
                 _software.AddSeries(SeriesName + i.ToString(), SeriesDescription + i.ToString());
             }
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            if (File.Exists(FILE_PATH))
+                File.Delete(FILE_PATH);
         }
 
         [TestMethod]
@@ -84,6 +92,17 @@ namespace SeriesManagementSystemUnitTest
             _software.RemoveSeries(1);
             Assert.AreEqual(2, seriesList.Count);
             Assert.IsNull(seriesList.Find((s) => s.Name == SeriesName + 1));
+        }
+
+        [TestMethod]
+        public void TestDestructor()
+        {
+            Assert.IsFalse(File.Exists(FILE_PATH));
+            _software = null;
+            _privateObject = null;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            Assert.IsTrue(File.Exists(FILE_PATH));
         }
 
         private void PrepareImportFile(string fileContext)
