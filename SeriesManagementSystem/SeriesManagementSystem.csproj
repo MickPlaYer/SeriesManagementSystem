@@ -52,6 +52,7 @@
     <Compile Include="Domain\SeriesManager.cs" />
     <Compile Include="Domain\Software.cs" />
     <Compile Include="Foundation\FileManager.cs" />
+    <Compile Include="Foundation\Server.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\SoftwareForm.cs">
@@ -69,6 +70,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\SoftwareForm.resx">
+      <DependentUpon>SoftwareForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
