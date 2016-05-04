@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using SeriesManagementSystem.Domain;
 using SeriesManagementSystem.Foundation;
 using System;
 using System.Collections.Generic;
@@ -24,7 +26,8 @@ namespace SeriesManagementSystemUnitTest
         {
             string data;
             data = _server.GetData();
-            Assert.IsTrue(false);
+            List<Series> series = JsonConvert.DeserializeObject<List<Series>>(data);
+            Assert.IsTrue(series.Count > 0);
         }
     }
 }
