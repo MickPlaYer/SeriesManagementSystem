@@ -9,24 +9,24 @@ namespace SeriesManagementSystem.Foundation
 {
     public class FileManager
     {
-        private List<Series> _list;
-        private const string LOCAL_STOREAGE = "./dat/data.dat";
+        private string _content;
+        private string _localStorage;
+        
 
-        public FileManager()
+        public FileManager(string localStorage)
         {
             try
             {
-                ImportFile(LOCAL_STOREAGE);
+                ImportFile(localStorage);
             }
             catch (Exception e)
             {
-                if (e is FileNotFoundException || e is DirectoryNotFoundException)
+                if (e is FileNotFoundException | e is DirectoryNotFoundException)
                 {
-                    _list = new List<Series>();
+                    _content = "[]";
                 }
-                else
-                    throw e;
             }
+            _localStorage = localStorage;
         }
 
         public void ImportFile(string filePath)
@@ -36,21 +36,21 @@ namespace SeriesManagementSystem.Foundation
             {
                 fileContext = streamReader.ReadToEnd();
             }
-            _list = JsonConvert.DeserializeObject<List<Series>>(fileContext) as List<Series>;
+            _content = fileContext;
         }
 
-        public List<Series> GetList()
+        public string GetContent()
         {
-            return _list;
+            return _content;
         }
 
-        public void SaveFile(List<Series> series)
+        public void SaveFile(string content)
         {
-            new FileInfo(LOCAL_STOREAGE).Directory.Create();
-            using (FileStream fs = File.OpenWrite(LOCAL_STOREAGE))
+            new FileInfo(_localStorage).Directory.Create();
+            using (FileStream fs = File.OpenWrite(_localStorage))
             {
-                string data = JsonConvert.SerializeObject(series);
-                Byte[] info = new UTF8Encoding(true).GetBytes(data);
+                //string data = JsonConvert.SerializeObject(series);
+                Byte[] info = new UTF8Encoding(true).GetBytes(content);
                 fs.Write(info, 0, info.Length);
                 fs.Close();
             }

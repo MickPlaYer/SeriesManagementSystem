@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace SeriesManagementSystem.Domain
 {
@@ -10,9 +11,9 @@ namespace SeriesManagementSystem.Domain
         private int _count = 0;
 
         #region Constructor
-        public SeriesManager(List<Series> list)
+        public SeriesManager(string list)
         {
-            _series = list;
+            _series = JsonConvert.DeserializeObject<List<Series>>(list) as List<Series>;
             InitializeCount();
         }
         #endregion
@@ -33,6 +34,14 @@ namespace SeriesManagementSystem.Domain
                 return _selectedSeries;
             }
         }
+
+        public string SeriesListString
+        {
+            get
+            {
+                return JsonConvert.SerializeObject(_series);
+            }
+        }
         #endregion
 
         public void AddSeries(String name, String description)
@@ -41,8 +50,9 @@ namespace SeriesManagementSystem.Domain
             _series.Add(series);
         }
 
-        public void AddList(List<Series> list)
+        public void AddList(string content)
         {
+            List<Series> list = JsonConvert.DeserializeObject<List<Series>>(content) as List<Series>;
             foreach (Series series in list)
             {
                 series.SeriesID = _count++;

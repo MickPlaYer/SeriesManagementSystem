@@ -7,12 +7,12 @@ namespace SeriesManagementSystem.Domain
     {
         private SeriesManager _seriesManager;
         private FileManager _fileManager;
+        private const string LOCAL_STOREAGE = "./dat/data.dat";
 
         public Software()
         {
-            _fileManager = new FileManager();
-            List<Series> list = _fileManager.GetList();
-            _seriesManager = new SeriesManager(list);
+            _fileManager = new FileManager(LOCAL_STOREAGE);
+            _seriesManager = new SeriesManager(_fileManager.GetContent());
         }
 
         // Add a new series with name and description.
@@ -25,8 +25,7 @@ namespace SeriesManagementSystem.Domain
         public void ImportFile(string filePath)
         {
             _fileManager.ImportFile(filePath);
-            List<Series> list = _fileManager.GetList();
-            _seriesManager.AddList(list);
+            _seriesManager.AddList(_fileManager.GetContent());
         }
 
         public void SelectSeries(int sid)
@@ -46,7 +45,7 @@ namespace SeriesManagementSystem.Domain
 
          ~Software()
         {
-            List<Series> list = _seriesManager.SeriesList;
+            string list = _seriesManager.SeriesListString;
             _fileManager.SaveFile(list);
         }
     }

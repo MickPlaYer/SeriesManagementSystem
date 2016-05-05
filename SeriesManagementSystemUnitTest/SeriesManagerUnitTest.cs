@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using SeriesManagementSystem.Domain;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace SeriesManagementSystemUnitTest
         [TestInitialize]
         public void Initialize()
         {
-            _seriesManager = new SeriesManager(new List<Series>());
+            _seriesManager = new SeriesManager("[]");
             _series = new Series[3];
             for (int i = 0; i < 3; i++)
             {
@@ -69,7 +70,8 @@ namespace SeriesManagementSystemUnitTest
             List<Series> content = GetSeriesList();
             Assert.IsTrue(content.Count == 0, "the initialized series list is not empty");
             List<Series> seriesList = new List<Series>(_series);
-            _seriesManager.AddList(seriesList);
+            string contentString = JsonConvert.SerializeObject(seriesList);
+            _seriesManager.AddList(contentString);
             content = GetSeriesList();
             Assert.IsTrue(content.Count != 0, "the series list is still empty after adding a list of series");
         }
