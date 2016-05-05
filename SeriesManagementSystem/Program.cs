@@ -18,7 +18,7 @@ namespace SeriesManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SoftwareForm(new Software()));
+            Application.Run(new SoftwareForm8888(new Software()));
         }
     }
 }
