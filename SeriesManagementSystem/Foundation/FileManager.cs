@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using SeriesManagementSystem.Domain;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Text;
 

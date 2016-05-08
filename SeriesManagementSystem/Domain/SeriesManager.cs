@@ -60,6 +60,16 @@ namespace SeriesManagementSystem.Domain
             _series.AddRange(list);
         }
 
+        public void AddServerData(string content)
+        {
+            List<Series> list = JsonConvert.DeserializeObject<List<Series>>(content);
+            foreach (Series series in list)
+            {
+                if (_series.Find((s) => s.SeriesID == series.SeriesID) == null)
+                    _series.Add(series);
+            }
+        }
+
         public void SelectSeries(int sid)
         {
             _selectedSeries = _series.Find((x) => x.SeriesID == sid);

@@ -127,6 +127,17 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(-1, seriesList.IndexOf(_series[1]));
         }
 
+        [TestMethod]
+        public void TestAddServerData()
+        {
+            List<Series> seriesList = GetSeriesList();
+            string content = "[{\"Name\":\"ServerSeries1\",\"Description\":\"This is on the server.\",\"SeriesID\":-256}]";
+            _seriesManager.AddServerData(content);
+            Assert.AreEqual(1, seriesList.Count);
+            _seriesManager.AddServerData(content);
+            Assert.AreEqual(1, seriesList.Count);
+        }
+
         /// <summary>
         /// get the series list of series manager
         /// </summary>

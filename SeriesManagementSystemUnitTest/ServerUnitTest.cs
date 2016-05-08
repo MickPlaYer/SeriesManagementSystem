@@ -27,7 +27,9 @@ namespace SeriesManagementSystemUnitTest
             string data;
             data = _server.GetData();
             List<Series> series = JsonConvert.DeserializeObject<List<Series>>(data);
+            Series s = series[0];
             Assert.IsTrue(series.Count > 0);
+            Assert.AreEqual(-20, s.SeriesID);
         }
     }
 }

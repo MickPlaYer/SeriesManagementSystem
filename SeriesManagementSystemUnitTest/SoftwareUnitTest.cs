@@ -12,7 +12,6 @@ namespace SeriesManagementSystemUnitTest
     {
         Software _software;
         PrivateObject _privateObject;
-        Series[] _series;
         const String _filePath = "../test.txt";
         const string SeriesName = "Test Series";
         const string SeriesDescription = "This is a test description";
@@ -25,7 +24,7 @@ namespace SeriesManagementSystemUnitTest
         {
             _software = new Software();
             _privateObject = new PrivateObject(_software, new PrivateType(typeof(Software)));
-            
+
             for (int i = 0; i < 3; i++)
             {
                 _software.AddSeries(SeriesName + i.ToString(), SeriesDescription + i.ToString());
@@ -56,7 +55,7 @@ namespace SeriesManagementSystemUnitTest
             String name = "First Movie";
             String description = "The first movie in the world.";
             int seriesID = 1;
-            String fileContext = "[{ \"Name\":\"" + name + "\", \"Description\":\"" + description + "\", \"SeriesID\":"+seriesID+"}]";
+            String fileContext = "[{ \"Name\":\"" + name + "\", \"Description\":\"" + description + "\", \"SeriesID\":" + seriesID + "}]";
             PrepareImportFile(fileContext);
             _software.ImportFile(_filePath);
             Series s = GetLastSeries();
@@ -88,10 +87,17 @@ namespace SeriesManagementSystemUnitTest
         {
             SeriesManager seriesManager = GetSeriesManager();
             List<Series> seriesList = seriesManager.SeriesList;
-            Assert.AreEqual(3, seriesList.Count);
+            Assert.AreEqual(4, seriesList.Count);
             _software.RemoveSeries(1);
-            Assert.AreEqual(2, seriesList.Count);
+            Assert.AreEqual(3, seriesList.Count);
             Assert.IsNull(seriesList.Find((s) => s.Name == SeriesName + 1));
+        }
+
+        [TestMethod]
+        public void TestGetSeriesList()
+        {
+            SeriesManager seriesManager = GetSeriesManager();
+            Assert.AreEqual(seriesManager.SeriesList, _software.GetSeriesList());
         }
 
         [TestMethod]
