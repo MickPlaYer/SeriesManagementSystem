@@ -36,14 +36,14 @@
             this._seriesGridView = new System.Windows.Forms.DataGridView();
             this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -124,21 +124,17 @@
             this.Remove.Text = "Remove";
             this.Remove.UseColumnTextForButtonValue = true;
             // 
-            // seriesManagerBindingSource
-            // 
-            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
-            // 
             // seriesListBindingSource
             // 
             this.seriesListBindingSource.DataMember = "SeriesList";
             this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
             // 
-            // seriesIDDataGridViewTextBoxColumn
+            // nameDataGridViewTextBoxColumn
             // 
-            this.seriesIDDataGridViewTextBoxColumn.DataPropertyName = "SeriesID";
-            this.seriesIDDataGridViewTextBoxColumn.HeaderText = "SeriesID";
-            this.seriesIDDataGridViewTextBoxColumn.Name = "seriesIDDataGridViewTextBoxColumn";
-            this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
@@ -147,12 +143,16 @@
             this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
             this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // nameDataGridViewTextBoxColumn
+            // seriesIDDataGridViewTextBoxColumn
             // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.seriesIDDataGridViewTextBoxColumn.DataPropertyName = "SeriesID";
+            this.seriesIDDataGridViewTextBoxColumn.HeaderText = "SeriesID";
+            this.seriesIDDataGridViewTextBoxColumn.Name = "seriesIDDataGridViewTextBoxColumn";
+            this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // seriesManagerBindingSource
+            // 
+            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
             // 
             // SoftwareForm
             // 
@@ -169,8 +169,8 @@
             this.Name = "SoftwareForm";
             this.Text = "Series Management System";
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
