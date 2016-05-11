@@ -24,6 +24,7 @@ namespace SeriesManagementSystem.UI
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
                     _software.AddSeries(addForm.ReturnSeries.Name, addForm.ReturnSeries.Description);
+                    seriesListBindingSource.ResetBindings(true);
                 }
             }
         }
@@ -47,10 +48,14 @@ namespace SeriesManagementSystem.UI
                     _software.SelectSeries(sid);
                     string name = row.Cells[2].Value.ToString();
                     string desc = row.Cells[3].Value.ToString();
-                    /*SeriesForm s = new SeriesForm(name, desc);
-                    seriesForm.ShowDialog();
-                    if (s.DialogResult == DialogResult.OK)
-                        _software.ModifySeries(s.SeriesName, s.Description);*/
+                    using (var modifyForm = new SeriesForm(new Series(name, desc)))
+                    {
+                        if (modifyForm.ShowDialog() == DialogResult.OK)
+                        {
+                            _software.ModifySeries(modifyForm.ReturnSeries.Name, modifyForm.ReturnSeries.Description);
+                            seriesListBindingSource.ResetBindings(true);
+                        }
+                    }
                 }
                 seriesListBindingSource.ResetBindings(true);
             }
