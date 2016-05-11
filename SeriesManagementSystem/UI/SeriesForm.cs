@@ -46,10 +46,11 @@ namespace SeriesManagementSystem.UI
             this.Text = "修改 Series";
             this.button_Confirm.Text = "修改影集";
 
+            _series = series;
+            _model = new SeriesFormPresentationModel(series.Name, series.Description);
+
             this.textBox_SeriesName.Text = series.Name;
             this.textBox_SeriesDes.Text = series.Description;
-            _series = series;
-            _model = new SeriesFormPresentationModel();
         }
 
         private void ClickButtonConfirm(object sender, EventArgs e)
