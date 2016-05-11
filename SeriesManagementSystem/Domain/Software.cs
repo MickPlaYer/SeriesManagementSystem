@@ -15,12 +15,11 @@ namespace SeriesManagementSystem.Domain
         {
             _fileManager = new FileManager(LOCAL_STOREAGE);
             _seriesManager = new SeriesManager(_fileManager.GetContent());
-            AddServerData();
+            AddServerData(new Server());
         }
 
-        private void AddServerData()
+        private void AddServerData(IServer server)
         {
-            Server server = new Server();
             try
             {
                 _seriesManager.AddServerData(server.GetData());

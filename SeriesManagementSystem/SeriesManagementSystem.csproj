@@ -53,6 +53,7 @@
     <Compile Include="Domain\SeriesManager.cs" />
     <Compile Include="Domain\Software.cs" />
     <Compile Include="Foundation\FileManager.cs" />
+    <Compile Include="Foundation\IServer.cs" />
     <Compile Include="Foundation\Server.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
