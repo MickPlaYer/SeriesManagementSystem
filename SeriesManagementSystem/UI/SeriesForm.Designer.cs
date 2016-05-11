@@ -1,4 +1,4 @@
-﻿namespace SeriesManagementSystem
+﻿namespace SeriesManagementSystem.UI
 {
     partial class SeriesForm
     {
