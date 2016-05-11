@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeriesManagementSystem.ViewModel;
+using System.ComponentModel;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -60,6 +61,20 @@ namespace SeriesManagementSystemUnitTest
 
             _model.ModifyName(MODIFYNAME);
             Assert.IsTrue(_model.IsOkButtonEnabled);
+        }
+
+        [TestMethod]
+        public void TestNotify()
+        {
+            _model = new SeriesFormPresentationModel();
+            string propertyName = string.Empty;
+            Assert.AreEqual(propertyName, string.Empty);
+            _model.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
+            {
+                propertyName = e.PropertyName;
+            };
+            _model.ModifyName(MODIFYNAME);
+            Assert.AreEqual(propertyName, "IsOkButtonEnabled");
         }
     }
 }

@@ -4,6 +4,7 @@ using SeriesManagementSystem.Domain;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using SeriesManagementSystemUnitTest.TestItem;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -109,6 +110,14 @@ namespace SeriesManagementSystemUnitTest
             GC.Collect();
             GC.WaitForPendingFinalizers();
             Assert.IsTrue(File.Exists(FILE_PATH));
+        }
+
+        [TestMethod]
+        public void TestAddServerData()
+        {
+            Assert.IsFalse(_software.IsNoInternet);
+            _privateObject.Invoke("AddServerData", new TestServer());
+            Assert.IsTrue(_software.IsNoInternet);
         }
 
         private void PrepareImportFile(string fileContext)

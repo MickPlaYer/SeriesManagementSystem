@@ -9,7 +9,6 @@ namespace SeriesManagementSystem.Foundation
         private string _content;
         private string _localStorage;
         
-
         public FileManager(string localStorage)
         {
             try
@@ -43,13 +42,9 @@ namespace SeriesManagementSystem.Foundation
 
         public void SaveFile(string content)
         {
-            new FileInfo(_localStorage).Directory.Create();
-            using (FileStream fs = File.OpenWrite(_localStorage))
+            using (var streamReader = new StreamWriter(_localStorage, false))
             {
-                //string data = JsonConvert.SerializeObject(series);
-                Byte[] info = new UTF8Encoding(true).GetBytes(content);
-                fs.Write(info, 0, info.Length);
-                fs.Close();
+                streamReader.Write(content);
             }
         }
     }

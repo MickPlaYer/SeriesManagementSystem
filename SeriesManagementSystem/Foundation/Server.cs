@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SeriesManagementSystem.Foundation
 {
-    public class Server
+    public class Server : IServer
     {
         const string SERVER_URL = @"https://script.google.com/macros/s/AKfycbyYu-99imRw9KZ3osDFbzbVHscLB4nWVMlc2G2JDV9cB98889L2/exec";
 

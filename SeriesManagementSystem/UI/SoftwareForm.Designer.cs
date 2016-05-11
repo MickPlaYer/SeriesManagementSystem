@@ -29,60 +29,39 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button_AddSeries = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this._addSeriesButton = new System.Windows.Forms.Button();
+            this._importSeriesButton = new System.Windows.Forms.Button();
             this._seriesGridView = new System.Windows.Forms.DataGridView();
+            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // button_AddSeries
+            // _addSeriesButton
             // 
-            this.button_AddSeries.Location = new System.Drawing.Point(12, 12);
-            this.button_AddSeries.Name = "button_AddSeries";
-            this.button_AddSeries.Size = new System.Drawing.Size(75, 23);
-            this.button_AddSeries.TabIndex = 0;
-            this.button_AddSeries.Text = "Add";
-            this.button_AddSeries.UseVisualStyleBackColor = true;
-            this.button_AddSeries.Click += new System.EventHandler(this.ClickAddSeriesButton);
+            this._addSeriesButton.Location = new System.Drawing.Point(12, 12);
+            this._addSeriesButton.Name = "_addSeriesButton";
+            this._addSeriesButton.Size = new System.Drawing.Size(75, 23);
+            this._addSeriesButton.TabIndex = 0;
+            this._addSeriesButton.Text = "新增";
+            this._addSeriesButton.UseVisualStyleBackColor = true;
+            this._addSeriesButton.Click += new System.EventHandler(this.OnAddSeries);
             // 
-            // button2
+            // _importSeriesButton
             // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(93, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Modify";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(174, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Remove";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(255, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Import";
-            this.button4.UseVisualStyleBackColor = true;
+            this._importSeriesButton.Location = new System.Drawing.Point(93, 12);
+            this._importSeriesButton.Name = "_importSeriesButton";
+            this._importSeriesButton.Size = new System.Drawing.Size(75, 23);
+            this._importSeriesButton.TabIndex = 3;
+            this._importSeriesButton.Text = "匯入";
+            this._importSeriesButton.UseVisualStyleBackColor = true;
             // 
             // _seriesGridView
             // 
@@ -108,43 +87,7 @@
             this._seriesGridView.RowTemplate.Height = 24;
             this._seriesGridView.Size = new System.Drawing.Size(500, 318);
             this._seriesGridView.TabIndex = 4;
-            // 
-            // Modify
-            // 
-            this.Modify.HeaderText = "Modify";
-            this.Modify.Name = "Modify";
-            this.Modify.ReadOnly = true;
-            this.Modify.Text = "Modify";
-            this.Modify.UseColumnTextForButtonValue = true;
-            // 
-            // Remove
-            // 
-            this.Remove.HeaderText = "Remove";
-            this.Remove.Name = "Remove";
-            this.Remove.ReadOnly = true;
-            this.Remove.Text = "Remove";
-            this.Remove.UseColumnTextForButtonValue = true;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // seriesIDDataGridViewTextBoxColumn
-            // 
-            this.seriesIDDataGridViewTextBoxColumn.DataPropertyName = "SeriesID";
-            this.seriesIDDataGridViewTextBoxColumn.HeaderText = "SeriesID";
-            this.seriesIDDataGridViewTextBoxColumn.Name = "seriesIDDataGridViewTextBoxColumn";
-            this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this._seriesGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellButtonClick);
             // 
             // seriesListBindingSource
             // 
@@ -155,16 +98,52 @@
             // 
             this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
             // 
+            // Modify
+            // 
+            this.Modify.HeaderText = "";
+            this.Modify.Name = "Modify";
+            this.Modify.ReadOnly = true;
+            this.Modify.Text = "修改";
+            this.Modify.UseColumnTextForButtonValue = true;
+            // 
+            // Remove
+            // 
+            this.Remove.HeaderText = "";
+            this.Remove.Name = "Remove";
+            this.Remove.ReadOnly = true;
+            this.Remove.Text = "刪除";
+            this.Remove.UseColumnTextForButtonValue = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "名稱";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "描述";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // seriesIDDataGridViewTextBoxColumn
+            // 
+            this.seriesIDDataGridViewTextBoxColumn.DataPropertyName = "SeriesID";
+            this.seriesIDDataGridViewTextBoxColumn.HeaderText = "SeriesID";
+            this.seriesIDDataGridViewTextBoxColumn.Name = "seriesIDDataGridViewTextBoxColumn";
+            this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.seriesIDDataGridViewTextBoxColumn.Visible = false;
+            // 
             // SoftwareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 371);
             this.Controls.Add(this._seriesGridView);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button_AddSeries);
+            this.Controls.Add(this._importSeriesButton);
+            this.Controls.Add(this._addSeriesButton);
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(540, 410);
             this.Name = "SoftwareForm";
@@ -178,17 +157,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button_AddSeries;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button _addSeriesButton;
+        private System.Windows.Forms.Button _importSeriesButton;
         private System.Windows.Forms.DataGridView _seriesGridView;
+        private System.Windows.Forms.BindingSource seriesManagerBindingSource;
+        private System.Windows.Forms.BindingSource seriesListBindingSource;
         private System.Windows.Forms.DataGridViewButtonColumn Modify;
         private System.Windows.Forms.DataGridViewButtonColumn Remove;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn seriesIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource seriesManagerBindingSource;
-        private System.Windows.Forms.BindingSource seriesListBindingSource;
     }
 }

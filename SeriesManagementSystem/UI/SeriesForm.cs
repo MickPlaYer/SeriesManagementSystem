@@ -3,7 +3,7 @@ using SeriesManagementSystem.ViewModel;
 using System;
 using System.Windows.Forms;
 
-namespace SeriesManagementSystem
+namespace SeriesManagementSystem.UI
 {
     public partial class SeriesForm : Form
     {
