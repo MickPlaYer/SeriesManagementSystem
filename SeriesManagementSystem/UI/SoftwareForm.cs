@@ -17,14 +17,39 @@ namespace SeriesManagementSystem.UI
                 MessageBox.Show("目前裝置尚未連接網路");
         }
 
-        private void AddSeries(object sender, EventArgs e)
+        private void OnAddSeries(object sender, EventArgs e)
         {
-            SeriesForm seriesForm = new SeriesForm();
-            seriesForm.ShowDialog();
-            if (seriesForm.DialogResult == DialogResult.OK)
+            SeriesForm s = new SeriesForm();
+            s.ShowDialog();
+            /*if (s.DialogResult == DialogResult.OK)
+                _software.AddSeries(s.SeriesName, s.Description);*/
+        }
+
+        private void OnCellButtonClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+            var column = senderGrid.Columns[e.ColumnIndex];
+            var row = senderGrid.Rows[e.RowIndex];
+            if (column is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                Series s = seriesForm.ReturnSeries;
-                _software.AddSeries(s.Name, s.Description);
+                int sid = Int32.Parse(row.Cells[4].Value.ToString());
+                if (column.Name == "Remove")
+                {
+                    var result = MessageBox.Show("是否刪除影集？", "刪除影集", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                        _software.RemoveSeries(sid);
+                }
+                else if (column.Name == "Modify")
+                {
+                    _software.SelectSeries(sid);
+                    string name = row.Cells[2].Value.ToString();
+                    string desc = row.Cells[3].Value.ToString();
+                    /*SeriesForm s = new SeriesForm(name, desc);
+                    seriesForm.ShowDialog();
+                    if (s.DialogResult == DialogResult.OK)
+                        _software.ModifySeries(s.SeriesName, s.Description);*/
+                }
+                seriesListBindingSource.ResetBindings(true);
             }
         }
     }
