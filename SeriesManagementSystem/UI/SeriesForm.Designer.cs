@@ -59,20 +59,21 @@
             // 
             this.textBox_SeriesName.Location = new System.Drawing.Point(83, 12);
             this.textBox_SeriesName.Name = "textBox_SeriesName";
-            this.textBox_SeriesName.Size = new System.Drawing.Size(247, 22);
+            this.textBox_SeriesName.Size = new System.Drawing.Size(248, 22);
             this.textBox_SeriesName.TabIndex = 2;
+            this.textBox_SeriesName.TextChanged += new System.EventHandler(this.ChangeTextBoxSeriesName);
             // 
             // textBox_SeriesDes
             // 
             this.textBox_SeriesDes.Location = new System.Drawing.Point(83, 54);
             this.textBox_SeriesDes.Multiline = true;
             this.textBox_SeriesDes.Name = "textBox_SeriesDes";
-            this.textBox_SeriesDes.Size = new System.Drawing.Size(247, 126);
+            this.textBox_SeriesDes.Size = new System.Drawing.Size(248, 126);
             this.textBox_SeriesDes.TabIndex = 3;
             // 
             // button_Cancel
             // 
-            this.button_Cancel.Location = new System.Drawing.Point(244, 197);
+            this.button_Cancel.Location = new System.Drawing.Point(245, 197);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(86, 35);
             this.button_Cancel.TabIndex = 4;
@@ -82,7 +83,7 @@
             // 
             // button_Confirm
             // 
-            this.button_Confirm.Location = new System.Drawing.Point(152, 197);
+            this.button_Confirm.Location = new System.Drawing.Point(153, 197);
             this.button_Confirm.Name = "button_Confirm";
             this.button_Confirm.Size = new System.Drawing.Size(86, 35);
             this.button_Confirm.TabIndex = 5;
@@ -94,7 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 244);
+            this.ClientSize = new System.Drawing.Size(343, 244);
             this.Controls.Add(this.button_Confirm);
             this.Controls.Add(this.button_Cancel);
             this.Controls.Add(this.textBox_SeriesDes);

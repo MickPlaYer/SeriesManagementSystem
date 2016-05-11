@@ -29,31 +29,32 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_AddSeries = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this._seriesGridView = new System.Windows.Forms.DataGridView();
             this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // button_AddSeries
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_AddSeries.Location = new System.Drawing.Point(12, 12);
+            this.button_AddSeries.Name = "button_AddSeries";
+            this.button_AddSeries.Size = new System.Drawing.Size(75, 23);
+            this.button_AddSeries.TabIndex = 0;
+            this.button_AddSeries.Text = "Add";
+            this.button_AddSeries.UseVisualStyleBackColor = true;
+            this.button_AddSeries.Click += new System.EventHandler(this.ClickAddSeriesButton);
             // 
             // button2
             // 
@@ -124,11 +125,6 @@
             this.Remove.Text = "Remove";
             this.Remove.UseColumnTextForButtonValue = true;
             // 
-            // seriesListBindingSource
-            // 
-            this.seriesListBindingSource.DataMember = "SeriesList";
-            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
-            // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
@@ -150,6 +146,11 @@
             this.seriesIDDataGridViewTextBoxColumn.Name = "seriesIDDataGridViewTextBoxColumn";
             this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // seriesListBindingSource
+            // 
+            this.seriesListBindingSource.DataMember = "SeriesList";
+            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
+            // 
             // seriesManagerBindingSource
             // 
             this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
@@ -163,7 +164,7 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_AddSeries);
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(540, 410);
             this.Name = "SoftwareForm";
@@ -177,7 +178,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_AddSeries;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
