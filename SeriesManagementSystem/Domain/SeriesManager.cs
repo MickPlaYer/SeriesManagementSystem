@@ -91,7 +91,10 @@ namespace SeriesManagementSystem.Domain
         {
             if (_series.Count != 0)
             {
-                _count = _series[_series.Count - 1].SeriesID + 1;
+                _series.Sort((s1, s2) => { return s1.SeriesID - s2.SeriesID; });
+                int count = _series[_series.Count - 1].SeriesID + 1;
+                if (count > 0)
+                    _count = count;
             }
         }
     }
