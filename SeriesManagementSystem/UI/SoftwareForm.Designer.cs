@@ -34,13 +34,13 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this._seriesGridView = new System.Windows.Forms.DataGridView();
+            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
@@ -108,6 +108,15 @@
             this._seriesGridView.Size = new System.Drawing.Size(500, 318);
             this._seriesGridView.TabIndex = 4;
             // 
+            // seriesListBindingSource
+            // 
+            this.seriesListBindingSource.DataMember = "SeriesList";
+            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
+            // 
+            // seriesManagerBindingSource
+            // 
+            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
+            // 
             // Modify
             // 
             this.Modify.HeaderText = "Modify";
@@ -123,11 +132,6 @@
             this.Remove.ReadOnly = true;
             this.Remove.Text = "Remove";
             this.Remove.UseColumnTextForButtonValue = true;
-            // 
-            // seriesListBindingSource
-            // 
-            this.seriesListBindingSource.DataMember = "SeriesList";
-            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -149,10 +153,7 @@
             this.seriesIDDataGridViewTextBoxColumn.HeaderText = "SeriesID";
             this.seriesIDDataGridViewTextBoxColumn.Name = "seriesIDDataGridViewTextBoxColumn";
             this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // seriesManagerBindingSource
-            // 
-            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
+            this.seriesIDDataGridViewTextBoxColumn.Visible = false;
             // 
             // SoftwareForm
             // 
@@ -182,12 +183,12 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView _seriesGridView;
+        private System.Windows.Forms.BindingSource seriesManagerBindingSource;
+        private System.Windows.Forms.BindingSource seriesListBindingSource;
         private System.Windows.Forms.DataGridViewButtonColumn Modify;
         private System.Windows.Forms.DataGridViewButtonColumn Remove;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn seriesIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource seriesManagerBindingSource;
-        private System.Windows.Forms.BindingSource seriesListBindingSource;
     }
 }

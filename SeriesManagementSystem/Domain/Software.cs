@@ -1,5 +1,6 @@
 ﻿using SeriesManagementSystem.Foundation;
 using System.Collections.Generic;
+using System.Net;
 
 namespace SeriesManagementSystem.Domain
 {
@@ -7,15 +8,27 @@ namespace SeriesManagementSystem.Domain
     {
         private SeriesManager _seriesManager;
         private FileManager _fileManager;
-        private Server _server;
+        private bool _isNoInternet = false;
         private const string LOCAL_STOREAGE = "./dat/data.dat";
 
         public Software()
         {
             _fileManager = new FileManager(LOCAL_STOREAGE);
             _seriesManager = new SeriesManager(_fileManager.GetContent());
-            _server = new Server();
-            _seriesManager.AddServerData(_server.GetData());
+            AddServerData();
+        }
+
+        private void AddServerData()
+        {
+            Server server = new Server();
+            try
+            {
+                _seriesManager.AddServerData(server.GetData());
+            }
+            catch (WebException)
+            {
+                _isNoInternet = true;
+            }
         }
 
         // Add a new series with name and description.
@@ -55,6 +68,11 @@ namespace SeriesManagementSystem.Domain
         public List<Series> GetSeriesList()
         {
             return _seriesManager.SeriesList;
+        }
+
+        public bool IsNoInternet
+        {
+            get { return _isNoInternet; }
         }
     }
 }

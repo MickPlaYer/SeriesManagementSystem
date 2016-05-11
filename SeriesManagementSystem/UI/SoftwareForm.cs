@@ -12,6 +12,8 @@ namespace SeriesManagementSystem.UI
             InitializeComponent();
             _software = software;
             seriesListBindingSource.DataSource = _software.GetSeriesList();
+            if (_software.IsNoInternet)
+                MessageBox.Show("目前裝置尚未連接網路");
         }
     }
 }
