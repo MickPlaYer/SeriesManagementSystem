@@ -9,6 +9,7 @@ namespace SeriesManagementSystem.Domain
         private SeriesManager _seriesManager;
         private FileManager _fileManager;
         private bool _isNoInternet = false;
+        private bool _isImportFail = false;
         private const string LOCAL_STOREAGE = "./dat/data.dat";
 
         public Software()
@@ -20,14 +21,8 @@ namespace SeriesManagementSystem.Domain
 
         private void AddServerData(IServer server)
         {
-            try
-            {
-                _seriesManager.AddServerData(server.GetData());
-            }
-            catch (WebException)
-            {
-                _isNoInternet = true;
-            }
+            try { _seriesManager.AddServerData(server.GetData()); }
+            catch (WebException) { _isNoInternet = true; }
         }
 
         // Add a new series with name and description.
@@ -39,8 +34,10 @@ namespace SeriesManagementSystem.Domain
         //Import series data from a file.
         public void ImportFile(string filePath)
         {
+            _isImportFail = false;
             _fileManager.ImportFile(filePath);
-            _seriesManager.AddList(_fileManager.GetContent());
+            try { _seriesManager.AddList(_fileManager.GetContent()); }
+            catch { _isImportFail = true; }
         }
 
         public void SelectSeries(int sid)
@@ -72,6 +69,11 @@ namespace SeriesManagementSystem.Domain
         public bool IsNoInternet
         {
             get { return _isNoInternet; }
+        }
+
+        public bool IsImportFail
+        {
+            get { return _isImportFail; }
         }
     }
 }

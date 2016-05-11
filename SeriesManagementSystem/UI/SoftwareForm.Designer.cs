@@ -32,13 +32,13 @@
             this._addSeriesButton = new System.Windows.Forms.Button();
             this._importSeriesButton = new System.Windows.Forms.Button();
             this._seriesGridView = new System.Windows.Forms.DataGridView();
-            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
@@ -62,6 +62,7 @@
             this._importSeriesButton.TabIndex = 3;
             this._importSeriesButton.Text = "匯入";
             this._importSeriesButton.UseVisualStyleBackColor = true;
+            this._importSeriesButton.Click += new System.EventHandler(this.OnImportSeries);
             // 
             // _seriesGridView
             // 
@@ -89,15 +90,6 @@
             this._seriesGridView.TabIndex = 4;
             this._seriesGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellButtonClick);
             // 
-            // seriesListBindingSource
-            // 
-            this.seriesListBindingSource.DataMember = "SeriesList";
-            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
-            // 
-            // seriesManagerBindingSource
-            // 
-            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
-            // 
             // Modify
             // 
             this.Modify.HeaderText = "";
@@ -113,6 +105,11 @@
             this.Remove.ReadOnly = true;
             this.Remove.Text = "刪除";
             this.Remove.UseColumnTextForButtonValue = true;
+            // 
+            // seriesListBindingSource
+            // 
+            this.seriesListBindingSource.DataMember = "SeriesList";
+            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -136,6 +133,10 @@
             this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.seriesIDDataGridViewTextBoxColumn.Visible = false;
             // 
+            // seriesManagerBindingSource
+            // 
+            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
+            // 
             // SoftwareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -157,9 +158,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button _addSeriesButton;
         private System.Windows.Forms.Button _importSeriesButton;
         private System.Windows.Forms.DataGridView _seriesGridView;

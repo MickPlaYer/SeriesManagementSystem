@@ -1,5 +1,6 @@
 ﻿using SeriesManagementSystem.Domain;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SeriesManagementSystem.UI
@@ -58,6 +59,21 @@ namespace SeriesManagementSystem.UI
                     }
                 }
                 seriesListBindingSource.ResetBindings(true);
+            }
+        }
+
+        private void OnImportSeries(object sender, EventArgs e)
+        {
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    _software.ImportFile(openFileDialog.FileName);
+                    if (_software.IsImportFail)
+                        MessageBox.Show("檔案格式錯誤？", "匯入失敗");
+                    seriesListBindingSource.ResetBindings(true);
+                }
             }
         }
     }

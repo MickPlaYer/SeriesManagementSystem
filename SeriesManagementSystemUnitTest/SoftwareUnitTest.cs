@@ -62,6 +62,12 @@ namespace SeriesManagementSystemUnitTest
             Series s = GetLastSeries();
             Assert.AreEqual(name, s.Name);
             Assert.AreEqual(description, s.Description);
+            // Fail route.
+            fileContext = "[dsad]wewe";
+            PrepareImportFile(fileContext);
+            Assert.IsFalse(_software.IsImportFail);
+            _software.ImportFile(_filePath);
+            Assert.IsTrue(_software.IsImportFail);
         }
 
         [TestMethod]
