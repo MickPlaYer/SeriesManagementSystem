@@ -132,9 +132,12 @@ namespace SeriesManagementSystemUnitTest
         {
             List<Series> seriesList = GetSeriesList();
             string content = "[{\"Name\":\"ServerSeries1\",\"Description\":\"This is on the server.\",\"SeriesID\":-256}]";
+            Assert.IsFalse(_seriesManager.IsExistNewOne);
             _seriesManager.AddServerData(content);
+            Assert.IsTrue(_seriesManager.IsExistNewOne);
             Assert.AreEqual(1, seriesList.Count);
             _seriesManager.AddServerData(content);
+            Assert.IsFalse(_seriesManager.IsExistNewOne);
             Assert.AreEqual(1, seriesList.Count);
         }
 

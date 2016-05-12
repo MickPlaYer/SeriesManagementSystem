@@ -34,11 +34,12 @@
             this._seriesGridView = new System.Windows.Forms.DataGridView();
             this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._refreshButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
@@ -106,11 +107,6 @@
             this.Remove.Text = "刪除";
             this.Remove.UseColumnTextForButtonValue = true;
             // 
-            // seriesListBindingSource
-            // 
-            this.seriesListBindingSource.DataMember = "SeriesList";
-            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
-            // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
@@ -133,15 +129,31 @@
             this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.seriesIDDataGridViewTextBoxColumn.Visible = false;
             // 
+            // seriesListBindingSource
+            // 
+            this.seriesListBindingSource.DataMember = "SeriesList";
+            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
+            // 
             // seriesManagerBindingSource
             // 
             this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
+            // 
+            // _refreshButton
+            // 
+            this._refreshButton.Location = new System.Drawing.Point(174, 12);
+            this._refreshButton.Name = "_refreshButton";
+            this._refreshButton.Size = new System.Drawing.Size(75, 23);
+            this._refreshButton.TabIndex = 5;
+            this._refreshButton.Text = "更新";
+            this._refreshButton.UseVisualStyleBackColor = true;
+            this._refreshButton.Click += new System.EventHandler(this.OnRefresh);
             // 
             // SoftwareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 371);
+            this.Controls.Add(this._refreshButton);
             this.Controls.Add(this._seriesGridView);
             this.Controls.Add(this._importSeriesButton);
             this.Controls.Add(this._addSeriesButton);
@@ -149,6 +161,7 @@
             this.MinimumSize = new System.Drawing.Size(540, 410);
             this.Name = "SoftwareForm";
             this.Text = "Series Management System";
+            this.Shown += new System.EventHandler(this.OnShown);
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).EndInit();
@@ -168,5 +181,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn seriesIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button _refreshButton;
     }
 }

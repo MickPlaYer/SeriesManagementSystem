@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SeriesManagementSystem.ViewModel;
+using SeriesManagementSystem.UI.ViewModel;
 using System.ComponentModel;
 
 namespace SeriesManagementSystemUnitTest
@@ -37,7 +37,7 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), string.Empty);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), string.Empty);
 
-            _model.ModifyName(MODIFYNAME);
+            _model.Name = MODIFYNAME;
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), MODIFYNAME);
         }
 
@@ -49,7 +49,7 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), SERIESNAME);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), SERIESDES);
 
-            _model.ModifyDescription(MODIFYDES);
+            _model.Description = MODIFYDES;
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), MODIFYDES);
         }
        
@@ -59,8 +59,17 @@ namespace SeriesManagementSystemUnitTest
             _model = new SeriesFormPresentationModel();
             Assert.IsFalse(_model.IsOkButtonEnabled);
 
-            _model.ModifyName(MODIFYNAME);
+            _model.Name = MODIFYNAME;
             Assert.IsTrue(_model.IsOkButtonEnabled);
+        }
+
+        [TestMethod]
+        public void TestGetter()
+        {
+            _model = new SeriesFormPresentationModel(SERIESNAME, SERIESDES);
+            _privateObject = new PrivateObject(_model);
+            Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), _model.Name);
+            Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), _model.Description);
         }
 
         [TestMethod]
@@ -73,7 +82,7 @@ namespace SeriesManagementSystemUnitTest
             {
                 propertyName = e.PropertyName;
             };
-            _model.ModifyName(MODIFYNAME);
+            _model.Name = MODIFYNAME;
             Assert.AreEqual(propertyName, "IsOkButtonEnabled");
         }
     }

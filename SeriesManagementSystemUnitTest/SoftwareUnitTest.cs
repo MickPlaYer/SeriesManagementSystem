@@ -4,7 +4,7 @@ using SeriesManagementSystem.Domain;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
-using SeriesManagementSystemUnitTest.TestItem;
+using SeriesManagementSystemUnitTest.FakeItem;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -21,7 +21,7 @@ namespace SeriesManagementSystemUnitTest
         const string FILE_PATH = "./dat/data.dat";
 
         [TestInitialize()]
-        public void TestInitialize()
+        public void Initialize()
         {
             _software = new Software();
             _privateObject = new PrivateObject(_software, new PrivateType(typeof(Software)));
@@ -101,10 +101,10 @@ namespace SeriesManagementSystemUnitTest
         }
 
         [TestMethod]
-        public void TestGetSeriesList()
+        public void TestGetSeriesManager()
         {
             SeriesManager seriesManager = GetSeriesManager();
-            Assert.AreEqual(seriesManager.SeriesList, _software.GetSeriesList());
+            Assert.AreEqual(seriesManager, _software.GetSeriesManager());
         }
 
         [TestMethod]
@@ -122,7 +122,7 @@ namespace SeriesManagementSystemUnitTest
         public void TestAddServerData()
         {
             Assert.IsFalse(_software.IsNoInternet);
-            _privateObject.Invoke("AddServerData", new TestServer());
+            _privateObject.Invoke("AddServerData", new FakeDeadServer());
             Assert.IsTrue(_software.IsNoInternet);
         }
 

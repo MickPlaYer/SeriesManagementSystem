@@ -19,12 +19,9 @@ namespace SeriesManagementSystem.Foundation
             request.Method = "GET";
             using (WebResponse wr = request.GetResponse())
             {
-                using (Stream s = wr.GetResponseStream())
+                using (StreamReader sr = new StreamReader(wr.GetResponseStream(), Encoding.UTF8))
                 {
-                    using (StreamReader sr = new StreamReader(s, Encoding.UTF8))
-                    {
-                        data = sr.ReadToEnd();
-                    }
+                    data = sr.ReadToEnd();
                 }
             }
             return data;

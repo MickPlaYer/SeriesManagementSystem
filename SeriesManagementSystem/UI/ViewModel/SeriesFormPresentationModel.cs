@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SeriesManagementSystem.ViewModel
+namespace SeriesManagementSystem.UI.ViewModel
 {
     public class SeriesFormPresentationModel : INotifyPropertyChanged
     {
@@ -21,6 +21,34 @@ namespace SeriesManagementSystem.ViewModel
             _description = description;
         }
 
+        #region Public Property
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                Notify("IsOkButtonEnabled");
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+            }
+        }
+
+        #endregion
+
         public bool IsOkButtonEnabled
         {
             get
@@ -31,17 +59,6 @@ namespace SeriesManagementSystem.ViewModel
                 }
                 return false;
             }
-        }
-
-        public void ModifyName(string name)
-        {
-            _name = name;
-            Notify("IsOkButtonEnabled");
-        }
-
-        public void ModifyDescription(string desc)
-        {
-            _description = desc;
         }
 
         private void Notify(string property)

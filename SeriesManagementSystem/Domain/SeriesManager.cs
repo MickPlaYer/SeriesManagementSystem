@@ -9,6 +9,7 @@ namespace SeriesManagementSystem.Domain
         private List<Series> _series = null;
         private Series _selectedSeries;
         private int _count = 0;
+        private bool _isExistNewOne = false;
 
         #region Constructor
         public SeriesManager(string list)
@@ -42,6 +43,14 @@ namespace SeriesManagementSystem.Domain
                 return JsonConvert.SerializeObject(_series);
             }
         }
+
+        public bool IsExistNewOne
+        {
+            get
+            {
+                return _isExistNewOne;
+            }
+        }
         #endregion
 
         public void AddSeries(String name, String description)
@@ -63,10 +72,14 @@ namespace SeriesManagementSystem.Domain
         public void AddServerData(string content)
         {
             List<Series> list = JsonConvert.DeserializeObject<List<Series>>(content);
+            _isExistNewOne = false;
             foreach (Series series in list)
             {
                 if (_series.Find((s) => s.SeriesID == series.SeriesID) == null)
+                {
                     _series.Add(series);
+                    _isExistNewOne = true;
+                }
             }
         }
 

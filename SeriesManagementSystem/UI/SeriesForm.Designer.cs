@@ -31,7 +31,7 @@
             System.Windows.Forms.Label label_SeriesName;
             this.label_SeriesDes = new System.Windows.Forms.Label();
             this.textBox_SeriesName = new System.Windows.Forms.TextBox();
-            this.textBox_SeriesDes = new System.Windows.Forms.TextBox();
+            this.textBox_SeriesDesc = new System.Windows.Forms.TextBox();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_Confirm = new System.Windows.Forms.Button();
             label_SeriesName = new System.Windows.Forms.Label();
@@ -65,11 +65,12 @@
             // 
             // textBox_SeriesDes
             // 
-            this.textBox_SeriesDes.Location = new System.Drawing.Point(83, 54);
-            this.textBox_SeriesDes.Multiline = true;
-            this.textBox_SeriesDes.Name = "textBox_SeriesDes";
-            this.textBox_SeriesDes.Size = new System.Drawing.Size(248, 126);
-            this.textBox_SeriesDes.TabIndex = 3;
+            this.textBox_SeriesDesc.Location = new System.Drawing.Point(83, 54);
+            this.textBox_SeriesDesc.Multiline = true;
+            this.textBox_SeriesDesc.Name = "textBox_SeriesDes";
+            this.textBox_SeriesDesc.Size = new System.Drawing.Size(248, 126);
+            this.textBox_SeriesDesc.TabIndex = 3;
+            this.textBox_SeriesDesc.TextChanged += new System.EventHandler(this.ChangeTextBoxSeriesDescription);
             // 
             // button_Cancel
             // 
@@ -98,7 +99,7 @@
             this.ClientSize = new System.Drawing.Size(343, 244);
             this.Controls.Add(this.button_Confirm);
             this.Controls.Add(this.button_Cancel);
-            this.Controls.Add(this.textBox_SeriesDes);
+            this.Controls.Add(this.textBox_SeriesDesc);
             this.Controls.Add(this.textBox_SeriesName);
             this.Controls.Add(this.label_SeriesDes);
             this.Controls.Add(label_SeriesName);
@@ -115,7 +116,7 @@
 
         private System.Windows.Forms.Label label_SeriesDes;
         private System.Windows.Forms.TextBox textBox_SeriesName;
-        private System.Windows.Forms.TextBox textBox_SeriesDes;
+        private System.Windows.Forms.TextBox textBox_SeriesDesc;
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Button button_Confirm;
     }

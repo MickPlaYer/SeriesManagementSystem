@@ -1,4 +1,5 @@
 ﻿using SeriesManagementSystem.Domain;
+using SeriesManagementSystem.Foundation;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -8,14 +9,14 @@ namespace SeriesManagementSystem.UI
     public partial class SoftwareForm : Form
     {
         private Software _software;
+        private SeriesManager _seriesManager;
 
         public SoftwareForm(Software software)
         {
             InitializeComponent();
             _software = software;
-            seriesListBindingSource.DataSource = _software.GetSeriesList();
-            if (_software.IsNoInternet)
-                MessageBox.Show("目前裝置尚未連接網路");
+            _seriesManager = _software.GetSeriesManager();
+            seriesListBindingSource.DataSource = _seriesManager.SeriesList;
         }
 
         private void OnAddSeries(object sender, EventArgs e)
@@ -24,7 +25,7 @@ namespace SeriesManagementSystem.UI
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
-                    _software.AddSeries(addForm.ReturnSeries.Name, addForm.ReturnSeries.Description);
+                    _software.AddSeries(addForm.ReturnName, addForm.ReturnDesc);
                     seriesListBindingSource.ResetBindings(true);
                 }
             }
@@ -49,11 +50,11 @@ namespace SeriesManagementSystem.UI
                     _software.SelectSeries(sid);
                     string name = row.Cells[2].Value.ToString();
                     string desc = row.Cells[3].Value.ToString();
-                    using (var modifyForm = new SeriesForm(new Series(name, desc)))
+                    using (var modifyForm = new SeriesForm(name, desc))
                     {
                         if (modifyForm.ShowDialog() == DialogResult.OK)
                         {
-                            _software.ModifySeries(modifyForm.ReturnSeries.Name, modifyForm.ReturnSeries.Description);
+                            _software.ModifySeries(modifyForm.ReturnName, modifyForm.ReturnDesc);
                             seriesListBindingSource.ResetBindings(true);
                         }
                     }
@@ -74,6 +75,31 @@ namespace SeriesManagementSystem.UI
                         MessageBox.Show("檔案格式錯誤？", "匯入失敗");
                     seriesListBindingSource.ResetBindings(true);
                 }
+            }
+        }
+
+        private void OnShown(object sender, EventArgs e)
+        {
+            ReportFromServer();
+        }
+
+        private void OnRefresh(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            _software.AddServerData(new Server());
+            this.Enabled = true;
+            ReportFromServer();
+        }
+
+        private void ReportFromServer()
+        {
+            if (_software.IsNoInternet)
+            {
+                MessageBox.Show("目前裝置尚未連接網路", "連線失敗");
+            }
+            else if (!_seriesManager.IsExistNewOne)
+            {
+                MessageBox.Show("沒有新的影音資訊", "已更新");
             }
         }
     }

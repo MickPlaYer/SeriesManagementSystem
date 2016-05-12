@@ -19,7 +19,7 @@ namespace SeriesManagementSystem.Domain
             AddServerData(new Server());
         }
 
-        private void AddServerData(IServer server)
+        public void AddServerData(IServer server)
         {
             try { _seriesManager.AddServerData(server.GetData()); }
             catch (WebException) { _isNoInternet = true; }
@@ -61,9 +61,9 @@ namespace SeriesManagementSystem.Domain
             _fileManager.SaveFile(list);
         }
 
-        public List<Series> GetSeriesList()
+        public SeriesManager GetSeriesManager()
         {
-            return _seriesManager.SeriesList;
+            return _seriesManager;
         }
 
         public bool IsNoInternet

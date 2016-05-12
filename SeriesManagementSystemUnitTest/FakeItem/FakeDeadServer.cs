@@ -2,9 +2,9 @@
 using System;
 using System.Net;
 
-namespace SeriesManagementSystemUnitTest.TestItem
+namespace SeriesManagementSystemUnitTest.FakeItem
 {
-    public class TestServer : IServer
+    public class FakeDeadServer : IServer
     {
         public string GetData()
         {

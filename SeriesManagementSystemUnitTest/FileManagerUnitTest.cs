@@ -77,13 +77,9 @@ namespace SeriesManagementSystemUnitTest
         /// <param name="content">file's content</param>
         private void PrepareFile(string path, string content)
         {
-            new FileInfo(path).Directory.Create();
-            using (FileStream fs = File.OpenWrite(path))
+            using (var streamReader = new StreamWriter(path, false))
             {
-                string data = content;
-                Byte[] info = new UTF8Encoding(true).GetBytes(content);
-                fs.Write(info, 0, info.Length);
-                fs.Close();
+                streamReader.Write(content);
             }
         }
     }
