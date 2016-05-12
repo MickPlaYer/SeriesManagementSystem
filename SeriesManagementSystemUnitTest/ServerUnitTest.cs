@@ -25,7 +25,7 @@ namespace SeriesManagementSystemUnitTest
         public void TestGetData()
         {
             string data;
-            data = _server.GetData();
+            data = _server.DownloadData();
             List<Series> series = JsonConvert.DeserializeObject<List<Series>>(data);
             Series s = series[0];
             Assert.IsTrue(series.Count > 0);

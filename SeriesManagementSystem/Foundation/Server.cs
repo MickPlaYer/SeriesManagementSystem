@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeriesManagementSystem.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,12 +11,13 @@ namespace SeriesManagementSystem.Foundation
 {
     public class Server : IServer
     {
-        const string SERVER_URL = @"https://script.google.com/macros/s/AKfycbyYu-99imRw9KZ3osDFbzbVHscLB4nWVMlc2G2JDV9cB98889L2/exec";
+        const string SERVER_URL = @"https://script.google.com/macros/s/";
 
-        public string GetData()
+        public string DownloadData()
         {
             string data;
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(SERVER_URL);
+            string url = SERVER_URL + Resources.GoogleWebAppID;
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             request.Method = "GET";
             using (WebResponse wr = request.GetResponse())
             {

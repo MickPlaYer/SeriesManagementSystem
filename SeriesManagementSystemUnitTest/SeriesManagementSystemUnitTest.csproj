@@ -54,6 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FakeItem\FakeFileSystem.cs" />
     <Compile Include="SeriesManagerUnitTest.cs" />
     <Compile Include="SeriesUnitTest.cs" />
     <Compile Include="ServerUnitTest.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileManagerUnitTest.cs" />
     <Compile Include="SeriesFormPresentationModelTest.cs" />
-    <Compile Include="FakeItem\FakeDeadServer.cs" />
+    <Compile Include="FakeItem\FakeServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeriesManagementSystem\SeriesManagementSystem.csproj">

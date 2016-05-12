@@ -13,7 +13,8 @@ namespace SeriesManagementSystemUnitTest
     {
         Software _software;
         PrivateObject _privateObject;
-        const String _filePath = "../test.txt";
+        FakeFileSystem _fakeFileSystem;
+        FakeServer _fakeServer;
         const string SeriesName = "Test Series";
         const string SeriesDescription = "This is a test description";
         const string ModifiedSeriesName = "modifiedSeries";
@@ -23,9 +24,10 @@ namespace SeriesManagementSystemUnitTest
         [TestInitialize()]
         public void Initialize()
         {
-            _software = new Software();
+            _fakeFileSystem = new FakeFileSystem();
+            _fakeServer = new FakeServer();
+            _software = new Software(_fakeServer, _fakeFileSystem);
             _privateObject = new PrivateObject(_software, new PrivateType(typeof(Software)));
-
             for (int i = 0; i < 3; i++)
             {
                 _software.AddSeries(SeriesName + i.ToString(), SeriesDescription + i.ToString());
@@ -57,16 +59,15 @@ namespace SeriesManagementSystemUnitTest
             String description = "The first movie in the world.";
             int seriesID = 1;
             String fileContext = "[{ \"Name\":\"" + name + "\", \"Description\":\"" + description + "\", \"SeriesID\":" + seriesID + "}]";
-            PrepareImportFile(fileContext);
-            _software.ImportFile(_filePath);
+            _fakeFileSystem.PrepareImportFile(fileContext);
+            _software.ImportFile(FILE_PATH);
             Series s = GetLastSeries();
             Assert.AreEqual(name, s.Name);
             Assert.AreEqual(description, s.Description);
             // Fail route.
-            fileContext = "[dsad]wewe";
-            PrepareImportFile(fileContext);
+            _fakeFileSystem.PrepareImportFile("[{\"Name\"");
             Assert.IsFalse(_software.IsImportFail);
-            _software.ImportFile(_filePath);
+            _software.ImportFile(FILE_PATH);
             Assert.IsTrue(_software.IsImportFail);
         }
 
@@ -104,37 +105,28 @@ namespace SeriesManagementSystemUnitTest
         public void TestGetSeriesManager()
         {
             SeriesManager seriesManager = GetSeriesManager();
-            Assert.AreEqual(seriesManager, _software.GetSeriesManager());
+            Assert.AreEqual(seriesManager, _software.SeriesManager);
         }
 
         [TestMethod]
         public void TestDestructor()
         {
-            Assert.IsFalse(File.Exists(FILE_PATH));
+            string seriesListString = GetSeriesManager().SeriesListString;
+            string expected = FILE_PATH + seriesListString;
             _software = null;
             _privateObject = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
-            Assert.IsTrue(File.Exists(FILE_PATH));
+            Assert.AreEqual(expected, _fakeFileSystem.Content);
         }
 
         [TestMethod]
         public void TestAddServerData()
         {
             Assert.IsFalse(_software.IsNoInternet);
-            _privateObject.Invoke("AddServerData", new FakeDeadServer());
+            _fakeServer.TestDownLoadFail = true;
+            _privateObject.Invoke("AddServerData");
             Assert.IsTrue(_software.IsNoInternet);
-        }
-
-        private void PrepareImportFile(string fileContext)
-        {
-            if (File.Exists(_filePath))
-                File.Delete(_filePath);
-            using (FileStream fs = File.OpenWrite(_filePath))
-            {
-                Byte[] info = new UTF8Encoding(true).GetBytes(fileContext);
-                fs.Write(info, 0, info.Length);
-            }
         }
 
         #region Get Private Object
@@ -145,6 +137,7 @@ namespace SeriesManagementSystemUnitTest
             Assert.IsTrue(seriesManager.SeriesList.Count > 0, "No any series in the list!");
             return seriesManager.SeriesList[seriesManager.SeriesList.Count - 1];
         }
+
         private SeriesManager GetSeriesManager()
         {
             return _privateObject.GetField("_seriesManager") as SeriesManager;

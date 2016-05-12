@@ -4,26 +4,9 @@ using System.Text;
 
 namespace SeriesManagementSystem.Foundation
 {
-    public class FileManager
+    public class FileManager : IFileSystem
     {
-        private string _content;
-        private string _localStorage;
-        
-        public FileManager(string localStorage)
-        {
-            try
-            {
-                ImportFile(localStorage);
-            }
-            catch (Exception e)
-            {
-                if (e is FileNotFoundException | e is DirectoryNotFoundException)
-                {
-                    _content = "[]";
-                }
-            }
-            _localStorage = localStorage;
-        }
+        private string _content = "[]";
 
         public void ImportFile(string filePath)
         {
@@ -35,17 +18,27 @@ namespace SeriesManagementSystem.Foundation
             _content = fileContext;
         }
 
-        public string GetContent()
+        public void LoadFile(string localStorage)
         {
-            return _content;
+            try { ImportFile(localStorage); }
+            catch (Exception e)
+            {
+                if (e is FileNotFoundException | e is DirectoryNotFoundException)
+                    _content = "[]";
+            }
         }
 
-        public void SaveFile(string content)
+        public void SaveFile(string localStorage, string content)
         {
-            using (var streamReader = new StreamWriter(_localStorage, false))
+            using (var streamReader = new StreamWriter(localStorage, false))
             {
                 streamReader.Write(content);
             }
+        }
+
+        public string Content
+        {
+            get { return _content; }
         }
     }
 }

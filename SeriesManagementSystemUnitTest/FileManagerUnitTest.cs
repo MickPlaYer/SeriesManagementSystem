@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeriesManagementSystem.Foundation;
+using System;
 using System.IO;
-using Newtonsoft.Json;
 using System.Text;
 
 namespace SeriesManagementSystemUnitTest
@@ -13,7 +12,14 @@ namespace SeriesManagementSystemUnitTest
         private FileManager _fileManager;
         private PrivateObject _privateObject;
         private const string LOCAL_STORAGE = "./testFileManager.txt";
-        private const string  CONTENT = "[{ \"Name\":\"First Movie\", \"Description\":\"The first movie in the world.\" }]";
+
+        [TestInitialize()]
+        public void Initialize()
+        {
+            _fileManager = new FileManager();
+            _privateObject = new PrivateObject(_fileManager, new PrivateType(typeof(FileManager)));
+            Assert.AreEqual("[]", _privateObject.GetField("_content"));
+        }
 
         [TestCleanup]
         public void CleanUp()
@@ -23,51 +29,46 @@ namespace SeriesManagementSystemUnitTest
         }
 
         [TestMethod]
-        public void TestConstructor()
+        public void TestLoadFile()
         {
-            _fileManager = new FileManager(LOCAL_STORAGE);
-            Assert.AreEqual(GetListString(), "[]");
-            PrepareFile(LOCAL_STORAGE, "test");
-            _fileManager = new FileManager(LOCAL_STORAGE);
-            Assert.IsNotNull(_fileManager);
+            string testString = "Gorira parrrrrrty";
+            _fileManager.LoadFile(LOCAL_STORAGE);
+            Assert.AreEqual("[]", _privateObject.GetField("_content"));
+            PrepareFile(LOCAL_STORAGE, testString);
+            _fileManager.LoadFile(LOCAL_STORAGE);
+            Assert.AreEqual(testString, _privateObject.GetField("_content"));
         }
 
         [TestMethod]
-        public void TestGetList()
+        public void TestGetContent()
         {
-            PrepareFile(LOCAL_STORAGE, CONTENT);
-            _fileManager = new FileManager(LOCAL_STORAGE);
-            Assert.IsTrue(_fileManager.GetContent() == CONTENT);
+            string testString = "Banana usually drop.";
+            _privateObject.SetField("_content", testString);
+            Assert.AreEqual(testString, _fileManager.Content);
         }
 
         [TestMethod]
         public void TestImportFile()
         {
-            PrepareFile(LOCAL_STORAGE, "[]");
-            _fileManager = new FileManager(LOCAL_STORAGE);
-            Assert.IsTrue(GetListString() == "[]");
+            string testString = "Why monkey can't talk?";
+            PrepareFile(LOCAL_STORAGE, testString);
+            _fileManager.ImportFile(LOCAL_STORAGE);
+            Assert.AreEqual(testString, _privateObject.GetField("_content"));
         }
 
         [TestMethod]
         public void TestSaveFile()
         {
+            string testString = "Super monkey fly bat.";
             PrepareFile(LOCAL_STORAGE, "[]");
-            _fileManager = new FileManager(LOCAL_STORAGE);
-            _fileManager.SaveFile(CONTENT);
-
+            _fileManager.SaveFile(LOCAL_STORAGE, testString);
             // test the file contains the string
             String fileContext;
             using (var streamReader = new StreamReader(LOCAL_STORAGE, Encoding.UTF8))
             {
                 fileContext = streamReader.ReadToEnd();
             }
-            Assert.AreEqual(fileContext, CONTENT);
-        }
-
-        private string GetListString()
-        {
-            _privateObject = new PrivateObject(_fileManager);
-            return _fileManager.GetContent();
+            Assert.AreEqual(testString, fileContext);
         }
 
         /// <summary>

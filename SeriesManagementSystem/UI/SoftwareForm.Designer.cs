@@ -34,12 +34,13 @@
             this._seriesGridView = new System.Windows.Forms.DataGridView();
             this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._refreshButton = new System.Windows.Forms.Button();
+            this._refreshResultLabel = new System.Windows.Forms.Label();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this._refreshButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
@@ -107,6 +108,29 @@
             this.Remove.Text = "刪除";
             this.Remove.UseColumnTextForButtonValue = true;
             // 
+            // seriesListBindingSource
+            // 
+            this.seriesListBindingSource.DataMember = "SeriesList";
+            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
+            // 
+            // _refreshButton
+            // 
+            this._refreshButton.Location = new System.Drawing.Point(174, 12);
+            this._refreshButton.Name = "_refreshButton";
+            this._refreshButton.Size = new System.Drawing.Size(75, 23);
+            this._refreshButton.TabIndex = 5;
+            this._refreshButton.Text = "更新";
+            this._refreshButton.UseVisualStyleBackColor = true;
+            this._refreshButton.Click += new System.EventHandler(this.OnRefresh);
+            // 
+            // _refreshResultLabel
+            // 
+            this._refreshResultLabel.AutoSize = true;
+            this._refreshResultLabel.Location = new System.Drawing.Point(255, 17);
+            this._refreshResultLabel.Name = "_refreshResultLabel";
+            this._refreshResultLabel.Size = new System.Drawing.Size(0, 12);
+            this._refreshResultLabel.TabIndex = 6;
+            // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
@@ -129,30 +153,16 @@
             this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.seriesIDDataGridViewTextBoxColumn.Visible = false;
             // 
-            // seriesListBindingSource
-            // 
-            this.seriesListBindingSource.DataMember = "SeriesList";
-            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
-            // 
             // seriesManagerBindingSource
             // 
             this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
-            // 
-            // _refreshButton
-            // 
-            this._refreshButton.Location = new System.Drawing.Point(174, 12);
-            this._refreshButton.Name = "_refreshButton";
-            this._refreshButton.Size = new System.Drawing.Size(75, 23);
-            this._refreshButton.TabIndex = 5;
-            this._refreshButton.Text = "更新";
-            this._refreshButton.UseVisualStyleBackColor = true;
-            this._refreshButton.Click += new System.EventHandler(this.OnRefresh);
             // 
             // SoftwareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 371);
+            this.Controls.Add(this._refreshResultLabel);
             this.Controls.Add(this._refreshButton);
             this.Controls.Add(this._seriesGridView);
             this.Controls.Add(this._importSeriesButton);
@@ -166,6 +176,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -182,5 +193,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn seriesIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button _refreshButton;
+        private System.Windows.Forms.Label _refreshResultLabel;
     }
 }

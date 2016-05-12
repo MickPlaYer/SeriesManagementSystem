@@ -7,21 +7,24 @@ namespace SeriesManagementSystem.Domain
     public class Software
     {
         private SeriesManager _seriesManager;
-        private FileManager _fileManager;
+        private IFileSystem _fileManager;
+        private IServer _server;
         private bool _isNoInternet = false;
         private bool _isImportFail = false;
         private const string LOCAL_STOREAGE = "./dat/data.dat";
 
-        public Software()
+        public Software(IServer server, IFileSystem fileManager)
         {
-            _fileManager = new FileManager(LOCAL_STOREAGE);
-            _seriesManager = new SeriesManager(_fileManager.GetContent());
-            AddServerData(new Server());
+            _server = server;
+            _fileManager = fileManager;
+            _fileManager.LoadFile(LOCAL_STOREAGE);
+            _seriesManager = new SeriesManager(_fileManager.Content);
+            AddServerData();
         }
 
-        public void AddServerData(IServer server)
+        public void AddServerData()
         {
-            try { _seriesManager.AddServerData(server.GetData()); }
+            try { _seriesManager.AddServerData(_server.DownloadData()); }
             catch (WebException) { _isNoInternet = true; }
         }
 
@@ -36,7 +39,7 @@ namespace SeriesManagementSystem.Domain
         {
             _isImportFail = false;
             _fileManager.ImportFile(filePath);
-            try { _seriesManager.AddList(_fileManager.GetContent()); }
+            try { _seriesManager.AddList(_fileManager.Content); }
             catch { _isImportFail = true; }
         }
 
@@ -58,12 +61,12 @@ namespace SeriesManagementSystem.Domain
         ~Software()
         {
             string list = _seriesManager.SeriesListString;
-            _fileManager.SaveFile(list);
+            _fileManager.SaveFile(LOCAL_STOREAGE, list);
         }
 
-        public SeriesManager GetSeriesManager()
+        public SeriesManager SeriesManager
         {
-            return _seriesManager;
+            get { return _seriesManager; }
         }
 
         public bool IsNoInternet

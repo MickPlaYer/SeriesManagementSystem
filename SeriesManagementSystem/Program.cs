@@ -1,4 +1,5 @@
 ﻿using SeriesManagementSystem.Domain;
+using SeriesManagementSystem.Foundation;
 using SeriesManagementSystem.UI;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace SeriesManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SoftwareForm(new Software()));
+            Software software = new Software(new Server(), new FileManager());
+            Application.Run(new SoftwareForm(software));
         }
     }
 }

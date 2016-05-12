@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Foundation\IFileSystem.cs" />
     <Compile Include="Domain\Series.cs" />
     <Compile Include="Domain\SeriesManager.cs" />
     <Compile Include="Domain\Software.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UI\SeriesForm.resx">
       <DependentUpon>SeriesForm.cs</DependentUpon>

@@ -14,7 +14,7 @@ namespace SeriesManagementSystem.Domain
         #region Constructor
         public SeriesManager(string list)
         {
-            _series = JsonConvert.DeserializeObject<List<Series>>(list) as List<Series>;
+            _series = JsonConvert.DeserializeObject<List<Series>>(list);
             InitializeCount();
         }
         #endregion
