@@ -34,13 +34,6 @@ namespace SeriesManagementSystemUnitTest
             }
         }
 
-        [TestCleanup]
-        public void CleanUp()
-        {
-            if (File.Exists(FILE_PATH))
-                File.Delete(FILE_PATH);
-        }
-
         [TestMethod]
         public void TestAddSeries()
         {
