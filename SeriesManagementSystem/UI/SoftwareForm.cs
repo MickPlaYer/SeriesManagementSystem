@@ -90,7 +90,7 @@ namespace SeriesManagementSystem.UI
 
         private void OnRefresh(object sender, EventArgs e)
         {
-            _refreshResultLabel.Text = "";
+            _refreshResultLabel.Text = "連線取得最新資訊中";
             this.Enabled = false;
             _software.AddServerData();
             this.Enabled = true;
