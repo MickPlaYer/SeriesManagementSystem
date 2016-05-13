@@ -32,15 +32,15 @@
             this._addSeriesButton = new System.Windows.Forms.Button();
             this._importSeriesButton = new System.Windows.Forms.Button();
             this._seriesGridView = new System.Windows.Forms.DataGridView();
-            this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._refreshButton = new System.Windows.Forms.Button();
             this._refreshResultLabel = new System.Windows.Forms.Label();
+            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
@@ -92,22 +92,6 @@
             this._seriesGridView.TabIndex = 4;
             this._seriesGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellButtonClick);
             // 
-            // Modify
-            // 
-            this.Modify.HeaderText = "";
-            this.Modify.Name = "Modify";
-            this.Modify.ReadOnly = true;
-            this.Modify.Text = "修改";
-            this.Modify.UseColumnTextForButtonValue = true;
-            // 
-            // Remove
-            // 
-            this.Remove.HeaderText = "";
-            this.Remove.Name = "Remove";
-            this.Remove.ReadOnly = true;
-            this.Remove.Text = "刪除";
-            this.Remove.UseColumnTextForButtonValue = true;
-            // 
             // seriesListBindingSource
             // 
             this.seriesListBindingSource.DataMember = "SeriesList";
@@ -131,9 +115,35 @@
             this._refreshResultLabel.Size = new System.Drawing.Size(0, 12);
             this._refreshResultLabel.TabIndex = 6;
             // 
+            // seriesManagerBindingSource
+            // 
+            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
+            // 
+            // Modify
+            // 
+            this.Modify.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Modify.FillWeight = 187.5F;
+            this.Modify.HeaderText = "";
+            this.Modify.Name = "Modify";
+            this.Modify.ReadOnly = true;
+            this.Modify.Text = "修改";
+            this.Modify.UseColumnTextForButtonValue = true;
+            this.Modify.Width = 120;
+            // 
+            // Remove
+            // 
+            this.Remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Remove.HeaderText = "";
+            this.Remove.Name = "Remove";
+            this.Remove.ReadOnly = true;
+            this.Remove.Text = "刪除";
+            this.Remove.UseColumnTextForButtonValue = true;
+            this.Remove.Width = 120;
+            // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.FillWeight = 56.25F;
             this.nameDataGridViewTextBoxColumn.HeaderText = "名稱";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
@@ -141,6 +151,7 @@
             // descriptionDataGridViewTextBoxColumn
             // 
             this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.FillWeight = 56.25F;
             this.descriptionDataGridViewTextBoxColumn.HeaderText = "描述";
             this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
             this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
@@ -152,10 +163,6 @@
             this.seriesIDDataGridViewTextBoxColumn.Name = "seriesIDDataGridViewTextBoxColumn";
             this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.seriesIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // seriesManagerBindingSource
-            // 
-            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
             // 
             // SoftwareForm
             // 
@@ -187,12 +194,12 @@
         private System.Windows.Forms.DataGridView _seriesGridView;
         private System.Windows.Forms.BindingSource seriesManagerBindingSource;
         private System.Windows.Forms.BindingSource seriesListBindingSource;
+        private System.Windows.Forms.Button _refreshButton;
+        private System.Windows.Forms.Label _refreshResultLabel;
         private System.Windows.Forms.DataGridViewButtonColumn Modify;
         private System.Windows.Forms.DataGridViewButtonColumn Remove;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn seriesIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button _refreshButton;
-        private System.Windows.Forms.Label _refreshResultLabel;
     }
 }
