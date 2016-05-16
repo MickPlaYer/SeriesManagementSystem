@@ -101,7 +101,10 @@ namespace SeriesManagementSystem.UI
         private void ReportFromServer()
         {
             if (_software.IsNoInternet)
+            {
+                _refreshResultLabel.Text = "";
                 MessageBox.Show("目前裝置尚未連接網路", "連線失敗");
+            }
             else if (!_seriesManager.IsExistNewOne)
                 _refreshResultLabel.Text = "沒有發現新的影音資訊";
             else
