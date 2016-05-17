@@ -117,9 +117,24 @@ namespace SeriesManagementSystemUnitTest
         public void TestAddServerData()
         {
             Assert.IsFalse(_software.IsNoInternet);
-            _fakeServer.TestDownLoadFail = true;
-            _privateObject.Invoke("AddServerData");
+            _fakeServer.IsDownloadFail = true;
+            _software.AddServerData();
             Assert.IsTrue(_software.IsNoInternet);
+            _fakeServer.IsDownloadFail = false;
+            _software.AddServerData();
+            Assert.IsFalse(_software.IsNoInternet);
+        }
+
+        [TestMethod]
+        public void TestLoadFile()
+        {
+            Assert.IsFalse(_software.IsLoadFail);
+            _fakeFileSystem.IsLoadFail = true;
+            _privateObject.Invoke("LoadFile");
+            Assert.IsTrue(_software.IsLoadFail);
+            _fakeFileSystem.IsLoadFail = false;
+            _privateObject.Invoke("LoadFile");
+            Assert.IsFalse(_software.IsLoadFail);
         }
 
         #region Get Private Object

@@ -21,7 +21,7 @@ namespace SeriesManagementSystemUnitTest
         [TestInitialize]
         public void Initialize()
         {
-            _seriesManager = new SeriesManager("[]");
+            _seriesManager = new SeriesManager();
             _series = new Series[3];
             for (int i = 0; i < 3; i++)
             {

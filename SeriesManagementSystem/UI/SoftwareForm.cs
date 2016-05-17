@@ -85,6 +85,10 @@ namespace SeriesManagementSystem.UI
 
         private void OnShown(object sender, EventArgs e)
         {
+            if (_software.IsLoadFail)
+            {
+                MessageBox.Show("檔案損毀，檔案已刪除", "檔案讀取失敗");
+            }
             ReportFromServer();
         }
 

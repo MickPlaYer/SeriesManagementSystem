@@ -6,16 +6,16 @@ namespace SeriesManagementSystemUnitTest.FakeItem
 {
     public class FakeServer : IServer
     {
-        public bool TestDownLoadFail { get; set; }
+        public bool IsDownloadFail { get; set; }
 
         public FakeServer()
         {
-            TestDownLoadFail = false;
+            IsDownloadFail = false;
         }
 
         public string DownloadData()
         {
-            if (TestDownLoadFail)
+            if (IsDownloadFail)
                 throw new WebException();
             else
                 return "[{\"Name\":\"FakeServerSeries\",\"Description\":\":)\"}]";

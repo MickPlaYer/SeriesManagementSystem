@@ -12,6 +12,11 @@ namespace SeriesManagementSystemUnitTest.FakeItem
     public class FakeFileSystem : IFileSystem
     {
         private string _content = "[]";
+        public bool IsLoadFail
+        {
+            get;
+            set;
+        }
 
         public void ImportFile(string filePath)
         {
@@ -20,7 +25,8 @@ namespace SeriesManagementSystemUnitTest.FakeItem
 
         public void LoadFile(string localStorage)
         {
-            // Empty
+            if (IsLoadFail)
+                throw new Exception(); 
         }
 
         public void SaveFile(string localStorage, string content)

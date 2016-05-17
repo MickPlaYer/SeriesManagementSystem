@@ -6,18 +6,16 @@ namespace SeriesManagementSystem.Domain
 {
     public class SeriesManager
     {
-        private List<Series> _series = null;
+        private List<Series> _series = new List<Series>();
         private Series _selectedSeries;
         private int _count = 0;
         private bool _isExistNewOne = false;
 
-        #region Constructor
-        public SeriesManager(string list)
+        public void AddLoadedFile(string list)
         {
-            _series = JsonConvert.DeserializeObject<List<Series>>(list);
+            _series.AddRange(JsonConvert.DeserializeObject<List<Series>>(list));
             InitializeCount();
         }
-        #endregion
 
         #region Public Object
         public List<Series> SeriesList
@@ -104,7 +102,10 @@ namespace SeriesManagementSystem.Domain
         {
             if (_series.Count != 0)
             {
-                _series.Sort((s1, s2) => { return s1.SeriesID - s2.SeriesID; });
+                _series.Sort((s1, s2) =>
+                {
+                    return s1.SeriesID - s2.SeriesID;
+                });
                 int count = _series[_series.Count - 1].SeriesID + 1;
                 if (count > 0)
                     _count = count;

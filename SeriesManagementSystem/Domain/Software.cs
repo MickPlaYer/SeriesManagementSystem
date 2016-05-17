@@ -1,4 +1,5 @@
 ﻿using SeriesManagementSystem.Foundation;
+using System;
 using System.Collections.Generic;
 using System.Net;
 
@@ -11,21 +12,43 @@ namespace SeriesManagementSystem.Domain
         private IServer _server;
         private bool _isNoInternet = false;
         private bool _isImportFail = false;
+        private bool _isLoadFail = false;
         private const string LOCAL_STOREAGE = "./dat/data.dat";
 
         public Software(IServer server, IFileSystem fileManager)
         {
             _server = server;
             _fileManager = fileManager;
-            _fileManager.LoadFile(LOCAL_STOREAGE);
-            _seriesManager = new SeriesManager(_fileManager.Content);
+            _seriesManager = new SeriesManager();
+            LoadFile();
             AddServerData();
+        }
+
+        private void LoadFile()
+        {
+            _isLoadFail = false;
+            try
+            {
+                _fileManager.LoadFile(LOCAL_STOREAGE);
+                _seriesManager.AddLoadedFile(_fileManager.Content);
+            }
+            catch (Exception)
+            {
+                _isLoadFail = true;
+            }
         }
 
         public void AddServerData()
         {
-            try { _seriesManager.AddServerData(_server.DownloadData()); }
-            catch (WebException) { _isNoInternet = true; }
+            _isNoInternet = false;
+            try
+            {
+                _seriesManager.AddServerData(_server.DownloadData());
+            }
+            catch (WebException)
+            {
+                _isNoInternet = true;
+            }
         }
 
         // Add a new series with name and description.
@@ -39,8 +62,14 @@ namespace SeriesManagementSystem.Domain
         {
             _isImportFail = false;
             _fileManager.ImportFile(filePath);
-            try { _seriesManager.AddList(_fileManager.Content); }
-            catch { _isImportFail = true; }
+            try
+            {
+                _seriesManager.AddList(_fileManager.Content);
+            }
+            catch
+            {
+                _isImportFail = true;
+            }
         }
 
         public void SelectSeries(int sid)
@@ -66,17 +95,34 @@ namespace SeriesManagementSystem.Domain
 
         public SeriesManager SeriesManager
         {
-            get { return _seriesManager; }
+            get
+            {
+                return _seriesManager;
+            }
         }
 
         public bool IsNoInternet
         {
-            get { return _isNoInternet; }
+            get
+            {
+                return _isNoInternet;
+            }
         }
 
         public bool IsImportFail
         {
-            get { return _isImportFail; }
+            get
+            {
+                return _isImportFail;
+            }
+        }
+
+        public bool IsLoadFail
+        {
+            get
+            {
+                return _isLoadFail;
+            }
         }
     }
 }
