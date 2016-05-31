@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SeriesManagementSystem.Foundation
 {
-    public class Server : IServer
+    public class ServerHelper : IServerHelper
     {
         const string SERVER_URL = @"https://script.google.com/macros/s/";
 

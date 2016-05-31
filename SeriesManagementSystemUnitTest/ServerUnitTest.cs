@@ -13,12 +13,12 @@ namespace SeriesManagementSystemUnitTest
     [TestClass]
     public class ServerUnitTest
     {
-        Server _server;
+        ServerHelper _server;
 
         [TestInitialize]
         public void Initialize()
         {
-            _server = new Server();
+            _server = new ServerHelper();
         }
 
         [TestMethod]

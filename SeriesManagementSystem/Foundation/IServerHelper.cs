@@ -1,7 +1,7 @@
 ﻿
 namespace SeriesManagementSystem.Foundation
 {
-    public interface IServer
+    public interface IServerHelper
     {
         string DownloadData();
     }

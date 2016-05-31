@@ -96,7 +96,7 @@ namespace SeriesManagementSystem.UI
         {
             _refreshResultLabel.Text = "連線取得最新資訊中";
             this.Enabled = false;
-            _software.AddServerData();
+            _software.RefreshServerData();
             this.Enabled = true;
             seriesListBindingSource.ResetBindings(true);
             ReportFromServer();

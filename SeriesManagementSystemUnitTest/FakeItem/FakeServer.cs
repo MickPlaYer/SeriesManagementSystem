@@ -4,7 +4,7 @@ using System.Net;
 
 namespace SeriesManagementSystemUnitTest.FakeItem
 {
-    public class FakeServer : IServer
+    public class FakeServer : IServerHelper
     {
         public bool IsDownloadFail { get; set; }
 

@@ -118,10 +118,10 @@ namespace SeriesManagementSystemUnitTest
         {
             Assert.IsFalse(_software.IsNoInternet);
             _fakeServer.IsDownloadFail = true;
-            _software.AddServerData();
+            _software.RefreshServerData();
             Assert.IsTrue(_software.IsNoInternet);
             _fakeServer.IsDownloadFail = false;
-            _software.AddServerData();
+            _software.RefreshServerData();
             Assert.IsFalse(_software.IsNoInternet);
         }
 

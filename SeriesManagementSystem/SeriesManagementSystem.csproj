@@ -87,6 +87,7 @@
     <EmbeddedResource Include="UI\SoftwareForm.resx">
       <DependentUpon>SoftwareForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\SeriesManagementSystem.Domain.SeriesManager.datasource" />
     <None Include="Properties\Settings.settings">

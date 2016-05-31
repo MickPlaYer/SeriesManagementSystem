@@ -19,7 +19,7 @@ namespace SeriesManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Software software = new Software(new Server(), new FileManager());
+            Software software = new Software(new ServerHelper(), new FileManager());
             Application.Run(new SoftwareForm(software));
         }
     }

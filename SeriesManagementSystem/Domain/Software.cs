@@ -9,19 +9,19 @@ namespace SeriesManagementSystem.Domain
     {
         private SeriesManager _seriesManager;
         private IFileSystem _fileManager;
-        private IServer _server;
+        private IServerHelper _serverHelper;
         private bool _isNoInternet = false;
         private bool _isImportFail = false;
         private bool _isLoadFail = false;
         private const string LOCAL_STOREAGE = "./dat/data.dat";
 
-        public Software(IServer server, IFileSystem fileManager)
+        public Software(IServerHelper serverHelper, IFileSystem fileManager)
         {
-            _server = server;
+            _serverHelper = serverHelper;
             _fileManager = fileManager;
             _seriesManager = new SeriesManager();
             LoadFile();
-            AddServerData();
+            RefreshServerData();
         }
 
         private void LoadFile()
@@ -38,12 +38,12 @@ namespace SeriesManagementSystem.Domain
             }
         }
 
-        public void AddServerData()
+        public void RefreshServerData()
         {
             _isNoInternet = false;
             try
             {
-                _seriesManager.AddServerData(_server.DownloadData());
+                _seriesManager.AddServerData(_serverHelper.DownloadData());
             }
             catch (WebException)
             {
@@ -64,7 +64,8 @@ namespace SeriesManagementSystem.Domain
             _fileManager.ImportFile(filePath);
             try
             {
-                _seriesManager.AddList(_fileManager.Content);
+                string content = _fileManager.Content;
+                _seriesManager.AddList(content);
             }
             catch
             {
