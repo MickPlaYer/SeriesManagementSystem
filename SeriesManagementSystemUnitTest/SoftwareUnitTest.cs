@@ -137,6 +137,14 @@ namespace SeriesManagementSystemUnitTest
             Assert.IsFalse(_software.IsLoadFail);
         }
 
+        [TestMethod]
+        public void TestFollowSeries()
+        {
+            GetSeriesManager().SelectSeries(2);
+            //_software.FollowSeries();
+            //Assert.AreEqual(1, GetSeriesManager().FollowingList);
+        }
+
         #region Get Private Object
         private Series GetLastSeries()
         {
