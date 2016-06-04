@@ -7,6 +7,7 @@ namespace SeriesManagementSystem.Domain
     public class SeriesManager
     {
         private List<Series> _series = new List<Series>();
+        private List<Series> _followingList = new List<Series>();
         private Series _selectedSeries;
         private int _count = 0;
         private bool _isExistNewOne = false;
@@ -23,6 +24,14 @@ namespace SeriesManagementSystem.Domain
             get
             {
                 return _series;
+            }
+        }
+
+        public List<Series> FollowingList 
+        { 
+            get
+            {
+                return _followingList;
             }
         }
 
@@ -96,6 +105,11 @@ namespace SeriesManagementSystem.Domain
         {
             Series series = _series.Find((s) => s.SeriesID == sid);
             _series.Remove(series);
+        }
+
+        public void FollowSeries()
+        {
+            _followingList.Add(_selectedSeries);
         }
 
         private void InitializeCount()

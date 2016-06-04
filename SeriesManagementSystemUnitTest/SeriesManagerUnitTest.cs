@@ -141,6 +141,20 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(1, seriesList.Count);
         }
 
+        [TestMethod]
+        public void TestFollowSeries()
+        {
+            PrivateObject privateObject = new PrivateObject(_seriesManager);
+            privateObject.SetField("_series", new List<Series>(_series));
+            privateObject.SetField("_selectedSeries", _series[2]);
+            _seriesManager.FollowSeries();
+            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
+            Series s = followingList[followingList.Count - 1];
+            Assert.AreEqual(1, followingList.Count);
+            Assert.AreEqual(SeriesName + 2, s.Name);
+            Assert.AreEqual(SeriesDescription + 2, s.Description);
+        }
+
         /// <summary>
         /// get the series list of series manager
         /// </summary>

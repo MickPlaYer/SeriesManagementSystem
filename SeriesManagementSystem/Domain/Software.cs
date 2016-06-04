@@ -88,6 +88,11 @@ namespace SeriesManagementSystem.Domain
             _seriesManager.RemoveSeries(sid);
         }
 
+        public void FollowSeries()
+        {
+            _seriesManager.FollowSeries();
+        }
+
         ~Software()
         {
             string list = _seriesManager.SeriesListString;

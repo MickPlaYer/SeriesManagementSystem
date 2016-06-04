@@ -141,8 +141,11 @@ namespace SeriesManagementSystemUnitTest
         public void TestFollowSeries()
         {
             GetSeriesManager().SelectSeries(2);
-            //_software.FollowSeries();
-            //Assert.AreEqual(1, GetSeriesManager().FollowingList);
+            _software.FollowSeries();
+            Series s = GetLastFollowingSeries();
+            Assert.AreEqual(1, GetSeriesManager().FollowingList.Count);
+            Assert.AreEqual(SeriesName + 2, s.Name);
+            Assert.AreEqual(SeriesDescription + 2, s.Description);
         }
 
         #region Get Private Object
@@ -152,6 +155,14 @@ namespace SeriesManagementSystemUnitTest
             Assert.IsNotNull(seriesManager.SeriesList);
             Assert.IsTrue(seriesManager.SeriesList.Count > 0, "No any series in the list!");
             return seriesManager.SeriesList[seriesManager.SeriesList.Count - 1];
+        }
+
+        private Series GetLastFollowingSeries()
+        {
+            SeriesManager seriesManager = GetSeriesManager();
+            Assert.IsNotNull(seriesManager.FollowingList);
+            Assert.IsTrue(seriesManager.SeriesList.Count > 0, "No any series in the following list!");
+            return seriesManager.FollowingList[seriesManager.FollowingList.Count - 1];
         }
 
         private SeriesManager GetSeriesManager()
