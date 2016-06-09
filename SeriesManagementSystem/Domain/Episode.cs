@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace SeriesManagementSystem.Domain
         private string _description;
         private int _episodeID;
 
+        [JsonConstructor]
         public Episode(string name, string description, int id)
         {
             _name = name;

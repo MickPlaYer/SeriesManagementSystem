@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace SeriesManagementSystem.Domain
 {
@@ -7,11 +8,14 @@ namespace SeriesManagementSystem.Domain
         private int _seriesID;
         private string _name;
         private string _description;
+        private List<Episode> _episodes;
+        
 
         public Series(string name, string description)
         {
             _name = name;
             _description = description;
+            _episodes = new List<Episode>();
         }
 
         [JsonConstructor]
@@ -57,6 +61,19 @@ namespace SeriesManagementSystem.Domain
                 _seriesID = value;
             }
         }
+
+        public List<Episode> Episodes
+        {
+            get
+            {
+                return _episodes;
+            }
+        }
         #endregion
+
+        public void AddEpisode(string episodeName, string episodeDescription)
+        {
+            _episodes.Add(new Episode(episodeName, episodeDescription, _episodes.Count));
+        }
     }
 }

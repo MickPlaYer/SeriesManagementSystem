@@ -63,6 +63,7 @@
     <Compile Include="FileManagerUnitTest.cs" />
     <Compile Include="SeriesFormPresentationModelTest.cs" />
     <Compile Include="FakeItem\FakeServer.cs" />
+    <Compile Include="EpisodeUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeriesManagementSystem\SeriesManagementSystem.csproj">

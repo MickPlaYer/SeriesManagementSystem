@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeriesManagementSystem.Domain;
 using System;
+using System.Collections.Generic;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -8,16 +9,22 @@ namespace SeriesManagementSystemUnitTest
     public class SeriesUnitTest
     {
         Series _series;
+        List<Episode> _episodes;
         const int SeriesID = 10;
         const string SeriesName = "testSeries";
         const string SeriesDescription = "this is a test Series Description";
         const string ModifiedSeriesName = "modifiedSeries";
         const string ModifiedSeriesDescription = "this is a modified description";
+        static readonly string[] EPISODE_NAMES = new string[] { "episode 0", "episode 1" };
+        static readonly string[] EPISODE_DESCRIPTIONS = new string[] { "episode description 0", "episode description 1" };
 
         [TestInitialize]
         public void Initialize()
         {
             _series = new Series(SeriesName, SeriesDescription);
+            _episodes = new List<Episode>();
+            _episodes.Add(new Episode(EPISODE_NAMES[0], EPISODE_DESCRIPTIONS[0], 0));
+            _episodes.Add(new Episode(EPISODE_NAMES[1], EPISODE_DESCRIPTIONS[1], 1));
         }
 
         [TestMethod]
@@ -46,6 +53,19 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(SeriesDescription, _series.Description);
             _series.Description = ModifiedSeriesDescription;
             Assert.AreEqual(ModifiedSeriesDescription, _series.Description);
+        }
+
+        [TestMethod]
+        public void TestAddEpisode()
+        {
+            Assert.AreEqual(0, GetEpisodes().Count);
+            _series.AddEpisode(EPISODE_NAMES[0], EPISODE_DESCRIPTIONS[0]);
+            Assert.AreEqual(1, GetEpisodes().Count);
+        }
+
+        private List<Episode> GetEpisodes()
+        {
+            return new PrivateObject(_series).GetFieldOrProperty("_episodes") as List<Episode>;
         }
     }
 }
