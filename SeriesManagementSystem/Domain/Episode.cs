@@ -11,16 +11,14 @@ namespace SeriesManagementSystem.Domain
     {
         private string _name;
         private string _description;
-        private int _episodeID;
         private bool _isRead;
         private List<Command> _commandList = new List<Command>();
 
         [JsonConstructor]
-        public Episode(string name, string description, int id)
+        public Episode(string name, string description)
         {
             _name = name;
             _description = description;
-            _episodeID = id;
         }
 
         #region Public Properties
@@ -48,14 +46,6 @@ namespace SeriesManagementSystem.Domain
             }
         }
 
-        public int EpisodeID
-        {
-            get
-            {
-                return _episodeID;
-            }
-        }
-
         public bool IsRead 
         { 
             get
@@ -71,6 +61,7 @@ namespace SeriesManagementSystem.Domain
                 return _commandList;
             }
         }
+>>>>>>> 502d88e9c77ebf2b2ce4986704f2734a28104532
         #endregion
 
         public void Record(string command)

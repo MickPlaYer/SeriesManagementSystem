@@ -73,7 +73,7 @@ namespace SeriesManagementSystem.Domain
 
         public void AddEpisode(string episodeName, string episodeDescription)
         {
-            _episodes.Add(new Episode(episodeName, episodeDescription, _episodes.Count));
+            _episodes.Add(new Episode(episodeName, episodeDescription));
         }
 
         public void Record(string name, string command)

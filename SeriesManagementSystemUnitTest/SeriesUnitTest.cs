@@ -23,8 +23,8 @@ namespace SeriesManagementSystemUnitTest
         {
             _series = new Series(SeriesName, SeriesDescription);
             _episodes = new List<Episode>();
-            _episodes.Add(new Episode(EPISODE_NAMES[0], EPISODE_DESCRIPTIONS[0], 0));
-            _episodes.Add(new Episode(EPISODE_NAMES[1], EPISODE_DESCRIPTIONS[1], 1));
+            _episodes.Add(new Episode(EPISODE_NAMES[0], EPISODE_DESCRIPTIONS[0]));
+            _episodes.Add(new Episode(EPISODE_NAMES[1], EPISODE_DESCRIPTIONS[1]));
         }
 
         [TestMethod]
