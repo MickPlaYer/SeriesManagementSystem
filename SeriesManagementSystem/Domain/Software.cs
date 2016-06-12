@@ -94,7 +94,6 @@ namespace SeriesManagementSystem.Domain
             _seriesManager.FollowSeries();
         }
 
-
         public void UnfollowSeries()
         {
             _seriesManager.UnfollowSeries();
