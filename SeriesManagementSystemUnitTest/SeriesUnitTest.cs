@@ -63,6 +63,20 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(1, GetEpisodes().Count);
         }
 
+        [TestMethod]
+        public void TestRecord()
+        {
+            string command = "Very well.";
+            GetEpisodes().AddRange(_episodes);
+            _series.Record(EPISODE_NAMES[0], command);
+            Assert.AreEqual(1, _episodes[0].CommandList.Count);
+            Assert.IsTrue(_episodes[0].IsRead);
+            command = "";
+            _series.Record(EPISODE_NAMES[1], command);
+            Assert.AreEqual(0, _episodes[1].CommandList.Count);
+            Assert.IsTrue(_episodes[1].IsRead);
+        }
+
         private List<Episode> GetEpisodes()
         {
             return new PrivateObject(_series).GetFieldOrProperty("_episodes") as List<Episode>;

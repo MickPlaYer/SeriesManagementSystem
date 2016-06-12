@@ -214,6 +214,23 @@ namespace SeriesManagementSystemUnitTest
         }
 
         [TestMethod]
+        public void TestRecord()
+        {
+            string eName = "goodEp", eDesc = "Hero is dead.";
+            string command = "So suprise!";
+            PrivateObject privateObject = new PrivateObject(_seriesManager);
+            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
+            Series s = _series[1];
+            s.AddEpisode(eName, eDesc);
+            Episode e = s.Episodes[0];
+            followingList.Add(s);
+            privateObject.SetField("_selectedSeries", s);
+            _seriesManager.Record(eName, command);
+            Assert.AreEqual(1, e.CommandList.Count);
+            Assert.IsTrue(e.IsRead);
+        }
+
+        [TestMethod]
         public void TestToJson()
         {
             Series s = new Series("s1", "456");

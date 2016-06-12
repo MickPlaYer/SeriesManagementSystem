@@ -32,5 +32,17 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(MODIFIED_NAME, _episode.Name);
             Assert.AreEqual(MODIFIED_DESCRIPTION, _episode.Description);
         }
+
+        [TestMethod]
+        public void TestRecord()
+        {
+            string command = "So suprise!";
+            _episode.Record(command);
+            Assert.AreEqual(1, _episode.CommandList.Count);
+            Assert.IsTrue(_episode.IsRead);
+            command = "";
+            _episode.Record(command);
+            Assert.AreEqual(1, _episode.CommandList.Count);
+        }
     }
 }

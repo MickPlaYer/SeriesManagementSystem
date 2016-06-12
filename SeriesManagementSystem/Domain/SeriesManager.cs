@@ -137,6 +137,11 @@ namespace SeriesManagementSystem.Domain
             _selectedSeries.AddEpisode(name, description);
         }
 
+        public void Record(string name, string command)
+        {
+            _selectedSeries.Record(name, command);
+        }
+
         [OnDeserialized]
         private void InitializeCount(StreamingContext context)
         {

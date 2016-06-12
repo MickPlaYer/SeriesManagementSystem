@@ -193,6 +193,20 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(eDesc, e.Description);
         }
 
+        [TestMethod]
+        public void TestRecord()
+        {
+            string eName = "goodEp", eDesc = "Hero is dead.";
+            string command = "So suprise!";
+            GetSeriesManager().SelectSeries(1);
+            Series s = GetSeriesManager().SelectedSeries;
+            s.AddEpisode(eName, eDesc);
+            Episode e = s.Episodes[0];
+            _software.Record(eName, command);
+            Assert.AreEqual(1, e.CommandList.Count);
+            Assert.IsTrue(e.IsRead);
+        }
+
         #region Get Private Object
         private Series GetLastSeries()
         {

@@ -110,6 +110,11 @@ namespace SeriesManagementSystem.Domain
             _seriesManager.AddEpisode(name, description);
         }
 
+        public void Record(string name, string command)
+        {
+            _seriesManager.Record(name, command);
+        }
+
         ~Software()
         {
             string list = _seriesManager.SeriesListString;
