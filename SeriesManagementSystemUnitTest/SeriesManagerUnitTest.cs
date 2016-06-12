@@ -4,6 +4,7 @@ using SeriesManagementSystem.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -35,7 +36,7 @@ namespace SeriesManagementSystemUnitTest
             PrivateObject privateObject = new PrivateObject(_seriesManager);
             Assert.AreEqual(0, privateObject.GetFieldOrProperty("_count"));
             privateObject.SetField("_series", new List<Series>(_series));
-            privateObject.Invoke("InitializeCount");
+            privateObject.Invoke("InitializeCount", new StreamingContext());
             Assert.AreEqual(3, privateObject.GetFieldOrProperty("_count"));
         }
 
@@ -193,6 +194,22 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(SeriesDescription + 2, s.Description);
             int index = unfollowingList.IndexOf(s);
             Assert.AreEqual(-1, index);
+        }
+
+        [TestMethod]
+        public void TestToJson()
+        {
+            Series s = new Series("s1", "456");
+            s.AddEpisode("e1", "sad");
+            _seriesManager.SeriesList.Add(s);
+            var jSetting = new JsonSerializerSettings();
+            jSetting.Formatting = Formatting.Indented;
+            String json = JsonConvert.SerializeObject(_seriesManager, jSetting);
+            SeriesManager sm = JsonConvert.DeserializeObject<SeriesManager>(json);
+            Assert.AreEqual("s1", sm.SeriesList[0].Name);
+            Assert.AreEqual("456", sm.SeriesList[0].Description);
+            Assert.AreEqual("e1", sm.SeriesList[0].Episodes[0].Name);
+            Assert.AreEqual("sad", sm.SeriesList[0].Episodes[0].Description);
         }
 
         /// <summary>

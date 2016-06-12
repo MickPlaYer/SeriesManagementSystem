@@ -1,4 +1,5 @@
-﻿using SeriesManagementSystem.Foundation;
+﻿using Newtonsoft.Json;
+using SeriesManagementSystem.Foundation;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -19,7 +20,6 @@ namespace SeriesManagementSystem.Domain
         {
             _serverHelper = serverHelper;
             _fileManager = fileManager;
-            _seriesManager = new SeriesManager();
             LoadFile();
             RefreshServerData();
         }
@@ -30,10 +30,11 @@ namespace SeriesManagementSystem.Domain
             try
             {
                 _fileManager.LoadFile(LOCAL_STOREAGE);
-                _seriesManager.AddLoadedFile(_fileManager.Content);
+                _seriesManager = JsonConvert.DeserializeObject<SeriesManager>(_fileManager.Content);
             }
             catch (Exception)
             {
+                _seriesManager = new SeriesManager();
                 _isLoadFail = true;
             }
         }

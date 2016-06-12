@@ -11,7 +11,7 @@ namespace SeriesManagementSystemUnitTest.FakeItem
 {
     public class FakeFileSystem : IFileSystem
     {
-        private string _content = "[]";
+        private string _content = "{\"_series\":[],\"_followingList\":[],\"_unfollowingList\":[]}";
         public bool IsLoadFail
         {
             get;

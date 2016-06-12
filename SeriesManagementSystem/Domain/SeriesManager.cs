@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace SeriesManagementSystem.Domain
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class SeriesManager
     {
+        [JsonProperty]
         private List<Series> _series = new List<Series>();
+        [JsonProperty]
         private List<Series> _followingList = new List<Series>();
+        [JsonProperty]
         private List<Series> _unfollowingList = new List<Series>();
         private Series _selectedSeries;
         private int _count = 0;
         private bool _isExistNewOne = false;
-
-        public void AddLoadedFile(string list)
-        {
-            _series.AddRange(JsonConvert.DeserializeObject<List<Series>>(list));
-            InitializeCount();
-        }
 
         #region Public Object
         public List<Series> SeriesList
@@ -56,7 +55,7 @@ namespace SeriesManagementSystem.Domain
         {
             get
             {
-                return JsonConvert.SerializeObject(_series);
+                return JsonConvert.SerializeObject(this);
             }
         }
 
@@ -133,7 +132,8 @@ namespace SeriesManagementSystem.Domain
             _followingList.Add(_selectedSeries);
         }
 
-        private void InitializeCount()
+        [OnDeserialized]
+        private void InitializeCount(StreamingContext context)
         {
             if (_series.Count != 0)
             {
