@@ -155,6 +155,46 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(SeriesDescription + 2, s.Description);
         }
 
+        [TestMethod]
+        public void TestUnfollowSeries()
+        {
+            PrivateObject privateObject = new PrivateObject(_seriesManager);
+            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
+            List<Series> unfollowingList = privateObject.GetField("_unfollowingList") as List<Series>;
+            followingList.AddRange(new List<Series>(_series));
+            privateObject.SetField("_selectedSeries", _series[2]);
+            Assert.AreEqual(0, unfollowingList.Count);
+            Assert.AreEqual(3, followingList.Count);
+            _seriesManager.UnfollowSeries();
+            Assert.AreEqual(1, unfollowingList.Count);
+            Assert.AreEqual(2, followingList.Count);
+            Series s = unfollowingList[unfollowingList.Count - 1];
+            Assert.AreEqual(SeriesName + 2, s.Name);
+            Assert.AreEqual(SeriesDescription + 2, s.Description);
+            int index = followingList.IndexOf(s);
+            Assert.AreEqual(-1, index);
+        }
+
+        [TestMethod]
+        public void TestRecoverSeries()
+        {
+            PrivateObject privateObject = new PrivateObject(_seriesManager);
+            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
+            List<Series> unfollowingList = privateObject.GetField("_unfollowingList") as List<Series>;
+            unfollowingList.AddRange(new List<Series>(_series));
+            privateObject.SetField("_selectedSeries", _series[2]);
+            Assert.AreEqual(3, unfollowingList.Count);
+            Assert.AreEqual(0, followingList.Count);
+            _seriesManager.RecoverSeries();
+            Assert.AreEqual(2, unfollowingList.Count);
+            Assert.AreEqual(1, followingList.Count);
+            Series s = followingList[followingList.Count - 1];
+            Assert.AreEqual(SeriesName + 2, s.Name);
+            Assert.AreEqual(SeriesDescription + 2, s.Description);
+            int index = unfollowingList.IndexOf(s);
+            Assert.AreEqual(-1, index);
+        }
+
         /// <summary>
         /// get the series list of series manager
         /// </summary>

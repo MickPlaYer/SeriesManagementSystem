@@ -8,6 +8,7 @@ namespace SeriesManagementSystem.Domain
     {
         private List<Series> _series = new List<Series>();
         private List<Series> _followingList = new List<Series>();
+        private List<Series> _unfollowingList = new List<Series>();
         private Series _selectedSeries;
         private int _count = 0;
         private bool _isExistNewOne = false;
@@ -32,6 +33,14 @@ namespace SeriesManagementSystem.Domain
             get
             {
                 return _followingList;
+            }
+        }
+
+        public List<Series> UnfollowingList
+        {
+            get
+            {
+                return _unfollowingList;
             }
         }
 
@@ -109,6 +118,18 @@ namespace SeriesManagementSystem.Domain
 
         public void FollowSeries()
         {
+            _followingList.Add(_selectedSeries);
+        }
+
+        public void UnfollowSeries()
+        {
+            _followingList.Remove(_selectedSeries);
+            _unfollowingList.Add(_selectedSeries);
+        }
+
+        public void RecoverSeries()
+        {
+            _unfollowingList.Remove(_selectedSeries);
             _followingList.Add(_selectedSeries);
         }
 

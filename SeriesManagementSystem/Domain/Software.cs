@@ -93,6 +93,17 @@ namespace SeriesManagementSystem.Domain
             _seriesManager.FollowSeries();
         }
 
+
+        public void UnfollowSeries()
+        {
+            _seriesManager.UnfollowSeries();
+        }
+
+        public void RecoverSeries()
+        {
+            _seriesManager.RecoverSeries();
+        }
+
         ~Software()
         {
             string list = _seriesManager.SeriesListString;

@@ -148,6 +148,37 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(SeriesDescription + 2, s.Description);
         }
 
+        [TestMethod]
+        public void TestUnfollowSeries()
+        {
+            GetSeriesManager().SelectSeries(2);
+            GetSeriesManager().FollowSeries();
+            _software.UnfollowSeries();
+            Assert.AreEqual(1, GetSeriesManager().UnfollowingList.Count);
+            Assert.AreEqual(0, GetSeriesManager().FollowingList.Count);
+            Series s = GetLastUnfollowingSeries();
+            Assert.AreEqual(SeriesName + 2, s.Name);
+            Assert.AreEqual(SeriesDescription + 2, s.Description);
+            int index = GetSeriesManager().FollowingList.IndexOf(s);
+            Assert.AreEqual(-1, index);
+        }
+
+        [TestMethod]
+        public void TestRecoverSeries()
+        {
+            GetSeriesManager().SelectSeries(2);
+            GetSeriesManager().FollowSeries();
+            GetSeriesManager().UnfollowSeries();
+            _software.RecoverSeries();
+            Assert.AreEqual(0, GetSeriesManager().UnfollowingList.Count);
+            Assert.AreEqual(1, GetSeriesManager().FollowingList.Count);
+            Series s = GetLastFollowingSeries();
+            Assert.AreEqual(SeriesName + 2, s.Name);
+            Assert.AreEqual(SeriesDescription + 2, s.Description);
+            int index = GetSeriesManager().UnfollowingList.IndexOf(s);
+            Assert.AreEqual(-1, index);
+        }
+
         #region Get Private Object
         private Series GetLastSeries()
         {
@@ -161,8 +192,16 @@ namespace SeriesManagementSystemUnitTest
         {
             SeriesManager seriesManager = GetSeriesManager();
             Assert.IsNotNull(seriesManager.FollowingList);
-            Assert.IsTrue(seriesManager.SeriesList.Count > 0, "No any series in the following list!");
+            Assert.IsTrue(seriesManager.FollowingList.Count > 0, "No any series in the following list!");
             return seriesManager.FollowingList[seriesManager.FollowingList.Count - 1];
+        }
+
+        private Series GetLastUnfollowingSeries()
+        {
+            SeriesManager seriesManager = GetSeriesManager();
+            Assert.IsNotNull(seriesManager.UnfollowingList);
+            Assert.IsTrue(seriesManager.UnfollowingList.Count > 0, "No any series in the following list!");
+            return seriesManager.UnfollowingList[seriesManager.UnfollowingList.Count - 1];
         }
 
         private SeriesManager GetSeriesManager()
