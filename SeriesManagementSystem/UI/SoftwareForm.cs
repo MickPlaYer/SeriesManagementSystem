@@ -21,7 +21,7 @@ namespace SeriesManagementSystem.UI
 
         private void OnAddSeries(object sender, EventArgs e)
         {
-            using (var addForm = new SeriesForm())
+            using (var addForm = new AddDataForm(true))
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
@@ -35,9 +35,9 @@ namespace SeriesManagementSystem.UI
         {
             var column = _seriesGridView.Columns[e.ColumnIndex];
             var row = _seriesGridView.Rows[e.RowIndex];
+            int sid = Int32.Parse(row.Cells[4].Value.ToString());
             if (column is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                int sid = Int32.Parse(row.Cells[4].Value.ToString());
                 string name = row.Cells[2].Value.ToString();
                 string desc = row.Cells[3].Value.ToString();
                 if (column.Name == "Remove")
@@ -45,6 +45,11 @@ namespace SeriesManagementSystem.UI
                 else if (column.Name == "Modify")
                     ModifySeries(name, desc, sid);
                 seriesListBindingSource.ResetBindings(true);
+            }
+            else
+            {
+                _software.SelectSeries(sid);
+                new SeriesDetailForm(_seriesManager.SelectedSeries, _software).ShowDialog();
             }
         }
 
@@ -58,7 +63,7 @@ namespace SeriesManagementSystem.UI
         private void ModifySeries(string name, string desc, int sid)
         {
             _software.SelectSeries(sid);
-            using (var modifyForm = new SeriesForm(name, desc))
+            using (var modifyForm = new AddDataForm(name, desc))
             {
                 if (modifyForm.ShowDialog() == DialogResult.OK)
                 {
