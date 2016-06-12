@@ -132,6 +132,11 @@ namespace SeriesManagementSystem.Domain
             _followingList.Add(_selectedSeries);
         }
 
+        public void AddEpisode(string name, string description)
+        {
+            _selectedSeries.AddEpisode(name, description);
+        }
+
         [OnDeserialized]
         private void InitializeCount(StreamingContext context)
         {

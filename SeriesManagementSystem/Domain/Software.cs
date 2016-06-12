@@ -105,6 +105,11 @@ namespace SeriesManagementSystem.Domain
             _seriesManager.RecoverSeries();
         }
 
+        public void AddEpisode(string name, string description)
+        {
+            _seriesManager.AddEpisode(name, description);
+        }
+
         ~Software()
         {
             string list = _seriesManager.SeriesListString;

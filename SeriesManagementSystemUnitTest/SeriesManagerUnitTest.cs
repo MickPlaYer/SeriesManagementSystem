@@ -113,8 +113,8 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(ModifiedSeriesName, _seriesManager.SelectedSeries.Name);
             Assert.AreEqual(ModifiedSeriesDescription, _seriesManager.SelectedSeries.Description);
 
-            Assert.AreEqual(ModifiedSeriesName, GetSeriesList().Find((x)=>x.SeriesID==2).Name);
-            Assert.AreEqual(ModifiedSeriesDescription, GetSeriesList().Find((x)=>x.SeriesID==2).Description);
+            Assert.AreEqual(ModifiedSeriesName, GetSeriesList().Find((x) => x.SeriesID == 2).Name);
+            Assert.AreEqual(ModifiedSeriesDescription, GetSeriesList().Find((x) => x.SeriesID == 2).Description);
         }
 
         [TestMethod]
@@ -194,6 +194,23 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(SeriesDescription + 2, s.Description);
             int index = unfollowingList.IndexOf(s);
             Assert.AreEqual(-1, index);
+        }
+
+        [TestMethod]
+        public void TestAddEpisode()
+        {
+            PrivateObject privateObject = new PrivateObject(_seriesManager);
+            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
+            Series s = _series[2];
+            string eName = "e1", eDesc = "how it is going?";
+            followingList.AddRange(_series);
+            privateObject.SetField("_selectedSeries", s);
+            Assert.AreEqual(0, s.Episodes.Count);
+            _seriesManager.AddEpisode(eName, eDesc);
+            Assert.AreEqual(1, s.Episodes.Count);
+            Episode e = s.Episodes[s.Episodes.Count - 1];
+            Assert.AreEqual(eName, e.Name);
+            Assert.AreEqual(eDesc, e.Description);
         }
 
         [TestMethod]

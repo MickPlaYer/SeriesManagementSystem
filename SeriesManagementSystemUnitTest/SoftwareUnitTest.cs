@@ -179,6 +179,20 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual(-1, index);
         }
 
+        [TestMethod]
+        public void TestAddEpisode()
+        {
+            GetSeriesManager().SelectSeries(2);
+            Series s = GetSeriesManager().SelectedSeries;
+            string eName = "e1", eDesc = "how it is going?";
+            Assert.AreEqual(0, s.Episodes.Count);
+            _software.AddEpisode(eName, eDesc);
+            Assert.AreEqual(1, s.Episodes.Count);
+            Episode e = s.Episodes[s.Episodes.Count - 1];
+            Assert.AreEqual(eName, e.Name);
+            Assert.AreEqual(eDesc, e.Description);
+        }
+
         #region Get Private Object
         private Series GetLastSeries()
         {
