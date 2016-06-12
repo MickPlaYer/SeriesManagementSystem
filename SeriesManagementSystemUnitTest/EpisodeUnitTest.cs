@@ -8,7 +8,6 @@ namespace SeriesManagementSystemUnitTest
     public class EpisodeUnitTest
     {
         Episode _episode;
-        const int ID = 3;
         const string EPISODE_NAME = "episode name";
         const string EPISODE_DESCRIPTION = "epispode description";
         const string MODIFIED_NAME = "modified name";
@@ -17,13 +16,12 @@ namespace SeriesManagementSystemUnitTest
         [TestInitialize]
         public void Initialize()
         {
-            _episode = new Episode(EPISODE_NAME, EPISODE_DESCRIPTION, ID);
+            _episode = new Episode(EPISODE_NAME, EPISODE_DESCRIPTION);
         }
 
         [TestMethod]
         public void TestProperties()
         {
-            Assert.AreEqual(ID, _episode.EpisodeID);
             Assert.AreEqual(EPISODE_NAME, _episode.Name);
             Assert.AreEqual(EPISODE_DESCRIPTION, _episode.Description);
 

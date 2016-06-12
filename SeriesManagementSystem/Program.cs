@@ -20,6 +20,7 @@ namespace SeriesManagementSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Software software = new Software(new ServerHelper(), new FileManager());
+            new SeriesDetailForm().ShowDialog();
             Application.Run(new SoftwareForm(software));
         }
     }

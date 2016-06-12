@@ -11,14 +11,12 @@ namespace SeriesManagementSystem.Domain
     {
         private string _name;
         private string _description;
-        private int _episodeID;
 
         [JsonConstructor]
-        public Episode(string name, string description, int id)
+        public Episode(string name, string description)
         {
             _name = name;
             _description = description;
-            _episodeID = id;
         }
 
         #region Public Properties
@@ -43,14 +41,6 @@ namespace SeriesManagementSystem.Domain
             set
             {
                 _description = value;
-            }
-        }
-
-        public int EpisodeID
-        {
-            get
-            {
-                return _episodeID;
             }
         }
         #endregion
