@@ -75,5 +75,11 @@ namespace SeriesManagementSystem.Domain
         {
             _episodes.Add(new Episode(episodeName, episodeDescription));
         }
+
+        public void Record(string name, string command)
+        {
+            Episode episode = _episodes.Find((e) => e.Name == name);
+            episode.Record(command);
+        }
     }
 }
