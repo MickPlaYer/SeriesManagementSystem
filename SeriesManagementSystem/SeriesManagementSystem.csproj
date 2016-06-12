@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Command.cs" />
     <Compile Include="Domain\Episode.cs" />
     <Compile Include="Foundation\IFileSystem.cs" />
     <Compile Include="Domain\Series.cs" />

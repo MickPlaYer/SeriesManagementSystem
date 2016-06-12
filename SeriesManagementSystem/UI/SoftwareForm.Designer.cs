@@ -32,15 +32,15 @@
             this._addSeriesButton = new System.Windows.Forms.Button();
             this._importSeriesButton = new System.Windows.Forms.Button();
             this._seriesGridView = new System.Windows.Forms.DataGridView();
-            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this._refreshButton = new System.Windows.Forms.Button();
-            this._refreshResultLabel = new System.Windows.Forms.Label();
-            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Modify = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seriesIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seriesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._refreshButton = new System.Windows.Forms.Button();
+            this._refreshResultLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
@@ -88,36 +88,9 @@
             this._seriesGridView.ReadOnly = true;
             this._seriesGridView.RowHeadersWidth = 50;
             this._seriesGridView.RowTemplate.Height = 24;
-            this._seriesGridView.Size = new System.Drawing.Size(500, 318);
+            this._seriesGridView.Size = new System.Drawing.Size(1002, 482);
             this._seriesGridView.TabIndex = 4;
             this._seriesGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellButtonClick);
-            // 
-            // seriesListBindingSource
-            // 
-            this.seriesListBindingSource.DataMember = "SeriesList";
-            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
-            // 
-            // _refreshButton
-            // 
-            this._refreshButton.Location = new System.Drawing.Point(174, 12);
-            this._refreshButton.Name = "_refreshButton";
-            this._refreshButton.Size = new System.Drawing.Size(75, 23);
-            this._refreshButton.TabIndex = 5;
-            this._refreshButton.Text = "更新";
-            this._refreshButton.UseVisualStyleBackColor = true;
-            this._refreshButton.Click += new System.EventHandler(this.OnRefresh);
-            // 
-            // _refreshResultLabel
-            // 
-            this._refreshResultLabel.AutoSize = true;
-            this._refreshResultLabel.Location = new System.Drawing.Point(255, 17);
-            this._refreshResultLabel.Name = "_refreshResultLabel";
-            this._refreshResultLabel.Size = new System.Drawing.Size(0, 12);
-            this._refreshResultLabel.TabIndex = 6;
-            // 
-            // seriesManagerBindingSource
-            // 
-            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
             // 
             // Modify
             // 
@@ -164,11 +137,38 @@
             this.seriesIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.seriesIDDataGridViewTextBoxColumn.Visible = false;
             // 
+            // seriesListBindingSource
+            // 
+            this.seriesListBindingSource.DataMember = "SeriesList";
+            this.seriesListBindingSource.DataSource = this.seriesManagerBindingSource;
+            // 
+            // seriesManagerBindingSource
+            // 
+            this.seriesManagerBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.SeriesManager);
+            // 
+            // _refreshButton
+            // 
+            this._refreshButton.Location = new System.Drawing.Point(174, 12);
+            this._refreshButton.Name = "_refreshButton";
+            this._refreshButton.Size = new System.Drawing.Size(75, 23);
+            this._refreshButton.TabIndex = 5;
+            this._refreshButton.Text = "更新";
+            this._refreshButton.UseVisualStyleBackColor = true;
+            this._refreshButton.Click += new System.EventHandler(this.OnRefresh);
+            // 
+            // _refreshResultLabel
+            // 
+            this._refreshResultLabel.AutoSize = true;
+            this._refreshResultLabel.Location = new System.Drawing.Point(255, 17);
+            this._refreshResultLabel.Name = "_refreshResultLabel";
+            this._refreshResultLabel.Size = new System.Drawing.Size(0, 12);
+            this._refreshResultLabel.TabIndex = 6;
+            // 
             // SoftwareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 371);
+            this.ClientSize = new System.Drawing.Size(1026, 535);
             this.Controls.Add(this._refreshResultLabel);
             this.Controls.Add(this._refreshButton);
             this.Controls.Add(this._seriesGridView);
