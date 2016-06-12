@@ -11,7 +11,6 @@ namespace SeriesManagementSystem.Domain
     {
         private string _name;
         private string _description;
-        private int _episodeID;
         private bool _isRead;
         private List<Command> _commandList = new List<Command>();
 
@@ -44,16 +43,6 @@ namespace SeriesManagementSystem.Domain
             set
             {
                 _description = value;
-            }
-        }
-<<<<<<< HEAD
-=======
-
-        public int EpisodeID
-        {
-            get
-            {
-                return _episodeID;
             }
         }
 
