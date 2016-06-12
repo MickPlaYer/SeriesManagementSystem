@@ -2,20 +2,20 @@
 
 namespace SeriesManagementSystem.UI.ViewModel
 {
-    public class SeriesFormPresentationModel : INotifyPropertyChanged
+    public class AddDataFormPresentationModel : INotifyPropertyChanged
     {
         private string _name;
         private string _description;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public SeriesFormPresentationModel()
+        public AddDataFormPresentationModel()
         {
             _name = string.Empty;
             _description = string.Empty;
         }
 
-        public SeriesFormPresentationModel(string name, string description)
+        public AddDataFormPresentationModel(string name, string description)
         {
             _name = name;
             _description = description;

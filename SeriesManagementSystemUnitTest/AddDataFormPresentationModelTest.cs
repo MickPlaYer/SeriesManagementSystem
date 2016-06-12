@@ -6,9 +6,9 @@ using System.ComponentModel;
 namespace SeriesManagementSystemUnitTest
 {
     [TestClass]
-    public class SeriesFormPresentationModelTest
+    public class AddDataFormPresentationModelTest
     {
-        private SeriesFormPresentationModel _model;
+        private AddDataFormPresentationModel _model;
         private PrivateObject _privateObject;
         private const string SERIESNAME = "test name";
         private const string SERIESDES = "test des";
@@ -18,12 +18,12 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestConstructor()
         {
-            _model = new SeriesFormPresentationModel();
+            _model = new AddDataFormPresentationModel();
             _privateObject = new PrivateObject(_model);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), string.Empty);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), string.Empty);
 
-            _model = new SeriesFormPresentationModel(SERIESNAME, SERIESDES);
+            _model = new AddDataFormPresentationModel(SERIESNAME, SERIESDES);
             _privateObject = new PrivateObject(_model);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), SERIESNAME);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), SERIESDES);
@@ -32,7 +32,7 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestModifyName()
         {
-            _model = new SeriesFormPresentationModel();
+            _model = new AddDataFormPresentationModel();
             _privateObject = new PrivateObject(_model);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), string.Empty);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), string.Empty);
@@ -44,7 +44,7 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestModifyDes()
         {
-            _model = new SeriesFormPresentationModel(SERIESNAME, SERIESDES);
+            _model = new AddDataFormPresentationModel(SERIESNAME, SERIESDES);
             _privateObject = new PrivateObject(_model);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), SERIESNAME);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), SERIESDES);
@@ -56,7 +56,7 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestIsOkButtonEnabled()
         {
-            _model = new SeriesFormPresentationModel();
+            _model = new AddDataFormPresentationModel();
             Assert.IsFalse(_model.IsOkButtonEnabled);
 
             _model.Name = MODIFYNAME;
@@ -66,7 +66,7 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestGetter()
         {
-            _model = new SeriesFormPresentationModel(SERIESNAME, SERIESDES);
+            _model = new AddDataFormPresentationModel(SERIESNAME, SERIESDES);
             _privateObject = new PrivateObject(_model);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_name"), _model.Name);
             Assert.AreEqual(_privateObject.GetFieldOrProperty("_description"), _model.Description);
@@ -75,7 +75,7 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestNotify()
         {
-            _model = new SeriesFormPresentationModel();
+            _model = new AddDataFormPresentationModel();
             string propertyName = string.Empty;
             Assert.AreEqual(propertyName, string.Empty);
             _model.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace SeriesManagementSystem.UI
 {
-    public partial class SeriesForm : Form
+    public partial class AddDataForm : Form
     {
-        private SeriesFormPresentationModel _model;
+        private AddDataFormPresentationModel _pModel;
         
         /// <summary>
         /// form 的回傳值
@@ -16,7 +16,7 @@ namespace SeriesManagementSystem.UI
         {
             get
             {
-                return _model.Name;
+                return _pModel.Name;
             }
         }
 
@@ -24,35 +24,42 @@ namespace SeriesManagementSystem.UI
         {
             get
             {
-                return _model.Description;
+                return _pModel.Description;
             }
         }
 
         /// <summary>
         /// add series 的 form
         /// </summary>
-        public SeriesForm()
+        public AddDataForm(bool series)
         {
-            //this.button_Confirm.Enabled = true;
             InitializeComponent();
-            this.Text = "新增 Series";
-            this.button_Confirm.Text = "新增影集";
-
-            _model = new SeriesFormPresentationModel();
-            button_Confirm.DataBindings.Add("Enabled", _model, "IsOkButtonEnabled");
+            if (series)
+            {
+                this.Text = "新增 Series";
+                this.button_Confirm.Text = "新增影集";
+            }
+            else
+            {
+                this.Text = "新增 Episode";
+                this.button_Confirm.Text = "新增 Episode";
+            }
+            
+            _pModel = new AddDataFormPresentationModel();
+            button_Confirm.DataBindings.Add("Enabled", _pModel, "IsOkButtonEnabled");
         }
 
         /// <summary>
         /// edit series 的 form
         /// </summary>
         /// <param name="series"></param>
-        public SeriesForm(string name, string description)
+        public AddDataForm(string name, string description)
         {
             InitializeComponent();
             this.Text = "修改 Series";
             this.button_Confirm.Text = "修改影集";
 
-            _model = new SeriesFormPresentationModel(name, description);
+            _pModel = new AddDataFormPresentationModel(name, description);
 
             this.textBox_SeriesName.Text = name;
             this.textBox_SeriesDesc.Text = description;
@@ -72,12 +79,12 @@ namespace SeriesManagementSystem.UI
 
         private void ChangeTextBoxSeriesName(object sender, EventArgs e)
         {
-            _model.Name = textBox_SeriesName.Text;
+            _pModel.Name = textBox_SeriesName.Text;
         }
 
         private void ChangeTextBoxSeriesDescription(object sender, EventArgs e)
         {
-            _model.Description = textBox_SeriesDesc.Text;
+            _pModel.Description = textBox_SeriesDesc.Text;
         }
     }
 }

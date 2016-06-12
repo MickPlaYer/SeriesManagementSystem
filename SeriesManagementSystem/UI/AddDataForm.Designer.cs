@@ -1,6 +1,6 @@
 ﻿namespace SeriesManagementSystem.UI
 {
-    partial class SeriesForm
+    partial class AddDataForm
     {
         /// <summary>
         /// Required designer variable.
