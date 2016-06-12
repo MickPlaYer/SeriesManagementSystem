@@ -33,17 +33,15 @@
             System.Windows.Forms.Label label3;
             this.label_SeriesName = new System.Windows.Forms.Label();
             this.tableLayoutPanel_SeriesDetail = new System.Windows.Forms.TableLayoutPanel();
+            this.label_SeriesDes = new System.Windows.Forms.Label();
             this.label_EpisodeNum = new System.Windows.Forms.Label();
             this.tabControl_Series = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label_SeriesDes = new System.Windows.Forms.Label();
             this.dataGridView_Episodes = new System.Windows.Forms.DataGridView();
-            this.button_AddEpisode = new System.Windows.Forms.Button();
             this.Column_EpisodeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_EpisodeDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_EpsiodeCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_AddCommand = new System.Windows.Forms.DataGridViewButtonColumn();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -76,6 +74,17 @@
             label2.Text = "集數：";
             label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            label3.Location = new System.Drawing.Point(3, 100);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(94, 62);
+            label3.TabIndex = 4;
+            label3.Text = "描述：";
+            label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label_SeriesName
             // 
             this.label_SeriesName.AutoSize = true;
@@ -89,6 +98,9 @@
             // 
             // tableLayoutPanel_SeriesDetail
             // 
+            this.tableLayoutPanel_SeriesDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel_SeriesDetail.ColumnCount = 2;
             this.tableLayoutPanel_SeriesDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel_SeriesDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -98,7 +110,7 @@
             this.tableLayoutPanel_SeriesDetail.Controls.Add(label2, 0, 1);
             this.tableLayoutPanel_SeriesDetail.Controls.Add(label1, 0, 0);
             this.tableLayoutPanel_SeriesDetail.Controls.Add(this.label_SeriesName, 1, 0);
-            this.tableLayoutPanel_SeriesDetail.Location = new System.Drawing.Point(15, 17);
+            this.tableLayoutPanel_SeriesDetail.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel_SeriesDetail.Name = "tableLayoutPanel_SeriesDetail";
             this.tableLayoutPanel_SeriesDetail.RowCount = 3;
             this.tableLayoutPanel_SeriesDetail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -106,6 +118,17 @@
             this.tableLayoutPanel_SeriesDetail.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel_SeriesDetail.Size = new System.Drawing.Size(249, 162);
             this.tableLayoutPanel_SeriesDetail.TabIndex = 2;
+            // 
+            // label_SeriesDes
+            // 
+            this.label_SeriesDes.AutoSize = true;
+            this.label_SeriesDes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_SeriesDes.Location = new System.Drawing.Point(103, 100);
+            this.label_SeriesDes.Name = "label_SeriesDes";
+            this.label_SeriesDes.Size = new System.Drawing.Size(143, 62);
+            this.label_SeriesDes.TabIndex = 4;
+            this.label_SeriesDes.Text = "SeriesDescription";
+            this.label_SeriesDes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_EpisodeNum
             // 
@@ -135,14 +158,13 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(282, 200);
+            this.tabPage1.Size = new System.Drawing.Size(455, 200);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本資訊";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button_AddEpisode);
             this.tabPage2.Controls.Add(this.dataGridView_Episodes);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
@@ -151,28 +173,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "各集資訊";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            label3.Location = new System.Drawing.Point(3, 100);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(94, 62);
-            label3.TabIndex = 4;
-            label3.Text = "描述：";
-            label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_SeriesDes
-            // 
-            this.label_SeriesDes.AutoSize = true;
-            this.label_SeriesDes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_SeriesDes.Location = new System.Drawing.Point(103, 100);
-            this.label_SeriesDes.Name = "label_SeriesDes";
-            this.label_SeriesDes.Size = new System.Drawing.Size(143, 62);
-            this.label_SeriesDes.TabIndex = 4;
-            this.label_SeriesDes.Text = "SeriesDescription";
-            this.label_SeriesDes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dataGridView_Episodes
             // 
@@ -184,25 +184,15 @@
             this.dataGridView_Episodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_EpisodeName,
             this.Column_EpisodeDes,
-            this.Column_EpsiodeCommand,
-            this.Column_AddCommand});
-            this.dataGridView_Episodes.Location = new System.Drawing.Point(6, 44);
+            this.Column_EpsiodeCommand});
+            this.dataGridView_Episodes.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_Episodes.Name = "dataGridView_Episodes";
             this.dataGridView_Episodes.RowHeadersVisible = false;
             this.dataGridView_Episodes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView_Episodes.RowTemplate.Height = 24;
             this.dataGridView_Episodes.ShowEditingIcon = false;
-            this.dataGridView_Episodes.Size = new System.Drawing.Size(443, 150);
+            this.dataGridView_Episodes.Size = new System.Drawing.Size(443, 188);
             this.dataGridView_Episodes.TabIndex = 4;
-            // 
-            // button_AddEpisode
-            // 
-            this.button_AddEpisode.Location = new System.Drawing.Point(6, 15);
-            this.button_AddEpisode.Name = "button_AddEpisode";
-            this.button_AddEpisode.Size = new System.Drawing.Size(75, 23);
-            this.button_AddEpisode.TabIndex = 4;
-            this.button_AddEpisode.Text = "新增影集";
-            this.button_AddEpisode.UseVisualStyleBackColor = true;
             // 
             // Column_EpisodeName
             // 
@@ -219,11 +209,6 @@
             this.Column_EpsiodeCommand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column_EpsiodeCommand.HeaderText = "評論";
             this.Column_EpsiodeCommand.Name = "Column_EpsiodeCommand";
-            // 
-            // Column_AddCommand
-            // 
-            this.Column_AddCommand.HeaderText = "AddCommand";
-            this.Column_AddCommand.Name = "Column_AddCommand";
             // 
             // SeriesDetailForm
             // 
@@ -252,12 +237,10 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label_SeriesDes;
-        private System.Windows.Forms.Button button_AddEpisode;
         private System.Windows.Forms.DataGridView dataGridView_Episodes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_EpisodeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_EpisodeDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_EpsiodeCommand;
-        private System.Windows.Forms.DataGridViewButtonColumn Column_AddCommand;
 
     }
 }

@@ -61,7 +61,6 @@ namespace SeriesManagementSystem.Domain
                 return _commandList;
             }
         }
->>>>>>> 502d88e9c77ebf2b2ce4986704f2734a28104532
         #endregion
 
         public void Record(string command)

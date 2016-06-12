@@ -78,6 +78,7 @@
     <Compile Include="UI\SoftwareForm.Designer.cs">
       <DependentUpon>SoftwareForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ViewModel\SeriesDetailFormPresentationModel.cs" />
     <Compile Include="UI\ViewModel\SeriesFormPresentationModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
