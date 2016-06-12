@@ -60,17 +60,29 @@
     <Compile Include="Foundation\ServerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\CommandForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CommandForm.Designer.cs">
+      <DependentUpon>CommandForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RecordForm.Designer.cs">
+      <DependentUpon>RecordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SeriesDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\SeriesDetailForm.Designer.cs">
       <DependentUpon>SeriesDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SeriesForm.cs">
+    <Compile Include="UI\AddDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\SeriesForm.Designer.cs">
-      <DependentUpon>SeriesForm.cs</DependentUpon>
+    <Compile Include="UI\AddDataForm.Designer.cs">
+      <DependentUpon>AddDataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SoftwareForm.cs">
       <SubType>Form</SubType>
@@ -79,7 +91,7 @@
       <DependentUpon>SoftwareForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ViewModel\SeriesDetailFormPresentationModel.cs" />
-    <Compile Include="UI\ViewModel\SeriesFormPresentationModel.cs" />
+    <Compile Include="UI\ViewModel\AddDataFormPresentationModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -90,17 +102,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\CommandForm.resx">
+      <DependentUpon>CommandForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\RecordForm.resx">
+      <DependentUpon>RecordForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SeriesDetailForm.resx">
       <DependentUpon>SeriesDetailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\SeriesForm.resx">
-      <DependentUpon>SeriesForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\AddDataForm.resx">
+      <DependentUpon>AddDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SoftwareForm.resx">
       <DependentUpon>SoftwareForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\SeriesManagementSystem.Domain.Episode.datasource" />
     <None Include="Properties\DataSources\SeriesManagementSystem.Domain.SeriesManager.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

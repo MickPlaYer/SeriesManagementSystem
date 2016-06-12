@@ -1,20 +1,44 @@
 ﻿using SeriesManagementSystem.Domain;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeriesManagementSystem.UI.ViewModel
 {
-    class SeriesDetailFormPresentationModel
+    public class SeriesDetailFormPresentationModel
     {
         Series _series;
 
         public SeriesDetailFormPresentationModel(Series series)
         {
             _series = series;
-            
+        }
+
+        public int EpisodeNumber
+        {
+            get
+            {
+                return _series.Episodes.Count;
+            }
+        }
+
+        public string SeriesName
+        {
+            get
+            {
+                return _series.Name;
+            }
+        }
+
+        public string SeriesDescription
+        {
+            get
+            {
+                return _series.Description;
+            }
+        }
+
+        public List<Command> GetCommands(string episodeName)
+        {
+            return _series.Episodes.Find((x) => x.Name == episodeName).CommandList;
         }
     }
 }
