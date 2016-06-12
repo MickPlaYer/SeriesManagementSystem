@@ -50,7 +50,8 @@ namespace SeriesManagementSystem.Domain
         { 
             get
             {
-                return _isRead;
+                return _commandList.Count != 0;
+                //return _isRead;
             }
         }
 
