@@ -12,13 +12,14 @@ namespace SeriesManagementSystemUnitTest
         private FileManager _fileManager;
         private PrivateObject _privateObject;
         private const string LOCAL_STORAGE = "./testFileManager.txt";
+        private const string EMPTY_CONTENT = "{\"_series\":[],\"_followingList\":[],\"_unfollowingList\":[]}";
 
         [TestInitialize()]
         public void Initialize()
         {
             _fileManager = new FileManager();
             _privateObject = new PrivateObject(_fileManager, new PrivateType(typeof(FileManager)));
-            Assert.AreEqual("[]", _privateObject.GetField("_content"));
+            Assert.AreEqual(EMPTY_CONTENT, _privateObject.GetField("_content"));
         }
 
         [TestCleanup]
@@ -33,7 +34,7 @@ namespace SeriesManagementSystemUnitTest
         {
             string testString = "Gorira parrrrrrty";
             _fileManager.LoadFile(LOCAL_STORAGE);
-            Assert.AreEqual("[]", _privateObject.GetField("_content"));
+            Assert.AreEqual(EMPTY_CONTENT, _privateObject.GetField("_content"));
             PrepareFile(LOCAL_STORAGE, testString);
             _fileManager.LoadFile(LOCAL_STORAGE);
             Assert.AreEqual(testString, _privateObject.GetField("_content"));

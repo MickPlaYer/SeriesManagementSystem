@@ -8,18 +8,18 @@ namespace SeriesManagementSystem.Domain
 {
     public class Command
     {
-        private string _context;
+        private string _content;
 
-        public Command(string context)
+        public Command(string content)
         {
-            _context = context;
+            _content = content;
         }
 
-        public String Context
+        public String Content
         {
             get
             {
-                return _context;
+                return _content;
             }
         }
     }

@@ -28,7 +28,7 @@ namespace SeriesManagementSystem.UI
         private void RefreshCommandContext()
         {
             label_CommandNum.Text = (_nowCommand+1).ToString();
-            label_Command.Text = _commands[_nowCommand].Context;
+            label_Command.Text = _commands[_nowCommand].Content;
         }
 
 

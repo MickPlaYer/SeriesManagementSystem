@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace SeriesManagementSystemUnitTest
 {
     [TestClass]
-    public class ServerUnitTest
+    public class ServerHelperUnitTest
     {
         ServerHelper _server;
 

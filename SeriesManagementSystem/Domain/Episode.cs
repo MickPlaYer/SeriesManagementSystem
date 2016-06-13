@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace SeriesManagementSystem.Domain
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Episode
     {
+        [JsonProperty]
         private string _name;
+        [JsonProperty]
         private string _description;
+        [JsonProperty]
         private bool _isRead;
+        [JsonProperty]
         private List<Command> _commandList = new List<Command>();
 
         [JsonConstructor]
@@ -50,8 +55,8 @@ namespace SeriesManagementSystem.Domain
         { 
             get
             {
-                return _commandList.Count != 0;
-                //return _isRead;
+                //return _commandList.Count != 0;
+                return _isRead;
             }
         }
 

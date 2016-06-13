@@ -6,7 +6,7 @@ namespace SeriesManagementSystem.Foundation
 {
     public class FileManager : IFileSystem
     {
-        private string _content = "[]";
+        private string _content = "{\"_series\":[],\"_followingList\":[],\"_unfollowingList\":[]}";
 
         public void ImportFile(string filePath)
         {
@@ -24,7 +24,7 @@ namespace SeriesManagementSystem.Foundation
             catch (Exception e)
             {
                 if (e is FileNotFoundException | e is DirectoryNotFoundException)
-                    _content = "[]";
+                    _content = "{\"_series\":[],\"_followingList\":[],\"_unfollowingList\":[]}";
             }
         }
 

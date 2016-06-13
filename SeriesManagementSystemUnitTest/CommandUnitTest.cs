@@ -19,7 +19,7 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestGetContent()
         {
-            Assert.AreEqual(DEFAULT_CONTENT, _command.Context);
+            Assert.AreEqual(DEFAULT_CONTENT, _command.Content);
         }
     }
 }
