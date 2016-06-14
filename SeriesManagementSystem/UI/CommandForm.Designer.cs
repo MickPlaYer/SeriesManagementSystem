@@ -245,7 +245,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "CommandForm";
-            this.Text = "CommandForm";
+            this.Text = "評論";
             tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel_info.ResumeLayout(false);
             this.tableLayoutPanel_info.PerformLayout();

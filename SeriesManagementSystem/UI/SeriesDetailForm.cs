@@ -54,20 +54,34 @@ namespace SeriesManagementSystem.UI
 
         private void ClickdataGridView_Episodes_Cell(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+                return;
             var column = dataGridView_Episodes.Columns[e.ColumnIndex];
             var row = dataGridView_Episodes.Rows[e.RowIndex];
             string episodeName = row.Cells[0].Value.ToString();
             string episodeDes = row.Cells[1].Value.ToString();
-            if (column is DataGridViewButtonColumn && e.RowIndex >= 0)
+
+            if (column is DataGridViewButtonColumn)
             {
-                using (var recordForm = new RecordForm(episodeName))
+                using (var recordForm = new RecordForm(episodeName, true))
                 {
                     if (recordForm.ShowDialog() == DialogResult.OK)
-                    {
                         _software.Record(episodeName, recordForm.ReturnRecord);
-                        episodeBindingSource.ResetBindings(true);
-                        RefreshSeriesData();
-                    }
+                }
+            }
+            else if (column.GetType() == typeof(DataGridViewCheckBoxColumn))
+            {
+                bool addCommandFlag = false;
+                if ((bool)row.Cells[3].Value == true)
+                {
+                    addCommandFlag = true;
+                }
+                using (var recordForm = new RecordForm(episodeName, addCommandFlag))
+                {
+                    if (recordForm.ShowDialog() == DialogResult.OK)
+                        _software.Record(episodeName, recordForm.ReturnRecord);
+                    else
+                        _software.Record(episodeName, "");
                 }
             }
             else
@@ -81,6 +95,9 @@ namespace SeriesManagementSystem.UI
                     MessageBox.Show(ex.Message);
                 }
             }
+
+            episodeBindingSource.ResetBindings(true);
+            RefreshSeriesData();
         }
     }
 }

@@ -271,7 +271,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SeriesDetailForm";
-            this.Text = "SeriesDetailForm";
+            this.Text = "影集資訊";
             this.tableLayoutPanel_SeriesDetail.ResumeLayout(false);
             this.tableLayoutPanel_SeriesDetail.PerformLayout();
             this.tabControl_Series.ResumeLayout(false);

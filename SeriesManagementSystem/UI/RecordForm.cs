@@ -27,10 +27,16 @@ namespace SeriesManagementSystem.UI
             }
         }
 
-        public RecordForm(string episodeName)
+        public RecordForm(string episodeName, bool addCommand)
         {
             InitializeComponent();
             label_EpisodeName.Text += episodeName;
+
+            if (!addCommand)
+            {
+                button_Cancel.Text = "不留下評論";
+                button_Yes.Text = "留下評論";
+            }            
         }
     }
 }

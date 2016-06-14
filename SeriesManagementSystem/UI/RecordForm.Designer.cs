@@ -86,6 +86,8 @@
             // checkBox_AddTimeStamp
             // 
             this.checkBox_AddTimeStamp.AutoSize = true;
+            this.checkBox_AddTimeStamp.Checked = true;
+            this.checkBox_AddTimeStamp.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_AddTimeStamp.Location = new System.Drawing.Point(90, 276);
             this.checkBox_AddTimeStamp.Name = "checkBox_AddTimeStamp";
             this.checkBox_AddTimeStamp.Size = new System.Drawing.Size(96, 16);
@@ -105,7 +107,7 @@
             this.Controls.Add(label);
             this.Controls.Add(this.label_EpisodeName);
             this.Name = "RecordForm";
-            this.Text = "RecordForm";
+            this.Text = "紀錄";
             this.ResumeLayout(false);
             this.PerformLayout();
 
