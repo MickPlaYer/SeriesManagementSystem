@@ -13,6 +13,7 @@ namespace SeriesManagementSystemUnitTest
     {
         SeriesManager _seriesManager;
         Series[] _series;
+        PrivateObject _privateObject;
         const int SeriesID = 0;
         const string SeriesName = "manager's series";
         const string SeriesDescription = "it is a series' description of manager";
@@ -28,6 +29,7 @@ namespace SeriesManagementSystemUnitTest
             {
                 _series[i] = new Series(SeriesName + i.ToString(), SeriesDescription + i.ToString(), SeriesID + i);
             }
+            _privateObject = new PrivateObject(_seriesManager);
         }
 
         [TestMethod]
@@ -244,6 +246,34 @@ namespace SeriesManagementSystemUnitTest
             Assert.AreEqual("456", sm.SeriesList[0].Description);
             Assert.AreEqual("e1", sm.SeriesList[0].Episodes[0].Name);
             Assert.AreEqual("sad", sm.SeriesList[0].Episodes[0].Description);
+        }
+
+        [TestMethod]
+        public void TestSetSeriesFlitter()
+        {
+            _seriesManager.SetSeriesFlitter(SeriesListFlitter.Following);
+            Assert.AreEqual(SeriesListFlitter.Following, _privateObject.GetFieldOrProperty("_seriesFlitter"));
+        }
+
+        [TestMethod]
+        public void TestGetSeriesList()
+        {
+            List<Series> seriesList = _privateObject.GetFieldOrProperty("_series") as List<Series>;
+            seriesList.Add(_series[0]);
+
+            List<Series> followingList = _privateObject.GetFieldOrProperty("_followingList") as List<Series>;
+            followingList.Add(_series[1]);
+
+            List<Series> unfollowingList = _privateObject.GetFieldOrProperty("_unfollowingList") as List<Series>;
+            unfollowingList.Add(_series[2]);
+
+            Assert.AreEqual(seriesList, _seriesManager.SeriesList);
+            _privateObject.SetFieldOrProperty("_seriesFlitter", SeriesListFlitter.Unfollowing);
+            Assert.AreEqual(unfollowingList, _seriesManager.SeriesList);
+            _privateObject.SetFieldOrProperty("_seriesFlitter", SeriesListFlitter.Following);
+            Assert.AreEqual(followingList, _seriesManager.SeriesList);
+            _privateObject.SetFieldOrProperty("_seriesFlitter", SeriesListFlitter.All);
+            Assert.AreEqual(seriesList, _seriesManager.SeriesList);
         }
 
         /// <summary>

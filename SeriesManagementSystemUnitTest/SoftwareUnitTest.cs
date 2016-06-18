@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using SeriesManagementSystemUnitTest.FakeItem;
+using System.ComponentModel;
 
 namespace SeriesManagementSystemUnitTest
 {
@@ -205,6 +206,44 @@ namespace SeriesManagementSystemUnitTest
             _software.Record(eName, command);
             Assert.AreEqual(1, e.CommandList.Count);
             Assert.IsTrue(e.IsRead);
+        }
+
+        [TestMethod]
+        public void TestSetCheckBoxesValue()
+        {
+            Assert.AreEqual(true, _software.IsCheckBoxAll);
+            Assert.AreEqual(false, _software.IsCheckBoxFollowing);
+            Assert.AreEqual(false, _software.IsCheckBoxUnfollowing);
+
+            _software.SetCheckBoxesValue(0, true);
+            Assert.AreEqual(true, _software.IsCheckBoxAll);
+            Assert.AreEqual(false, _software.IsCheckBoxFollowing);
+            Assert.AreEqual(false, _software.IsCheckBoxUnfollowing);
+
+            _software.SetCheckBoxesValue(0, false);
+            Assert.AreEqual(true, _software.IsCheckBoxAll);
+            Assert.AreEqual(false, _software.IsCheckBoxFollowing);
+            Assert.AreEqual(false, _software.IsCheckBoxUnfollowing);
+
+            _software.SetCheckBoxesValue(1, true);
+            Assert.AreEqual(false, _software.IsCheckBoxAll);
+            Assert.AreEqual(true, _software.IsCheckBoxFollowing);
+            Assert.AreEqual(false, _software.IsCheckBoxUnfollowing);
+
+            _software.SetCheckBoxesValue(1, false);
+            Assert.AreEqual(true, _software.IsCheckBoxAll);
+            Assert.AreEqual(false, _software.IsCheckBoxFollowing);
+            Assert.AreEqual(false, _software.IsCheckBoxUnfollowing);
+
+            _software.SetCheckBoxesValue(2, true);
+            Assert.AreEqual(false, _software.IsCheckBoxAll);
+            Assert.AreEqual(false, _software.IsCheckBoxFollowing);
+            Assert.AreEqual(true, _software.IsCheckBoxUnfollowing);
+
+            _software.SetCheckBoxesValue(2, false);
+            Assert.AreEqual(true, _software.IsCheckBoxAll);
+            Assert.AreEqual(false, _software.IsCheckBoxFollowing);
+            Assert.AreEqual(false, _software.IsCheckBoxUnfollowing);
         }
 
         #region Get Private Object

@@ -41,6 +41,9 @@
             this.seriesManagerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._refreshButton = new System.Windows.Forms.Button();
             this._refreshResultLabel = new System.Windows.Forms.Label();
+            this.checkBox_All = new System.Windows.Forms.CheckBox();
+            this.checkBox_Following = new System.Windows.Forms.CheckBox();
+            this.checkBox_Unfollowing = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this._seriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seriesManagerBindingSource)).BeginInit();
@@ -83,12 +86,12 @@
             this.descriptionDataGridViewTextBoxColumn,
             this.seriesIDDataGridViewTextBoxColumn});
             this._seriesGridView.DataSource = this.seriesListBindingSource;
-            this._seriesGridView.Location = new System.Drawing.Point(13, 41);
+            this._seriesGridView.Location = new System.Drawing.Point(174, 41);
             this._seriesGridView.Name = "_seriesGridView";
             this._seriesGridView.ReadOnly = true;
             this._seriesGridView.RowHeadersWidth = 50;
             this._seriesGridView.RowTemplate.Height = 24;
-            this._seriesGridView.Size = new System.Drawing.Size(1002, 482);
+            this._seriesGridView.Size = new System.Drawing.Size(841, 482);
             this._seriesGridView.TabIndex = 4;
             this._seriesGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellButtonClick);
             // 
@@ -164,11 +167,47 @@
             this._refreshResultLabel.Size = new System.Drawing.Size(0, 12);
             this._refreshResultLabel.TabIndex = 6;
             // 
+            // checkBox_All
+            // 
+            this.checkBox_All.AutoSize = true;
+            this.checkBox_All.Location = new System.Drawing.Point(12, 67);
+            this.checkBox_All.Name = "checkBox_All";
+            this.checkBox_All.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_All.TabIndex = 7;
+            this.checkBox_All.Text = "所有影集";
+            this.checkBox_All.UseVisualStyleBackColor = true;
+            this.checkBox_All.Click += new System.EventHandler(this.ClickCheckBoxAll);
+            // 
+            // checkBox_Following
+            // 
+            this.checkBox_Following.AutoSize = true;
+            this.checkBox_Following.Location = new System.Drawing.Point(12, 105);
+            this.checkBox_Following.Name = "checkBox_Following";
+            this.checkBox_Following.Size = new System.Drawing.Size(96, 16);
+            this.checkBox_Following.TabIndex = 8;
+            this.checkBox_Following.Text = "已追蹤的影集";
+            this.checkBox_Following.UseVisualStyleBackColor = true;
+            this.checkBox_Following.Click += new System.EventHandler(this.ClickCheckBoxFollowing);
+            // 
+            // checkBox_Unfollowing
+            // 
+            this.checkBox_Unfollowing.AutoSize = true;
+            this.checkBox_Unfollowing.Location = new System.Drawing.Point(12, 147);
+            this.checkBox_Unfollowing.Name = "checkBox_Unfollowing";
+            this.checkBox_Unfollowing.Size = new System.Drawing.Size(84, 16);
+            this.checkBox_Unfollowing.TabIndex = 9;
+            this.checkBox_Unfollowing.Text = "放棄的影集";
+            this.checkBox_Unfollowing.UseVisualStyleBackColor = true;
+            this.checkBox_Unfollowing.Click += new System.EventHandler(this.ClickCheckBoxUnfollowing);
+            // 
             // SoftwareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1026, 535);
+            this.Controls.Add(this.checkBox_Unfollowing);
+            this.Controls.Add(this.checkBox_Following);
+            this.Controls.Add(this.checkBox_All);
             this.Controls.Add(this._refreshResultLabel);
             this.Controls.Add(this._refreshButton);
             this.Controls.Add(this._seriesGridView);
@@ -201,5 +240,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn seriesIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.CheckBox checkBox_All;
+        private System.Windows.Forms.CheckBox checkBox_Following;
+        private System.Windows.Forms.CheckBox checkBox_Unfollowing;
     }
 }

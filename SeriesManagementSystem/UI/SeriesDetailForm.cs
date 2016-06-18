@@ -14,7 +14,7 @@ namespace SeriesManagementSystem.UI
 {
     public partial class SeriesDetailForm : Form
     {
-        Software _software;
+        SeriesManager _seriesManager;
         SeriesDetailFormPresentationModel _pModel;
 
         public SeriesDetailForm()
@@ -22,13 +22,19 @@ namespace SeriesManagementSystem.UI
             InitializeComponent();
         }
 
-        public SeriesDetailForm(Series series, Software software)
+        public SeriesDetailForm(Series series, SeriesManager seriesManager)
             : this()
         {
-            _software = software;
+            _seriesManager = seriesManager;
             _pModel = new SeriesDetailFormPresentationModel(series);
 
             episodeBindingSource.DataSource = series.Episodes;
+
+            _pModel.SetSeriesState(_seriesManager.FollowingList, _seriesManager.UnfollowingList);
+            _pModel.FollowSeriesEvent += _seriesManager.FollowSeries;
+            _pModel.UnfollowSeriesEvent += _seriesManager.UnfollowSeries;
+            _pModel.RecoverSeriesEvent += _seriesManager.RecoverSeries;
+
             RefreshSeriesData();
         }
 
@@ -37,6 +43,7 @@ namespace SeriesManagementSystem.UI
             label_EpisodeNum.Text = _pModel.EpisodeNumber.ToString();
             label_SeriesDes.Text = _pModel.SeriesDescription;
             label_SeriesName.Text = _pModel.SeriesName;
+            button_FollowingState.Text = _pModel.SeriesState;
         }
 
         private void ClickButton_AddEpisode(object sender, EventArgs e)
@@ -45,7 +52,7 @@ namespace SeriesManagementSystem.UI
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
-                    _software.AddEpisode(addForm.ReturnName, addForm.ReturnDesc);
+                    _seriesManager.AddEpisode(addForm.ReturnName, addForm.ReturnDesc);
                     episodeBindingSource.ResetBindings(true);
                     RefreshSeriesData();
                 }
@@ -66,7 +73,7 @@ namespace SeriesManagementSystem.UI
                 using (var recordForm = new RecordForm(episodeName, true))
                 {
                     if (recordForm.ShowDialog() == DialogResult.OK)
-                        _software.Record(episodeName, recordForm.ReturnRecord);
+                        _seriesManager.Record(episodeName, recordForm.ReturnRecord);
                 }
             }
             else if (column.GetType() == typeof(DataGridViewCheckBoxColumn))
@@ -79,9 +86,9 @@ namespace SeriesManagementSystem.UI
                 using (var recordForm = new RecordForm(episodeName, addCommandFlag))
                 {
                     if (recordForm.ShowDialog() == DialogResult.OK)
-                        _software.Record(episodeName, recordForm.ReturnRecord);
+                        _seriesManager.Record(episodeName, recordForm.ReturnRecord);
                     else
-                        _software.Record(episodeName, "");
+                        _seriesManager.Record(episodeName, "");
                 }
             }
             else
@@ -97,6 +104,12 @@ namespace SeriesManagementSystem.UI
             }
 
             episodeBindingSource.ResetBindings(true);
+            RefreshSeriesData();
+        }
+
+        private void button_FollowingState_Click(object sender, EventArgs e)
+        {
+            _pModel.MoveSeries();
             RefreshSeriesData();
         }
     }

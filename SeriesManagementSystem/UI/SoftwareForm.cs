@@ -17,6 +17,7 @@ namespace SeriesManagementSystem.UI
             _software = software;
             _seriesManager = _software.SeriesManager;
             seriesListBindingSource.DataSource = _seriesManager.SeriesList;
+            SwitchCheckBoxValue();
         }
 
         private void OnAddSeries(object sender, EventArgs e)
@@ -27,6 +28,7 @@ namespace SeriesManagementSystem.UI
                 {
                     _software.AddSeries(addForm.ReturnName, addForm.ReturnDesc);
                     seriesListBindingSource.ResetBindings(true);
+                    ClickCheckBoxAll(this, new EventArgs());
                 }
             }
         }
@@ -49,7 +51,7 @@ namespace SeriesManagementSystem.UI
             else
             {
                 _software.SelectSeries(sid);
-                new SeriesDetailForm(_seriesManager.SelectedSeries, _software).ShowDialog();
+                new SeriesDetailForm(_seriesManager.SelectedSeries, _seriesManager).ShowDialog();
             }
         }
 
@@ -84,6 +86,7 @@ namespace SeriesManagementSystem.UI
                     if (_software.IsImportFail)
                         MessageBox.Show("檔案格式錯誤？", "匯入失敗");
                     seriesListBindingSource.ResetBindings(true);
+                    ClickCheckBoxAll(this, new EventArgs());
                 }
             }
         }
@@ -105,6 +108,7 @@ namespace SeriesManagementSystem.UI
             this.Enabled = true;
             seriesListBindingSource.ResetBindings(true);
             ReportFromServer();
+            ClickCheckBoxAll(this, new EventArgs());
         }
 
         private void ReportFromServer()
@@ -118,6 +122,33 @@ namespace SeriesManagementSystem.UI
                 _refreshResultLabel.Text = "沒有發現新的影音資訊";
             else
                 _refreshResultLabel.Text = "已取得最新影集資訊";
+        }
+
+        private void SwitchCheckBoxValue()
+        {
+            checkBox_All.Checked = _software.IsCheckBoxAll;
+            checkBox_Following.Checked = _software.IsCheckBoxFollowing;
+            checkBox_Unfollowing.Checked = _software.IsCheckBoxUnfollowing;
+            seriesListBindingSource.DataSource = _seriesManager.SeriesList;
+            seriesListBindingSource.ResetBindings(true);
+        }
+
+        private void ClickCheckBoxAll(object sender, EventArgs e)
+        {
+            _software.SetCheckBoxesValue(0, checkBox_All.Checked);
+            SwitchCheckBoxValue();
+        }
+
+        private void ClickCheckBoxFollowing(object sender, EventArgs e)
+        {
+            _software.SetCheckBoxesValue(1, checkBox_Following.Checked);
+            SwitchCheckBoxValue();
+        }
+
+        private void ClickCheckBoxUnfollowing(object sender, EventArgs e)
+        {
+            _software.SetCheckBoxesValue(2, checkBox_Unfollowing.Checked);
+            SwitchCheckBoxValue();
         }
     }
 }

@@ -47,6 +47,7 @@
             this.Column_Record = new System.Windows.Forms.DataGridViewButtonColumn();
             this.isReadDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.episodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button_FollowingState = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -98,21 +99,23 @@
             this.label_SeriesName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_SeriesName.Location = new System.Drawing.Point(103, 0);
             this.label_SeriesName.Name = "label_SeriesName";
-            this.label_SeriesName.Size = new System.Drawing.Size(552, 30);
+            this.label_SeriesName.Size = new System.Drawing.Size(444, 30);
             this.label_SeriesName.TabIndex = 1;
             this.label_SeriesName.Text = "SeriesName";
             // 
             // tableLayoutPanel_SeriesDetail
             // 
-            this.tableLayoutPanel_SeriesDetail.ColumnCount = 2;
+            this.tableLayoutPanel_SeriesDetail.ColumnCount = 3;
             this.tableLayoutPanel_SeriesDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel_SeriesDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel_SeriesDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 450F));
+            this.tableLayoutPanel_SeriesDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel_SeriesDetail.Controls.Add(this.label_SeriesDes, 1, 2);
             this.tableLayoutPanel_SeriesDetail.Controls.Add(label3, 0, 2);
             this.tableLayoutPanel_SeriesDetail.Controls.Add(this.label_EpisodeNum, 1, 1);
             this.tableLayoutPanel_SeriesDetail.Controls.Add(label2, 0, 1);
             this.tableLayoutPanel_SeriesDetail.Controls.Add(label1, 0, 0);
             this.tableLayoutPanel_SeriesDetail.Controls.Add(this.label_SeriesName, 1, 0);
+            this.tableLayoutPanel_SeriesDetail.Controls.Add(this.button_FollowingState, 2, 0);
             this.tableLayoutPanel_SeriesDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel_SeriesDetail.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel_SeriesDetail.Name = "tableLayoutPanel_SeriesDetail";
@@ -129,7 +132,7 @@
             this.label_SeriesDes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_SeriesDes.Location = new System.Drawing.Point(103, 60);
             this.label_SeriesDes.Name = "label_SeriesDes";
-            this.label_SeriesDes.Size = new System.Drawing.Size(552, 268);
+            this.label_SeriesDes.Size = new System.Drawing.Size(444, 268);
             this.label_SeriesDes.TabIndex = 4;
             this.label_SeriesDes.Text = "SeriesDescription";
             // 
@@ -139,7 +142,7 @@
             this.label_EpisodeNum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_EpisodeNum.Location = new System.Drawing.Point(103, 30);
             this.label_EpisodeNum.Name = "label_EpisodeNum";
-            this.label_EpisodeNum.Size = new System.Drawing.Size(552, 30);
+            this.label_EpisodeNum.Size = new System.Drawing.Size(444, 30);
             this.label_EpisodeNum.TabIndex = 3;
             this.label_EpisodeNum.Text = "EpisodeNumber";
             // 
@@ -262,6 +265,16 @@
             // 
             this.episodeBindingSource.DataSource = typeof(SeriesManagementSystem.Domain.Episode);
             // 
+            // button_FollowingState
+            // 
+            this.button_FollowingState.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button_FollowingState.Location = new System.Drawing.Point(553, 3);
+            this.button_FollowingState.Name = "button_FollowingState";
+            this.button_FollowingState.Size = new System.Drawing.Size(102, 24);
+            this.button_FollowingState.TabIndex = 5;
+            this.button_FollowingState.UseVisualStyleBackColor = true;
+            this.button_FollowingState.Click += new System.EventHandler(this.button_FollowingState_Click);
+            // 
             // SeriesDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -301,6 +314,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_EpisodeDes;
         private System.Windows.Forms.DataGridViewButtonColumn Column_Record;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isReadDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Button button_FollowingState;
 
     }
 }
