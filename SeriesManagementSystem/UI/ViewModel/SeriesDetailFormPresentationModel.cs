@@ -1,7 +1,5 @@
 ﻿using SeriesManagementSystem.Domain;
-using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace SeriesManagementSystem.UI.ViewModel
 {
@@ -53,11 +51,11 @@ namespace SeriesManagementSystem.UI.ViewModel
 
         public void SetSeriesState(List<Series> followingList, List<Series> unfollowingList)
         {
-            if (followingList.Exists(x => x == _series))
+            if (followingList.Exists(x => x.SeriesID == _series.SeriesID))
             {
                 _seriesState = ViewModel.SeriesState.Followed;
             }
-            else if (unfollowingList.Exists(x => x == _series))
+            else if (unfollowingList.Exists(x => x.SeriesID == _series.SeriesID))
             {
                 _seriesState = ViewModel.SeriesState.Unfollowed;
             }

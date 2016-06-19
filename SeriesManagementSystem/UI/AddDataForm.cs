@@ -1,5 +1,4 @@
-﻿using SeriesManagementSystem.Domain;
-using SeriesManagementSystem.UI.ViewModel;
+﻿using SeriesManagementSystem.UI.ViewModel;
 using System;
 using System.Windows.Forms;
 

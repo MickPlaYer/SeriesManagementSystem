@@ -1,5 +1,4 @@
 ﻿using SeriesManagementSystem.Domain;
-using SeriesManagementSystem.Foundation;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -17,7 +16,7 @@ namespace SeriesManagementSystem.UI
             _software = software;
             _seriesManager = _software.SeriesManager;
             seriesListBindingSource.DataSource = _seriesManager.SeriesList;
-            SwitchCheckBoxValue();
+            SwitchCheckBoxValue(0, true);
         }
 
         private void OnAddSeries(object sender, EventArgs e)
@@ -125,31 +124,46 @@ namespace SeriesManagementSystem.UI
                 _refreshResultLabel.Text = "已取得最新影集資訊";
         }
 
-        private void SwitchCheckBoxValue()
+        private void SwitchCheckBoxValue(int index, bool value)
         {
-            checkBox_All.Checked = _software.IsCheckBoxAll;
-            checkBox_Following.Checked = _software.IsCheckBoxFollowing;
-            checkBox_Unfollowing.Checked = _software.IsCheckBoxUnfollowing;
+            /// 0 => CheckBoxAll
+            /// 1 => CheckBoxFollowing
+            /// 2 => CheckBoxUnfollowing
+            bool[] _checkBoxList = new bool[3] { false, false, false };
+            _checkBoxList[index] = value;
+            if (index == 0 && !value)
+                _checkBoxList[index] = true;
+            else if (index != 0 && !value)
+                _checkBoxList[0] = true;
+
+            if (value)
+                _seriesManager.SetSeriesFlitter((SeriesListFlitter)index);
+            else
+                _seriesManager.SetSeriesFlitter(0);
+
+            checkBox_All.Checked = _checkBoxList[0];
+            checkBox_Following.Checked = _checkBoxList[1];
+            checkBox_Unfollowing.Checked = _checkBoxList[2];
             seriesListBindingSource.DataSource = _seriesManager.SeriesList;
             seriesListBindingSource.ResetBindings(true);
         }
 
         private void ClickCheckBoxAll(object sender, EventArgs e)
         {
-            _software.SetCheckBoxesValue(0, checkBox_All.Checked);
-            SwitchCheckBoxValue();
+            //_software.SetCheckBoxesValue(0, checkBox_All.Checked);
+            SwitchCheckBoxValue(0, checkBox_All.Checked);
         }
 
         private void ClickCheckBoxFollowing(object sender, EventArgs e)
         {
-            _software.SetCheckBoxesValue(1, checkBox_Following.Checked);
-            SwitchCheckBoxValue();
+            //_software.SetCheckBoxesValue(1, checkBox_Following.Checked);
+            SwitchCheckBoxValue(1, checkBox_Following.Checked);
         }
 
         private void ClickCheckBoxUnfollowing(object sender, EventArgs e)
         {
-            _software.SetCheckBoxesValue(2, checkBox_Unfollowing.Checked);
-            SwitchCheckBoxValue();
+            //_software.SetCheckBoxesValue(2, checkBox_Unfollowing.Checked);
+            SwitchCheckBoxValue(2, checkBox_Unfollowing.Checked);
         }
     }
 }

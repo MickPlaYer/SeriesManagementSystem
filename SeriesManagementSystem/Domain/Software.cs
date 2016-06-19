@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SeriesManagementSystem.Foundation;
 using System;
-using System.ComponentModel;
 using System.Net;
 
 namespace SeriesManagementSystem.Domain
@@ -20,13 +19,13 @@ namespace SeriesManagementSystem.Domain
         /// 1 => CheckBoxFollowing
         /// 2 => CheckBoxUnfollowing
         /// </summary>
-        private bool[] _checkBoxList = new bool[3];
+        //private bool[] _checkBoxList = new bool[3];
 
         public Software(IServerHelper serverHelper, IFileSystem fileManager)
         {
             _serverHelper = serverHelper;
             _fileManager = fileManager;
-            _checkBoxList[0] = true;
+            //_checkBoxList[0] = true;
             LoadFile();
             RefreshServerData();
         }
@@ -121,20 +120,20 @@ namespace SeriesManagementSystem.Domain
             _seriesManager.Record(name, command);
         }
 
-        public void SetCheckBoxesValue(int index, bool value)
-        {
-            _checkBoxList = new bool[3] { false, false, false };
-            _checkBoxList[index] = value;
-            if (index == 0 && !value)
-                _checkBoxList[index] = true;
-            else if (index != 0 && !value)
-                _checkBoxList[0] = true;
+        //public void SetCheckBoxesValue(int index, bool value)
+        //{
+        //    _checkBoxList = new bool[3] { false, false, false };
+        //    _checkBoxList[index] = value;
+        //    if (index == 0 && !value)
+        //        _checkBoxList[index] = true;
+        //    else if (index != 0 && !value)
+        //        _checkBoxList[0] = true;
 
-            if (value)
-                _seriesManager.SetSeriesFlitter((SeriesListFlitter)index);
-            else
-                _seriesManager.SetSeriesFlitter(0);
-        }
+        //    if (value)
+        //        _seriesManager.SetSeriesFlitter((SeriesListFlitter)index);
+        //    else
+        //        _seriesManager.SetSeriesFlitter(0);
+        //}
 
         ~Software()
         {
@@ -178,35 +177,35 @@ namespace SeriesManagementSystem.Domain
         /// <summary>
         /// _checkBoxList => 0
         /// </summary>
-        public bool IsCheckBoxAll
-        {
-            get
-            {
-                return _checkBoxList[0];
-            }
-        }
+        //public bool IsCheckBoxAll
+        //{
+        //    get
+        //    {
+        //        return _checkBoxList[0];
+        //    }
+        //}
 
         /// <summary>
         /// _checkBoxList => 1
         /// </summary>
-        public bool IsCheckBoxFollowing
-        {
-            get
-            {
-                return _checkBoxList[1];
-            }
-        }
+        //public bool IsCheckBoxFollowing
+        //{
+        //    get
+        //    {
+        //        return _checkBoxList[1];
+        //    }
+        //}
 
         /// <summary>
         /// _checkBoxList => 2
         /// </summary>
-        public bool IsCheckBoxUnfollowing
-        {
-            get
-            {
-                return _checkBoxList[2];
-            }
-        }
+        //public bool IsCheckBoxUnfollowing
+        //{
+        //    get
+        //    {
+        //        return _checkBoxList[2];
+        //    }
+        //}
         #endregion
     }
 }
