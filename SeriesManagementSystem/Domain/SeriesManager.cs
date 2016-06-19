@@ -24,22 +24,13 @@ namespace SeriesManagementSystem.Domain
         private Series _selectedSeries;
         private int _count = 0;
         private bool _isExistNewOne = false;
-        private SeriesListFlitter _seriesFlitter = SeriesListFlitter.All;
 
         #region Public Object
         public List<Series> SeriesList
         {
             get
             {
-                switch (_seriesFlitter)
-                {
-                    case SeriesListFlitter.All:
-                        return _series;
-                    case SeriesListFlitter.Following:
-                        return _followingList;
-                    default:                // this is equal to SeriesListFlitter.Unfollowing
-                        return _unfollowingList;
-                }
+                return _series;
             }
         }
 
@@ -160,11 +151,6 @@ namespace SeriesManagementSystem.Domain
         public void Record(string name, string command)
         {
             _selectedSeries.Record(name, command);
-        }
-
-        public void SetSeriesFlitter(SeriesListFlitter flitter)
-        {
-            _seriesFlitter = flitter;
         }
 
         [OnDeserialized]

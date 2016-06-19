@@ -130,21 +130,38 @@ namespace SeriesManagementSystem.UI
             /// 1 => CheckBoxFollowing
             /// 2 => CheckBoxUnfollowing
             bool[] _checkBoxList = new bool[3] { false, false, false };
+            SeriesListFlitter flitter;
             _checkBoxList[index] = value;
-            if (index == 0 && !value)
+            if (index == 0 && !value){
+                flitter = (SeriesListFlitter)index;
                 _checkBoxList[index] = true;
+            }
             else if (index != 0 && !value)
+            {
+                flitter = (SeriesListFlitter)0;
                 _checkBoxList[0] = true;
-
-            if (value)
-                _seriesManager.SetSeriesFlitter((SeriesListFlitter)index);
+            }
             else
-                _seriesManager.SetSeriesFlitter(0);
-
+            {
+                flitter = (SeriesListFlitter)index;
+            }
             checkBox_All.Checked = _checkBoxList[0];
             checkBox_Following.Checked = _checkBoxList[1];
             checkBox_Unfollowing.Checked = _checkBoxList[2];
-            seriesListBindingSource.DataSource = _seriesManager.SeriesList;
+
+            // according to the flitter, change the data source of series list binding source
+            switch (flitter)
+            {
+                case SeriesListFlitter.All:
+                    seriesListBindingSource.DataSource = _seriesManager.SeriesList;
+                    break;
+                case SeriesListFlitter.Following:
+                    seriesListBindingSource.DataSource = _seriesManager.FollowingList;
+                    break;
+                default:                // this is equal to SeriesListFlitter.Unfollowing
+                    seriesListBindingSource.DataSource = _seriesManager.UnfollowingList;
+                    break;
+            }
             seriesListBindingSource.ResetBindings(true);
         }
 
