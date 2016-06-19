@@ -129,6 +129,10 @@ namespace SeriesManagementSystem.Domain
         {
             Series series = _series.Find((s) => s.SeriesID == sid);
             _series.Remove(series);
+            if (_followingList.Contains(series))
+                _followingList.Remove(series);
+            if (_unfollowingList.Contains(series))
+                _unfollowingList.Remove(series);
         }
 
         public void FollowSeries()
