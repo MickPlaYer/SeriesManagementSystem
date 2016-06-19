@@ -150,19 +150,16 @@ namespace SeriesManagementSystem.UI
 
         private void ClickCheckBoxAll(object sender, EventArgs e)
         {
-            //_software.SetCheckBoxesValue(0, checkBox_All.Checked);
             SwitchCheckBoxValue(0, checkBox_All.Checked);
         }
 
         private void ClickCheckBoxFollowing(object sender, EventArgs e)
         {
-            //_software.SetCheckBoxesValue(1, checkBox_Following.Checked);
             SwitchCheckBoxValue(1, checkBox_Following.Checked);
         }
 
         private void ClickCheckBoxUnfollowing(object sender, EventArgs e)
         {
-            //_software.SetCheckBoxesValue(2, checkBox_Unfollowing.Checked);
             SwitchCheckBoxValue(2, checkBox_Unfollowing.Checked);
         }
     }
