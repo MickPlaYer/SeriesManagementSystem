@@ -129,10 +129,12 @@ namespace SeriesManagementSystem.Domain
         {
             Series series = _series.Find((s) => s.SeriesID == sid);
             _series.Remove(series);
-            series = _followingList.Find((s) => s.SeriesID == sid);
-            _followingList.Remove(series);
-            series = _unfollowingList.Find((s) => s.SeriesID == sid);
-            _unfollowingList.Remove(series);
+            if (_followingList.Contains(series))
+            //series = _followingList.Find((s) => s.SeriesID == sid);
+                _followingList.Remove(series);
+            if (_unfollowingList.Contains(series))
+            //series = _unfollowingList.Find((s) => s.SeriesID == sid);
+                _unfollowingList.Remove(series);
         }
 
         public void FollowSeries()
@@ -168,7 +170,13 @@ namespace SeriesManagementSystem.Domain
         }
 
         [OnDeserialized]
-        private void InitializeCount(StreamingContext context)
+        private void OnDeserialized(StreamingContext context)
+        {
+            InitializeCount();
+            InitializeSeries();
+        }
+
+        private void InitializeCount()
         {
             if (_series.Count != 0)
             {
@@ -180,6 +188,24 @@ namespace SeriesManagementSystem.Domain
                 if (count > 0)
                     _count = count;
             }
+        }
+
+        private void InitializeSeries()
+        {
+            List<Series> followingList = new List<Series>();
+            List<Series> unfollowingList = new List<Series>();
+            foreach (Series s in _followingList)
+            {
+                Series series = _series.Find((x) => x.SeriesID == s.SeriesID);
+                followingList.Add(series);
+            }
+            foreach (Series s in _unfollowingList)
+            {
+                Series series = _series.Find((x) => x.SeriesID == s.SeriesID);
+                unfollowingList.Add(series);
+            }
+            _followingList = followingList;
+            _unfollowingList = unfollowingList;
         }
     }
 }

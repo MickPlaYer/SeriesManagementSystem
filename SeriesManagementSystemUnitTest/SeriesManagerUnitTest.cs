@@ -35,11 +35,28 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestInitializeCount()
         {
-            PrivateObject privateObject = new PrivateObject(_seriesManager);
-            Assert.AreEqual(0, privateObject.GetFieldOrProperty("_count"));
-            privateObject.SetField("_series", new List<Series>(_series));
-            privateObject.Invoke("InitializeCount", new StreamingContext());
-            Assert.AreEqual(3, privateObject.GetFieldOrProperty("_count"));
+            Assert.AreEqual(0, _privateObject.GetFieldOrProperty("_count"));
+            _privateObject.SetField("_series", new List<Series>(_series));
+            _privateObject.Invoke("InitializeCount");
+            Assert.AreEqual(3, _privateObject.GetFieldOrProperty("_count"));
+        }
+
+        [TestMethod]
+        public void TestInitializeSeries()
+        {
+            List<Series> seriesList = _privateObject.GetField("_series") as List<Series>;
+            List<Series> followingList = _privateObject.GetField("_followingList") as List<Series>;
+            List<Series> unfollowingList = _privateObject.GetField("_unfollowingList") as List<Series>;
+            seriesList.AddRange(_series);
+            followingList.Add(new Series("The important", "is ID. >>", 0));
+            unfollowingList.Add(new Series("The important", "is ID. >>", 1));
+            unfollowingList.Add(new Series("The important", "is ID. >>", 2));
+            _privateObject.Invoke("InitializeSeries");
+            followingList = _privateObject.GetField("_followingList") as List<Series>;
+            unfollowingList = _privateObject.GetField("_unfollowingList") as List<Series>;
+            Assert.AreEqual(seriesList[0], followingList[0]);
+            Assert.AreEqual(seriesList[1], unfollowingList[0]);
+            Assert.AreEqual(seriesList[2], unfollowingList[1]);
         }
 
         /// <summary>
@@ -122,11 +139,27 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestRemoveSeries()
         {
-            List<Series> seriesList = GetSeriesList();
-            seriesList.AddRange(new List<Series>(_series));
+            List<Series> seriesList = _privateObject.GetField("_series") as List<Series>;
+            List<Series> followingList = _privateObject.GetField("_followingList") as List<Series>;
+            List<Series> unfollowingList = _privateObject.GetField("_unfollowingList") as List<Series>;
+            seriesList.AddRange(_series);
+            followingList.Add(_series[1]);
+            unfollowingList.Add(_series[2]);
             Assert.AreEqual(3, seriesList.Count);
-            _seriesManager.RemoveSeries(1);
+            Assert.AreEqual(1, followingList.Count);
+            Assert.AreEqual(1, unfollowingList.Count);
+            _seriesManager.RemoveSeries(0);
             Assert.AreEqual(2, seriesList.Count);
+            Assert.AreEqual(1, followingList.Count);
+            Assert.AreEqual(1, unfollowingList.Count);
+            _seriesManager.RemoveSeries(2);
+            Assert.AreEqual(1, seriesList.Count);
+            Assert.AreEqual(1, followingList.Count);
+            Assert.AreEqual(0, unfollowingList.Count);
+            _seriesManager.RemoveSeries(1);
+            Assert.AreEqual(0, seriesList.Count);
+            Assert.AreEqual(0, followingList.Count);
+            Assert.AreEqual(0, unfollowingList.Count);
             Assert.AreEqual(-1, seriesList.IndexOf(_series[1]));
         }
 
@@ -147,11 +180,10 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestFollowSeries()
         {
-            PrivateObject privateObject = new PrivateObject(_seriesManager);
-            privateObject.SetField("_series", new List<Series>(_series));
-            privateObject.SetField("_selectedSeries", _series[2]);
+            _privateObject.SetField("_series", new List<Series>(_series));
+            _privateObject.SetField("_selectedSeries", _series[2]);
             _seriesManager.FollowSeries();
-            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
+            List<Series> followingList = _privateObject.GetField("_followingList") as List<Series>;
             Series s = followingList[followingList.Count - 1];
             Assert.AreEqual(1, followingList.Count);
             Assert.AreEqual(SeriesName + 2, s.Name);
@@ -161,11 +193,10 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestUnfollowSeries()
         {
-            PrivateObject privateObject = new PrivateObject(_seriesManager);
-            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
-            List<Series> unfollowingList = privateObject.GetField("_unfollowingList") as List<Series>;
+            List<Series> followingList = _privateObject.GetField("_followingList") as List<Series>;
+            List<Series> unfollowingList = _privateObject.GetField("_unfollowingList") as List<Series>;
             followingList.AddRange(new List<Series>(_series));
-            privateObject.SetField("_selectedSeries", _series[2]);
+            _privateObject.SetField("_selectedSeries", _series[2]);
             Assert.AreEqual(0, unfollowingList.Count);
             Assert.AreEqual(3, followingList.Count);
             _seriesManager.UnfollowSeries();
@@ -181,11 +212,10 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestRecoverSeries()
         {
-            PrivateObject privateObject = new PrivateObject(_seriesManager);
-            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
-            List<Series> unfollowingList = privateObject.GetField("_unfollowingList") as List<Series>;
+            List<Series> followingList = _privateObject.GetField("_followingList") as List<Series>;
+            List<Series> unfollowingList = _privateObject.GetField("_unfollowingList") as List<Series>;
             unfollowingList.AddRange(new List<Series>(_series));
-            privateObject.SetField("_selectedSeries", _series[2]);
+            _privateObject.SetField("_selectedSeries", _series[2]);
             Assert.AreEqual(3, unfollowingList.Count);
             Assert.AreEqual(0, followingList.Count);
             _seriesManager.RecoverSeries();
@@ -201,12 +231,11 @@ namespace SeriesManagementSystemUnitTest
         [TestMethod]
         public void TestAddEpisode()
         {
-            PrivateObject privateObject = new PrivateObject(_seriesManager);
-            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
+            List<Series> followingList = _privateObject.GetField("_followingList") as List<Series>;
             Series s = _series[2];
             string eName = "e1", eDesc = "how it is going?";
             followingList.AddRange(_series);
-            privateObject.SetField("_selectedSeries", s);
+            _privateObject.SetField("_selectedSeries", s);
             Assert.AreEqual(0, s.Episodes.Count);
             _seriesManager.AddEpisode(eName, eDesc);
             Assert.AreEqual(1, s.Episodes.Count);
@@ -220,13 +249,12 @@ namespace SeriesManagementSystemUnitTest
         {
             string eName = "goodEp", eDesc = "Hero is dead.";
             string command = "So suprise!";
-            PrivateObject privateObject = new PrivateObject(_seriesManager);
-            List<Series> followingList = privateObject.GetField("_followingList") as List<Series>;
+            List<Series> followingList = _privateObject.GetField("_followingList") as List<Series>;
             Series s = _series[1];
             s.AddEpisode(eName, eDesc);
             Episode e = s.Episodes[0];
             followingList.Add(s);
-            privateObject.SetField("_selectedSeries", s);
+            _privateObject.SetField("_selectedSeries", s);
             _seriesManager.Record(eName, command);
             Assert.AreEqual(1, e.CommandList.Count);
             Assert.IsTrue(e.IsRead);
