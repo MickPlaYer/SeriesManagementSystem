@@ -52,6 +52,7 @@ namespace SeriesManagementSystem.UI
             {
                 _software.SelectSeries(sid);
                 new SeriesDetailForm(_seriesManager.SelectedSeries, _seriesManager).ShowDialog();
+                seriesListBindingSource.ResetBindings(true);
             }
         }
 
