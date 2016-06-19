@@ -42,14 +42,14 @@ namespace SeriesManagementSystemUnitTest
             List<Series> followingList = new List<Series>();
             List<Series> unfollowingList = new List<Series>();
             _pModel.SetSeriesState(followingList, unfollowingList);
-            Assert.AreEqual("追蹤影集", _pModel.SeriesState);
+            Assert.AreEqual("追蹤影集", _pModel.SeriesStateString);
             followingList.Add(_series);
             _pModel.SetSeriesState(followingList, unfollowingList);
-            Assert.AreEqual("放棄影集", _pModel.SeriesState);
+            Assert.AreEqual("放棄影集", _pModel.SeriesStateString);
             followingList.Clear();
             unfollowingList.Add(_series);
             _pModel.SetSeriesState(followingList, unfollowingList);
-            Assert.AreEqual("復原該影集", _pModel.SeriesState);
+            Assert.AreEqual("復原該影集", _pModel.SeriesStateString);
         }
 
         [TestMethod]

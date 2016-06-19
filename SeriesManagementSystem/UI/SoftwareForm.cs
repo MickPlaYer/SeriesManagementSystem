@@ -7,6 +7,13 @@ namespace SeriesManagementSystem.UI
 {
     public partial class SoftwareForm : Form
     {
+        enum SeriesListFlitter
+        {
+            All = 0,
+            Following,
+            Unfollowing
+        }
+
         private Software _software;
         private SeriesManager _seriesManager;
 

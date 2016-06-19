@@ -53,27 +53,27 @@ namespace SeriesManagementSystem.UI.ViewModel
         {
             if (followingList.Exists(x => x.SeriesID == _series.SeriesID))
             {
-                _seriesState = ViewModel.SeriesState.Followed;
+                _seriesState = SeriesState.Followed;
             }
             else if (unfollowingList.Exists(x => x.SeriesID == _series.SeriesID))
             {
-                _seriesState = ViewModel.SeriesState.Unfollowed;
+                _seriesState = SeriesState.Unfollowed;
             }
             else
             {
-                _seriesState = ViewModel.SeriesState.NotFollowed;
+                _seriesState = SeriesState.NotFollowed;
             }
         }
 
-        public string SeriesState
+        public string SeriesStateString
         {
             get
             {
                 switch (_seriesState)
                 {
-                    case ViewModel.SeriesState.NotFollowed:
+                    case SeriesState.NotFollowed:
                         return "追蹤影集";
-                    case ViewModel.SeriesState.Followed:
+                    case SeriesState.Followed:
                         return "放棄影集";
                     default:
                         return "復原該影集";
@@ -92,25 +92,25 @@ namespace SeriesManagementSystem.UI.ViewModel
         {
             switch (_seriesState)
             {
-                case ViewModel.SeriesState.NotFollowed:
+                case SeriesState.NotFollowed:
                     if (FollowSeriesEvent != null)
                     {
                         FollowSeriesEvent();
-                        _seriesState = ViewModel.SeriesState.Followed;
+                        _seriesState = SeriesState.Followed;
                     }
                     break;
-                case ViewModel.SeriesState.Followed:
+                case SeriesState.Followed:
                     if (UnfollowSeriesEvent != null)
                     {
                         UnfollowSeriesEvent();
-                        _seriesState = ViewModel.SeriesState.Unfollowed;
+                        _seriesState = SeriesState.Unfollowed;
                     }
                     break;
                 default:
                     if (RecoverSeriesEvent != null)
                     {
                         RecoverSeriesEvent();
-                        _seriesState = ViewModel.SeriesState.Followed;
+                        _seriesState = SeriesState.Followed;
                     }
                     break;
             }

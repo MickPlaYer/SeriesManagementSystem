@@ -5,13 +5,6 @@ using System.Runtime.Serialization;
 
 namespace SeriesManagementSystem.Domain
 {
-    public enum SeriesListFlitter
-    {
-        All = 0,
-        Following,
-        Unfollowing
-    }
-
     [JsonObject(MemberSerialization.OptIn)]
     public class SeriesManager
     {

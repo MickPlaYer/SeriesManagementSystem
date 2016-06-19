@@ -36,7 +36,7 @@ namespace SeriesManagementSystem.UI
             label_EpisodeNum.Text = _pModel.EpisodeNumber.ToString();
             label_SeriesDes.Text = _pModel.SeriesDescription;
             label_SeriesName.Text = _pModel.SeriesName;
-            button_FollowingState.Text = _pModel.SeriesState;
+            button_FollowingState.Text = _pModel.SeriesStateString;
         }
 
         private void ClickButton_AddEpisode(object sender, EventArgs e)
