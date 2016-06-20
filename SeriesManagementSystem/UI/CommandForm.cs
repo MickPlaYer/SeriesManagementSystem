@@ -64,5 +64,10 @@ namespace SeriesManagementSystem.UI
             _nowCommand++;
             RefreshCommandForm();
         }
+
+        private void label_EpisodeDes_MouseHover(object sender, EventArgs e)
+        {
+
+        }
     }
 }

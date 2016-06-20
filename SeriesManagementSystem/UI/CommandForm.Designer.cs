@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
             System.Windows.Forms.Label label;
             System.Windows.Forms.Label label1;
@@ -43,6 +44,7 @@
             this.label_CommandNum = new System.Windows.Forms.Label();
             this.button_CommandRight = new System.Windows.Forms.Button();
             this.label_Command = new System.Windows.Forms.Label();
+            this.toolTip_description = new System.Windows.Forms.ToolTip(this.components);
             tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             label = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
@@ -60,12 +62,13 @@
             tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel.Controls.Add(this.tableLayoutPanel_info, 0, 0);
             tableLayoutPanel.Controls.Add(this.groupBox_Commands, 0, 1);
-            tableLayoutPanel.Location = new System.Drawing.Point(12, 12);
+            tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.RowCount = 2;
             tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel.Size = new System.Drawing.Size(460, 337);
+            tableLayoutPanel.Size = new System.Drawing.Size(484, 361);
             tableLayoutPanel.TabIndex = 0;
             // 
             // tableLayoutPanel_info
@@ -97,6 +100,7 @@
             this.label_EpisodeDes.Size = new System.Drawing.Size(69, 20);
             this.label_EpisodeDes.TabIndex = 4;
             this.label_EpisodeDes.Text = "EpisodeDes";
+            this.label_EpisodeDes.MouseHover += new System.EventHandler(this.label_EpisodeDes_MouseHover);
             // 
             // label_EpisodeName
             // 
@@ -157,7 +161,7 @@
             this.groupBox_Commands.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_Commands.Location = new System.Drawing.Point(3, 85);
             this.groupBox_Commands.Name = "groupBox_Commands";
-            this.groupBox_Commands.Size = new System.Drawing.Size(454, 249);
+            this.groupBox_Commands.Size = new System.Drawing.Size(478, 273);
             this.groupBox_Commands.TabIndex = 2;
             this.groupBox_Commands.TabStop = false;
             this.groupBox_Commands.Text = "評論";
@@ -271,6 +275,7 @@
         private System.Windows.Forms.Label label_CommandNum;
         private System.Windows.Forms.Button button_CommandRight;
         private System.Windows.Forms.Label label_Command;
+        private System.Windows.Forms.ToolTip toolTip_description;
 
     }
 }
